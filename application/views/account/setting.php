@@ -71,7 +71,13 @@
 						<label for="password">Old password</label>					
 					</div>
 					<div class="controls">
-						<input type="password" name = "oldpassword" value = "<?php echo set_value('password'); ?>" />
+						<input type="password" name = "oldpassword" value = "<?php echo set_value('oldpassword'); ?>" />
+						<?php	if(!$result)
+								{
+								?>
+								<label style="color:red">Incorrect password</label>
+						<?php	}
+						?>
 						<input type="hidden" name="dbpassword" value="<?php echo $password; ?>" />
 					</div>
 				</div> <!-- end of .control-group -->					

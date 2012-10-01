@@ -26,9 +26,13 @@ class Setting extends CI_Controller {
 		
 		$old_password = $this->input->post('oldpassword');
 		$dbpassword = $this->input->post('dbpassword');
+		
+		$data['result'] = false;	
 		if( sha1($old_password) == $dbpassword )
 		{
-			$password_correct = true;	
+			$password_correct = true;
+			//save password check result
+			$data['result'] = $password_correct;	
 		}
 		
 		if (($this->form_validation->run()) && $password_correct) { 
@@ -40,7 +44,7 @@ class Setting extends CI_Controller {
 			
 			// settings update successfully
 			if ($result) { 
-				redirect('setting');
+				redirect('dashboard');
 			}		
 		} else {
 			// not successful, go back to setting
