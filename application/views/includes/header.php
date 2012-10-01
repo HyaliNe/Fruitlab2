@@ -66,12 +66,13 @@
 			          <a class="btn" href="#"><i class="icon-user"></i> <?php echo $this->session->userdata('email'); ?></a>
 			          <a class="btn dropdown-toggle btn-warning" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 			          <ul class="dropdown-menu">
-			            <li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
-			            <li><a href="<?php echo site_url('account/logout'); ?>"><i class="icon-off"></i> Logout</a></li>
+							<!-- added a a href for settings, this will redirect to the correct settings page -->
+			            <li><a href="<?php echo site_url('setting/retrieve'); ?>"><i class="icon-wrench"></i> Settings</a></li>
+			            <li><a href="<?php echo site_url('logout'); ?>"><i class="icon-off"></i> Logout</a></li>
 			          </ul>
 			        </div>
 				</li>
-		
+
 				<?php else: ?>
 	      <div class="nav-collapse collapse">
             <ul class="nav">

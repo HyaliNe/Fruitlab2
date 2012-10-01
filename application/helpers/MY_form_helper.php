@@ -23,7 +23,7 @@ function country_dropdown($name = 'country', $selected_country = '') {
 	
 	foreach ($countries as $key => $value) {
 		$selected = (strtolower($value) === strtolower($selected_country)) ? "SELECTED": "" ;
-		$html .= "<option value = '{$key}' {$selected}>{$value}</option> ";
+		$html .= "<option value = '{$selected_country}' {$selected}>{$value}</option> ";
 	}
 	
 	$html .= "</select>";
