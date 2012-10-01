@@ -7,13 +7,22 @@ class Upload extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 	}
 	function index()
-	{
-		$this->load->view('upload_form', array('error' => ' ' ));
-             
-	}
-
+	{       
+                $this->load->library('form_validation');
+		$this->form_validation->set_rules('title', 'title', 'required|trim');
+		$this->form_validation->set_rules('price', 'price', 'required|trim');
+		$this->form_validation->set_rules('type', 'type', 'required|trim');
+                $this->form_validation->set_rules('rating','rating','required|trim');
+                if($this->form_validation->run()){
+                    
+                }
+                $data['error'] = '';
+                $data['main_content'] = 'upload_form';
+		$this->load->view('includes/template', $data);
+        }
 	function do_upload()
 	{
+                
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']	= '1000';
@@ -30,7 +39,6 @@ class Upload extends CI_Controller {
 		{
                         $this->library->load("validation");
                         $rules = array(
-                              
                             );
 			$data = array('upload_data' => $this->upload->data());
 			$this->load->view('upload_success', $data);
