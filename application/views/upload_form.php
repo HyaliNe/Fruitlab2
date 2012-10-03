@@ -27,4 +27,12 @@ Private:<input type="radio" name="type" value="Private" <?php echo set_radio('ty
 </body>
 <!-- to add to the models to others-->
 
+<?php
+      $id = 1;
+      $query = $this->db->get_where('design', array('customer_id' => $id));
+       
+      foreach ($query->result() as $row)
+       {
+       }
+?>
 </html>
