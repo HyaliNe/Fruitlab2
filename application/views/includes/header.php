@@ -55,7 +55,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">FruitLab</a>
+		  <!-- pressing this brand should redirect to the customer dashboard(if logged in) else go to main page, refer to facebook -->
+          <a class="brand" href="<?php if($this->session->userdata('email') != null)
+										{	
+											echo site_url("dashboard");
+										}
+										else
+										{
+											echo site_url();
+										}		?>">FruitLab</a>
     
 				<?php if ( $this->session->userdata('email') ) : ?>
 	      <div class="nav-collapse collapse pull-right">
@@ -93,9 +101,9 @@
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
+            <form class="navbar-form pull-right" action = "<?php echo site_url('login/validate'); ?>" method = "post">
+              <input class="span2" type="text" id="inputEmail" name="email" placeholder="Email">
+              <input class="span2" type="password" id="inputPassword" name = "password" placeholder="Password">
               <button type="submit" class="btn">Sign in</button>
             </form>
 

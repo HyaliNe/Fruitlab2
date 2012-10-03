@@ -1,10 +1,10 @@
 <div class="container">
 	
 	<div class = "page-header">
-		<h1>Settings</h1><br>
+		<h1>Profiles</h1><br>
 	</div> <!-- end of .page-header -->	
 	
-	<form class="form-vertical" action = "<?php echo site_url('setting'); ?>" method = "post"/>
+	<form class="form-vertical" action = "<?php echo site_url('profile'); ?>" method = "post"/>
 			 	
 		<?php if (validation_errors()): ?>
 
