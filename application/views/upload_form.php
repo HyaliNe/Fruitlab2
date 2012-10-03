@@ -24,15 +24,14 @@ Private:<input type="radio" name="type" value="Private" <?php echo set_radio('ty
 <br />
 <input type="submit" value="Submit" />
 </form>
-
-
 <table border = '1'> 
+<tr><th>Title</th><th>Price($)</th><th>Type</th><th>Image_Path</th></tr>
 <?php
     $customer_id = 1;
     $query = $this->db->get('design',$customer_id);
     if ($query->num_rows() > 0)
     {
-    <tr><th>Title</th><th>Price($)</th><th>Type</th><th>Image_Path</th></tr>
+
     foreach ($query->result() as $row)
     {
        echo "<tr>";
@@ -41,8 +40,9 @@ Private:<input type="radio" name="type" value="Private" <?php echo set_radio('ty
        echo "<td>" . $row->type . "</td>";
        echo "<td><img src=" . $row->image_path . "/></td>";
        echo "</tr>";
+   
     }
-    } 
+    }
 ?>
  </table>
 </body>
