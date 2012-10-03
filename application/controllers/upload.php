@@ -30,18 +30,16 @@ class Upload extends CI_Controller {
                 $result = $this->upload->do_upload();
                 if(!$result){
                      //display the image upload failures options
-                     $data['error'] = '';
+                     $data['error'] = 'Please upload a valid images';
                      $data['main_content'] = 'upload_form';
                 }else{
                      $filedata = $this->upload->data();
                      $filepath = $filedata['full_path'];
                      $postdata = $this->input->post();
-                     $rating = $postdata['rating'];
                      $price = $postdata['price'];
                      $title = $postdata['title'];
-                     $result = $this->db->query("INSERT INTO design (customer_id,image_path,rating,price,title,type)
-                             VALUES(1,'". $filepath.
-                             "',".$rating. "," . $price . ",'" . $title . "','".$type."')");
+                     $result = $this->db->query("INSERT INTO design (customer_id,image_path,price,title)
+                     VALUES(1,'". $filepath. "'," . $price . ",'" . $title . "'");
                      $data = array('upload_data' => $this->upload->data());
 		     $data['main_content'] = 'upload_success';
                 }
