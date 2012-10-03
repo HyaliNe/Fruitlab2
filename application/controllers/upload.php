@@ -6,6 +6,9 @@ class Upload extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 	}
+        
+      
+        
 	function index()
 	{       
             //configurations files for uploading images
