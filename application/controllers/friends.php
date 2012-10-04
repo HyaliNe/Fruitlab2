@@ -7,23 +7,43 @@ class Friends extends CI_Controller {
 	}
 	function index()
 	{  
-            $data['searchvar'] = array();
+            //by default set everything to null
+            $data['resultset'] = NULL;
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
             $this->load->view('includes/template', $data);
         }
+        
+        function add(){
+            //$customer = $this->session->userdata('customer_id');
+            $customer_id = 1;
+            $getdata = $this->input->get();
+            $customer_id2 = $getdata["id"];
+            if($customer_id2){
+                $result = $this->db->insert('is_friends_with',
+                array('customer_id'=> $customer_id
+                ,'customer_id2' => $customer_id2
+                ));
+                if($result){
+                    $data['error'] == 'Successfully added the friend';
+                }else{
+                    $data['friends'] == 'You already have this friend in the database';
+                }
+            }
+        }
+        
         function search(){
             //$this->db->query
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
             $postdata = $this->input->post();
             if(isset($postdata['fname']) && $_POST['fname'] != ''){
-                $name = $_POST['fname'];
-                $this->db->where(array('first_name' => $name));
+                $name = $postdata['fname'];
+                $this->db->like('first_name',$name);
             }
-            if(isset($postdata['username']) && $_POST['username'] != ''){
-                $username = $_POST['username'];
-                $this->db->where(array('username' => $username));
+            if(isset($postdata['email']) && $_POST['email'] != ''){
+                $email = $postdata['email'];
+                $this->db->like('email',$email);
             }
             if((isset($postdata['gender']) && $_POST['gender']) != ''){
                  $gender = $postdata['gender'];
@@ -32,13 +52,14 @@ class Friends extends CI_Controller {
             if((isset($postdata['fromage']) && $postdata['fromage'] != '' && $postdata['toage'] && $postdata['toage'] !='')){
                     $fromage = $postdata['fromage'];
                     $toage = $postdata['toage'];
-                    $this->db->where("YEAR(CURDATE()) - dob_year - IF( STR_TO_DATE( CONCAT( YEAR( CURDATE( ) ) ,  '-', dob_month,  '-', dob_day ),'%Y-%c-%e' )> CURDATE( ) , 1, 0 ) BETWEEN '$fromage' AND '$toage'");
+                    $this->db->where("date_of_birth BETWEEN '$fromage' AND '$toage'");
             }
-            $searchvar = $this->db->get("customer");
-            $data['searchvar'] = $searchvar;
+            $query = $this->db->get("customer");
+            $data['resultset'] = $query;
             $data['main_content'] = 'friend_display';
             $this->load->view('includes/template', $data);
         }
+        
 }
 /* End of file account.php */
 /* Location: ./controllers/account.php */	
