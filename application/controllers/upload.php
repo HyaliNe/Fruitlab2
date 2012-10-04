@@ -6,9 +6,17 @@ class Upload extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 	}
-        
-      
-        
+        function remove(){
+            $getdata = $this->input->get();
+            $id = $getdata["id"];
+            if($id != null){
+                $this->db->where('design_id', $id);
+                $result = $this->db->update('design', array('type' => 'remove')); 
+                $data['error'] = 'Design ID ='.$id .' has been successfully removed';
+                $data['main_content'] = 'upload_form';
+                $this->load->view('includes/template', $data);
+            }
+        }
 	function index()
 	{       
             //configurations files for uploading images

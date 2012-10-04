@@ -5,15 +5,17 @@
 <body>
 <?php echo $error;?>
 <?php echo form_open('friend/search')?>
-<label for="fname">Name</label><input type="fname">
-<label for="username">UserName</label>
-<label for="age">Age</label>
+<label for="fname">Name</label><input type="text" name="fname" value="<?php echo set_value('title'); ?>"/>
+<label for="username">UserName</label><input type="text" name="username" value="<?php echo set_value('username'); ?>"/>
+<label for="age">Age</label><input type="text" name="age" size="2" maxlength="2" value="<?php echo set_value('age'); ?>"/>
+<br/>
+Male:<input type="radio" name="type" value="Sales" <?php echo set_radio('type', 'On Sales'); ?> />
+Female:<input type="radio" name="type" value="Private" <?php echo set_radio('type', 'Private'); ?> />
+<br/>
+<input type="submit" value="Submit"><input type="Reset">
 </form>
-
 <table border = '1'> 
-<tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Type</th><th>Design_ID</th><th>Action</th></tr>
-
-
+<tr><th>Name</th><th>UserName</th><th>Age</th><th>Gender</th></tr>
 </table>
 </body>
 </html>

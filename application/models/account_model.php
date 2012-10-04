@@ -21,6 +21,7 @@ class Account_model extends CI_Model {
         $result['result'] = FALSE;
 
         $this->db->select('role');
+       
         $this->db->where('email', $email);
         $this->db->where('password', $password);
         $query = $this->db->get('account', 1); //LIMIT 1
@@ -57,6 +58,8 @@ class Account_model extends CI_Model {
             'role' => 'user',
             'date_created' => time()
         );
+        
+        
 
         $data = $this->db->insert('account', $user_data);
 
