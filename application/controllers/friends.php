@@ -27,9 +27,28 @@ class Friends extends CI_Controller {
                 if($result){
                     $data['error'] == 'Successfully added the friend';
                 }else{
-                    $data['friends'] == 'You already have this friend in the database';
+                    $data['error'] == 'Does not exist in the database';
                 }
             }
+            $data['main_content'] = 'friend_display';
+            $this->load->view('includes/template', $data);
+        }
+        
+        function remove(){
+            //$customer = $this->session->userdata('customer_id');
+            $customer_id = 1;
+            $getdata = $this->input->get();
+            $customer_id2 = $getdata["id"];
+            if($customer_id2){
+                $result = $this->db->delete('is_friends_with',array('customer_id'=>$customer_id,'customer_id2'=>$customer_id2));
+                if($result){
+                    $data['error'] == 'Successfully deleted friends from the database';
+                }else{
+                    $data['error'] == 'Does not exist in the database';
+                }
+            }
+            $data['main_content'] = 'friend_display';
+            $this->load->view('includes/template', $data);
         }
         
         function search(){
