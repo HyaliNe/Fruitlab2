@@ -29,7 +29,7 @@ class Account_model extends CI_Model {
 			$row = $query->row();
 			
 			$result['result'] = TRUE;
-			$result['role'] = $row->role;
+			$result['role'] = $row->role_id;
 		}
 		
 		return $result;
