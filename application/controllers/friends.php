@@ -33,9 +33,7 @@ class Friends extends CI_Controller {
             $data['main_content'] = 'friend_display';
             $this->load->view('includes/template', $data);
         }
-        
         function remove(){
-            //$customer = $this->session->userdata('customer_id');
             $customer_id = 1;
             $getdata = $this->input->get();
             $customer_id2 = $getdata["id"];
@@ -50,7 +48,6 @@ class Friends extends CI_Controller {
             $data['main_content'] = 'friend_display';
             $this->load->view('includes/template', $data);
         }
-        
         function search(){
             //$this->db->query
             $data["error"] = '';
