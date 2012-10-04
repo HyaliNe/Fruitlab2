@@ -44,9 +44,9 @@ class Design extends CI_Controller {
 		$this->load->model('design_model');
 		
 		$result = $this->design_model->searchByTitle($this->input->post('search_clause'));
-		print_r($result);
+		
 		if($result != false){
-			$data['search_results'] = $results;
+			$data['search_result'] = $result;
 			$data['search_exist'] = true;
 
 		} else {

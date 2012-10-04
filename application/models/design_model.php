@@ -54,7 +54,7 @@ class Design_model extends CI_model {
 		
 		$this->db->from('design');
 		$this->db->like('title', $input);
-		$this->db->limit($lowerlimit, $upperlimit);
+		$this->db->limit($upperlimit, $lowerlimit);
 		
 		$query = $this->db->get();
 		
