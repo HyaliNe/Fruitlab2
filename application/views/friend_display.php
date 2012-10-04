@@ -45,9 +45,8 @@ Male:<input type="radio" name="gender" value="male" <?php echo set_radio('gender
 Female:<input type="radio" name="gender" value="female" <?php echo set_radio('gender', 'female'); ?> />
 <br/>
 <br/>
-<input type="submit" value="Submit"><input type="Reset">
+<input type="submit" value="Submit"><input type="Reset"/>
 </form>
-
 <table border = '1'> 
 <tr><th>Name</th><th>UserName</th><th>Age</th><th>Gender</th></tr>
 <?php
