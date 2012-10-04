@@ -47,14 +47,26 @@ Female:<input type="radio" name="gender" value="female" <?php echo set_radio('ge
 <br/>
 <input type="submit" value="Submit"><input type="Reset"/>
 </form>
+
+<?php 
+    //function to check if the things are integrated already or not
+    function check_friends_exist($customer_id,$customer_id2){
+        
+    }
+?>
+
 <table border = '1'> 
-<tr><th>Name</th><th>UserName</th><th>Age</th><th>Gender</th></tr>
+<tr><th>Name</th><th>UserName</th><th>Age</th><th>Gender</th><th>Action</th></tr>
 <?php
-foreach($resultset->result() as $row){
+if($resultset != null){
+    foreach($resultset->result() as $row){
         echo "<tr>";
-	echo "<td>".$row->first_name."</td><td>".$row->email ."</td>";
+	echo "<td><a href=#>".$row->first_name."</a></td><td>".$row->email ."</td>";
 	echo "<td>".$row->gender."</td><td>".$row->date_of_birth ."</td>";
-	echo "</tr>";
+	echo "<td><a href=". site_url("friends/add?id=". $customer_id) . "/>";
+        echo "</a></td>";
+        echo "</tr>";
+}
 }
 ?>
 </table>
