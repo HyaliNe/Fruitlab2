@@ -23,12 +23,13 @@ class Register extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('first_name', 'first name', 'required|trim');
 		$this->form_validation->set_rules('last_name', 'last name', 'required|trim');
-
+		
+		//this line will call for email_exist()
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|callback_email_exist');
 		$this->form_validation->set_rules('password', 'Password', 'required|matches[password2]|trim');			
 		$this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim');			
 				
-		if ($this->form_validation->run()) {
+		if ($this->form_validation->run()) { 
 			// Load account model and call function to create account
 			$this->load->model('account_model');
 			$result = $this->account_model->create_account($this->input->post());

@@ -33,9 +33,9 @@ $allowed = false;
  * $allowed set to true if allowed else false
  * 
  **/
-$session_role = $this->session->userdata('role');
+$session_role = $this->session->userdata('role_id');
 
-if ($session_role === 'admin') { $allowed = true; } 
+if ($session_role === 1) { $allowed = true; } 
 else {
 	if ( empty($role) ) { $allowed = true; } 
 	else {
@@ -46,12 +46,12 @@ else {
 
 ?>
 
-
+<!-- header and footer is loaded, the part that will be dynamic will be the middle part -->
 <?php $this->load->view('includes/header', $data); ?>
 
 <?php
 	$view = ($allowed) ? $main_content : 'includes/no_permission';
-	$this->load->view($view);		
+	$this->load->view($view, $data);		
 ?>
 
 <?php $this->load->view('includes/footer'); ?>
