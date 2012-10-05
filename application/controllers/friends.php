@@ -7,18 +7,17 @@ class Friends extends CI_Controller {
 	}
 	function index()
 	{  
-            $data['resultset'] = '';
+            //by default set everything to null
+            $data['resultset'] = NULL;
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
             $this->load->view('includes/template', $data);
         }
         
         function add(){
-            $customer = $this->session->userdata('customer_id');
-            //$customer_id = 1;
-            $data['resultset'] = '';
+            //$customer = $this->session->userdata('customer_id');
+            $customer_id = 1;
             $getdata = $this->input->get();
-            $data['error'] = '';
             $customer_id2 = $getdata["id"];
             if($customer_id2){
                 $result = $this->db->insert('is_friends_with',
@@ -35,10 +34,7 @@ class Friends extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
         function remove(){
-            $customer = $this->session->userdata('customer_id');
-
-            $data['error'] = '';
-            $data['resultset'] = '';
+            $customer_id = 1;
             $getdata = $this->input->get();
             $customer_id2 = $getdata["id"];
             if($customer_id2){
@@ -53,6 +49,7 @@ class Friends extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
         function search(){
+            //$this->db->query
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
             $postdata = $this->input->post();
