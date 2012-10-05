@@ -1,7 +1,10 @@
 <div class="container">
 	
 	<div class = "page-header">
-		<h1>Profiles</h1><br>
+		<table>
+		<tr><td><img src="<?php echo site_url('img/user_add.png'); ?>" alt="user" width="124" height="124" ></td>
+		<td><h1><?php echo $first_name, " " , $last_name;?></h1></td></tr>
+		</table>
 	</div> <!-- end of .page-header -->	
 	
 	<form class="form-vertical" action = "<?php echo site_url('profile'); ?>" method = "post"/>
@@ -15,98 +18,83 @@
 			</div>
 
 		<?php endif ?>
+		
 			
-			
-		<div class="row">
-			<div class="span3">
-				<div class="control-group">
-					<div class="control-label">
-						<label for="first_name">First name</label>					
-					</div>
-					<div class="controls">
-						<input type="text" name = "first_name" value = "<?php echo set_value('first_name', $first_name); ?>" />					
-					</div>
-				</div> <!-- end of .control-group -->					
-			</div> <!-- end of .span3 -->
+		<table class="table">
+		<tr><h4>Basic info</h4></tr>
+		<tr>
+		<td>
+			<label for="date_of_birth">Date of birth</label>					
+		</td>
+		<td>
+			<input type="text" name = "date_of_birth" value = "<?php echo set_value('date_of_birth', $date_of_birth); ?>" />					
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<label class="control-label" for="country">Country</label>					
+		</td>
+		<td>
+			<?php echo country_dropdown('country', $country); ?>					
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<label for="gender">Gender</label>					
+		</td>
+		<td>
+		<?php	if($gender == 'M')
+				{	?>
+					<input type="radio" id="gender" name="gender" value="M" checked="checked">Male
+					<input type="radio" id="gender" name="gender" value="F">Female					
+		<?php	}	
+				elseif($gender == "F")
+				{	?>
+					<input type="radio" id="gender" name="gender" value="M" >Male
+					<input type="radio" id="gender" name="gender" value="F" checked="checked">Female					
+		<?php	}
+				else
+				{	?>
+					<input type="radio" id="gender" name="gender" value="M">Male
+					<input type="radio" id="gender" name="gender" value="F">Female				
+		<?php	}	?>
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<label for="about_you">About you</label>					
+		</td>
+		<td>
+			<textarea cols="40" id="about_you" name="about_you" rows="5" maxlength="150" value= "<?php echo set_value('about_you',$about_you); ?>"><?php echo $about_you;?></textarea>
+		</td>
+		</tr>
+		</table>
 
-			<div class="span3">
-				<div class="control-group">
-					<div class="control-label">
-						<label for="last_name">Last name</label>					
-					</div>
-					<div class="controls">
-						<input type="text" name = "last_name" value = "<?php echo set_value('last_name', $last_name); ?>" />					
-					</div>
-				</div> <!-- end of .control-group -->					
-			</div> <!-- end of .span3 -->
-		</div> <!-- end of .row -->
+		<table class="table">
+		<tr><h4>Contact info</h4></tr>
+		<tr>
+		<td>
+			<label for="hp_no">Handphone no</label>					
+		</td>
+		<td>
+			<input type="text" name = "hp_no" value = "<?php echo set_value('hp_no', $hp_no); ?>" />					
+		</td>
+		</tr>
 
-
-		<div class="row">
-			<div class="span3">
-
-				<div class="control-group">
-			      <label class="control-label" for="email">Email</label>
-			      <div class="controls">
-			        <input type="text" id="email" readonly="readonly" name = "email" value = "<?php echo $email; ?>" />	<!-- email should not be allowed to change, if want to change, can create new account -->
-			      </div>
-				</div> <!-- end of .control-group -->
-			</div> <!-- end of .span3 -->
-			
-			<div class="span3">				
-				<div class="control-group">
-					<label class="control-label" for="country">Country</label>
-			     	<div class="controls">
-						<?php echo country_dropdown('country', $country); ?>
-			         </div> <!-- .controls -->
-				 </div> <!-- .control-group -->				
-			</div> <!-- end of .span3 -->
-			
-		</div> <!-- end of .row -->
-
-		<div class="row">
-			<div class="span3">
-				<div class="control-group">
-					<div class="control-label">
-						<label for="password">Old password</label>					
-					</div>
-					<div class="controls">
-						<input type="password" name = "oldpassword" value = "<?php echo set_value('oldpassword'); ?>" />
-						<?php	if(!$result)
-								{
-								?>
-								<label style="color:red">Incorrect password</label>
-						<?php	}
-						?>
-						<input type="hidden" name="dbpassword" value="<?php echo $password; ?>" />
-					</div>
-				</div> <!-- end of .control-group -->					
-			</div>		
-			
-			<div class="span3">
-				<div class="control-group">
-					<div class="control-label">
-						<label for="password">New password</label>					
-					</div>
-					<div class="controls">
-						<input type="password" name = "password" value = "<?php echo set_value('password'); ?>" />					
-					</div>
-				</div> <!-- end of .control-group -->					
-			</div> <!-- end of .span3 -->
-
-			<div class="span3">
-				<div class="control-group">
-					<div class="control-label">
-						<label for="password2">Confirm Password</label>					
-					</div>
-					<div class="controls">
-						<input type="password" name = "password2" value = "<?php echo set_value('password2'); ?>" />					
-					</div>
-				</div> <!-- end of .control-group -->					
-			</div> <!-- end of .span3 -->
-		</div> <!-- end of .row -->
+		<tr>
+		<td>
+			<label for="email">Email</label>					
+		</td>
+		<td>
+			<input type="text" name = "email" value = "<?php echo set_value('email', $email); ?>" />					
+			<input type="hidden" name="first_name" value = "<?php echo $first_name; ?>" />
+			<input type="hidden" name="last_name" value = "<?php echo $last_name; ?>" />
+			<input type="hidden" name="customer_id" value = "<?php echo $this->session->userdata('customer_id'); ?>" />
+		</td>
+		</tr>	
+		</table>		
 				
-			<input type="submit" class="btn btn-primary" value = "Submit" />
+	<input type="submit" class="btn btn-primary" value = "Submit" />
 
 	</form>			
 </div>

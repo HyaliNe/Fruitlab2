@@ -72,13 +72,14 @@
 					</div>
 					<div class="controls">
 						<input type="password" name = "oldpassword" value = "<?php echo set_value('oldpassword'); ?>" />
+						<input type="hidden" name="dbpassword" value="<?php echo $password; ?>" />
 						<?php	if(!$result)
 								{
 								?>
 								<label style="color:red">Incorrect password</label>
 						<?php	}
 						?>
-						<input type="hidden" name="dbpassword" value="<?php echo $password; ?>" />
+
 					</div>
 				</div> <!-- end of .control-group -->					
 			</div>		
