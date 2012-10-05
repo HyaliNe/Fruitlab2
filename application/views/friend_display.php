@@ -32,14 +32,32 @@
 	});
 
 </script>
+<?php
+    function check_friend_exist($customer_id2){
+        $customer_id = $this->session->userdata("customer_id");
+        $result = FALSE;
+        $this->session->userdata('customer_id');
+        $this->db->select('customer_id');
+        $this->db->where('customer_id2', $customer_id2);
+        $this->db->get('is_friends_with',1);
+        if($query->num_row == 1){
+            $row = $query->row();
+            if($row->customer_id == $customer_id){
+                $result = TRUE;
+            }
+        }
+        return $result;
+    }
+?>
 <body>
-    <h2>Search for Friends</h2>
+    <h2>Filter Friends</h2>
 <?php echo $error;?>
 <?php echo form_open('friends/search')?>
 <label for="fname">Name:</label><input type="text" name="fname" value="<?php echo set_value('title'); ?>"/>
 <label for="email">Email:</label><input type="text" name="email" value="<?php echo set_value('email'); ?>"/>
-<label for="fromage">From Age:</label><input type="text" id="fromage" name="fromage" value="<?php echo set_value('fromage'); ?>"/>
-<label for="toage">To Age:</label><input type="text" id="toage" name="toage" value="<?php echo set_value('toage'); ?>"/>
+<br/>
+Filter Age Group:
+<label for="fromage">From Age:</label><input type="text" id="fromage" name="fromage" value="<?php echo set_value('fromage'); ?>"/><label for="toage">To Age:</label><input type="text" id="toage" name="toage" value="<?php echo set_value('toage'); ?>"/>
 <br/>
 Male:<input type="radio" name="gender" value="male" <?php echo set_radio('gender', 'male'); ?> />
 Female:<input type="radio" name="gender" value="female" <?php echo set_radio('gender', 'female'); ?> />
@@ -47,23 +65,36 @@ Female:<input type="radio" name="gender" value="female" <?php echo set_radio('ge
 <br/>
 <input type="submit" value="Submit"><input type="Reset"/>
 </form>
-
-<?php 
-    //function to check if the things are integrated already or not
-    function check_friends_exist($customer_id,$customer_id2){
-        
-    }
-?>
-
 <table border = '1'> 
 <tr><th>Name</th><th>UserName</th><th>Age</th><th>Gender</th><th>Action</th></tr>
 <?php
 if($resultset != null){
     foreach($resultset->result() as $row){
         echo "<tr>";
+        //to link to gguoliang pages
 	echo "<td><a href=#>".$row->first_name."</a></td><td>".$row->email ."</td>";
 	echo "<td>".$row->gender."</td><td>".$row->date_of_birth ."</td>";
-	echo "<td><a href=". site_url("friends/add?id=". $customer_id) . "/>";
+            $customer_id2 = $row->customer_id;
+            $this->db->select('customer_id');
+            $this->db->where('customer_id2', $customer_id2);
+            $query = $this->db->get('is_friends_with',1);
+            $result = false;//check if the results if works or not
+            if ($query->num_rows() > 0)
+            {
+                //check if the customer id already existed or not
+                $customer_id = $this->session->userdata('customer_id');
+                if($customer_id == $row->customer_id){
+                    $result = true;
+                }
+            }
+            if($result){
+                  //echo "<td><a href=". site_url("friends/remove?id=". $row->customer_id) . ">[Remove]</td>";
+                  echo "<td><a href='#'>[Is already friend]</td>";
+            }else{
+                  //echo "<td><a href=". site_url("friends/add?id=". $row->customer_id) . ">[Add]</td>";
+                  echo "<td><a href='#'>[Can be added]</td>";
+            }
+         
         echo "</a></td>";
         echo "</tr>";
 }
