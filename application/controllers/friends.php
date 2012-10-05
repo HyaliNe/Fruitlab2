@@ -10,6 +10,9 @@ class Friends extends CI_Controller {
             $data['resultset'] = '';
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
+			$data['js'] = 'jquery.ui.core';
+			$data['js'] = 'jquery.ui.datepicker';
+			$data['js'] = 'jquery-ui-1.8.18.custom';
             $this->load->view('includes/template', $data);
         }
         
@@ -32,6 +35,9 @@ class Friends extends CI_Controller {
                 }
             }
             $data['main_content'] = 'friend_display';
+			$data['js'] = 'jquery.ui.core';
+			$data['js'] = 'jquery.ui.datepicker';
+			$data['js'] = 'jquery-ui-1.8.18.custom';			
             $this->load->view('includes/template', $data);
         }
         function remove(){
@@ -49,6 +55,9 @@ class Friends extends CI_Controller {
                     $data['error'] == 'Does not exist in the database';
                 }
             }
+			$data['js'] = 'jquery.ui.core';
+			$data['js'] = 'jquery.ui.datepicker';
+			$data['js'] = 'jquery-ui-1.8.18.custom';			
             $data['main_content'] = 'friend_display';
             $this->load->view('includes/template', $data);
         }
@@ -75,6 +84,9 @@ class Friends extends CI_Controller {
             }
             $query = $this->db->get("customer");
             $data['resultset'] = $query;
+			$data['js'] = 'jquery.ui.core';
+			$data['js'] = 'jquery.ui.datepicker';
+			$data['js'] = 'jquery-ui-1.8.18.custom';			
             $data['main_content'] = 'friend_display';
             $this->load->view('includes/template', $data);
         }
