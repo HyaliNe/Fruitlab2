@@ -29,7 +29,7 @@ class Account_model extends CI_Model {
 			$row = $query->row();
 			
 			$result['result'] = TRUE;
-			$result['role'] = $row->role_id;
+			$result['role'] = $row->role;
 		}
 		
 		return $result;
@@ -128,6 +128,76 @@ class Account_model extends CI_Model {
 		//check result['result'] to see whether there are result from the query
 		return $result;
 	}
+	
+	public function retrieve_id($email)
+	{
+		$result = array();
+		
+		$this->db->select('customer_id');
+		$this->db->where('email', $email);
+		$query = $this->db->get('customer',1);	//LIMIT 1
+		
+		if($query->num_rows == 1)
+		{	
+			//storing the row return from the query
+			$row = $query->row();
+
+			//array of result
+			$result['result'] = TRUE;
+			$result['customer_id'] = $row->customer_id;
+		}
+		//return to the calling class, then the calling class need to 
+		//check result['result'] to see whether there are result from the query
+		return $result;
+	}
+	
+	public function retrieve_profile($customer_id)
+	{
+		$result = array();
+		$result['result'] = FALSE;
+		
+		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no');
+		$this->db->where('customer_id', $customer_id);
+		$query = $this->db->get('customer',1);	//LIMIT 1
+		
+		if($query->num_rows == 1)
+		{	
+			//storing the row return from the query
+			$row = $query->row();
+
+			//array of result
+			$result['result'] = TRUE;
+			$result['first_name'] = $row->first_name;
+			$result['last_name'] = $row->last_name;
+			$result['email'] = $row->email;		//need not query since already available
+			$result['country'] = $row->country;
+			$result['gender'] = $row->gender;
+			$result['about_you'] = $row->about_you;
+			$result['hp_no'] = $row->hp_no;
+			$result['date_of_birth'] = $row->date_of_birth;
+			
+		}
+		//return to the calling class, then the calling class need to 
+		//check result['result'] to see whether there are result from the query
+		return $result;
+	}
+	
+	public function update_profile($user)
+	{
+		//creating a new array
+		$user_data = array(
+						'gender' => (($user['gender'] != null) ? $user['gender'] : null),	
+						'country' => (($user['country'] != null) ? $user['country'] : null),
+						'hp_no' => (($user['hp_no'] != null) ? $user['hp_no'] : null),
+						'about_you' => (($user['about_you'] != null) ? $user['about_you'] : null),
+						'date_of_birth' => (($user['date_of_birth'] != null) ? $user['date_of_birth'] : null),
+						'email' => $user['email']
+						);
+		$this->db->where('customer_id', $user['customer_id']);
+		$data = $this->db->update('customer', $user_data);
+		return $data;
+	}
+
 }
 
 /* End of file account_model.php */

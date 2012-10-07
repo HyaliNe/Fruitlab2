@@ -34,12 +34,15 @@ class Login extends CI_Controller {
 		$email    = $this->input->post('email');
 		$password = sha1( $this->input->post('password') );	
 		$validate = $this->account_model->validate( $email, $password );
+		
+		$id = $this->account_model->retrieve_id($email);
 
 		if ($validate['result']) { // User is valid
 
 			$data = array(
 				'email' => $email,
-				'role' => $validate['role'] 
+				'role' => $validate['role'],
+				'customer_id' => $id['customer_id']
 			);
 
 			$this->session->set_userdata($data);

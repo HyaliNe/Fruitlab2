@@ -63,8 +63,7 @@
 										else
 										{
 											echo site_url();
-										}		?>">FruitLab</a>
-    
+										}		?>">FruitLab</a>   
 				<?php if ( $this->session->userdata('email') ) : ?>
 	      <div class="nav-collapse collapse pull-right">
             <ul class="nav">
@@ -74,6 +73,7 @@
 			          <a class="btn" href="#"><i class="icon-user"></i> <?php echo $this->session->userdata('email'); ?></a>
 			          <a class="btn dropdown-toggle btn-warning" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 			          <ul class="dropdown-menu">
+						<li><a href="<?php echo site_url('profile/retrieve'); ?>"><i class="icon-home"></i> Profile</a></li>
 							<!-- added a a href for settings, this will redirect to the correct settings page -->
 			            <li><a href="<?php echo site_url('setting/retrieve'); ?>"><i class="icon-wrench"></i> Settings</a></li>
 			            <li><a href="<?php echo site_url('logout'); ?>"><i class="icon-off"></i> Logout</a></li>
@@ -101,9 +101,11 @@
                 </ul>
               </li>
             </ul>
+
             <form class="navbar-form pull-right" action = "<?php echo site_url('login/validate'); ?>" method = "post">
               <input class="span2" type="text" id="inputEmail" name="email" placeholder="Email">
               <input class="span2" type="password" id="inputPassword" name = "password" placeholder="Password">
+
               <button type="submit" class="btn">Sign in</button>
             </form>
 
