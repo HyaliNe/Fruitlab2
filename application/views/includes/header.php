@@ -63,8 +63,30 @@
 										else
 										{
 											echo site_url();
-										}		?>">FruitLab</a>   
+										}		?>">FruitLab</a>
 				<?php if ( $this->session->userdata('email') ) : ?>
+		<ul class="nav">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Design
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<a href="<?php echo site_url('upload_form'); ?>"> Create design</a>
+					<a href="<?php echo site_url('upload_form'); ?>"> Search design</a>
+				</ul>
+			</li>
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Friends
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<a href="<?php echo site_url('upload_form'); ?>"> View friends</a>
+					<a href="<?php echo site_url('upload_form'); ?>"> Search friends</a>
+				</ul>
+			</li>			
+		</ul>
 	      <div class="nav-collapse collapse pull-right">
             <ul class="nav">
 				

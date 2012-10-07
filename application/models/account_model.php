@@ -20,7 +20,7 @@ class Account_model extends CI_Model {
 		$result = array();
 		$result['result'] = FALSE;
 		
-		$this->db->select('role_id');
+		$this->db->select('role_id, status, customer_id');
 		$this->db->where('email', $email);
 		$this->db->where('password', $password );
 		$query = $this->db->get('customer', 1); //LIMIT 1
@@ -29,7 +29,9 @@ class Account_model extends CI_Model {
 			$row = $query->row();
 			
 			$result['result'] = TRUE;
-			$result['role'] = $row->role;
+			$result['role'] = $row->role_id;
+			$result['status'] = $row->status;	//additional att to prevent ban user from logging in
+			$result['customer_id'] = $row->customer_id;
 		}
 		
 		return $result;
@@ -123,28 +125,6 @@ class Account_model extends CI_Model {
 			$result['email'] = $email;		//need not query since already available
 			$result['country'] = $row->country;
 			$result['password'] = $row->password;
-		}
-		//return to the calling class, then the calling class need to 
-		//check result['result'] to see whether there are result from the query
-		return $result;
-	}
-	
-	public function retrieve_id($email)
-	{
-		$result = array();
-		
-		$this->db->select('customer_id');
-		$this->db->where('email', $email);
-		$query = $this->db->get('customer',1);	//LIMIT 1
-		
-		if($query->num_rows == 1)
-		{	
-			//storing the row return from the query
-			$row = $query->row();
-
-			//array of result
-			$result['result'] = TRUE;
-			$result['customer_id'] = $row->customer_id;
 		}
 		//return to the calling class, then the calling class need to 
 		//check result['result'] to see whether there are result from the query
