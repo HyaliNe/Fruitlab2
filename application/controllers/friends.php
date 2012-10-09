@@ -18,7 +18,6 @@ class Friends extends CI_Controller {
         
         function add(){
             $customer = $this->session->userdata('customer_id');
-            //$customer_id = 1;
             $data['resultset'] = '';
             $getdata = $this->input->get();
             $data['error'] = '';

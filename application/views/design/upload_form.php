@@ -12,17 +12,46 @@
 		<?php echo validation_errors(); ?>
 		</div>
     <?php endif ?>
-<label for="title">Title:</label><input type="text" name="title">
+<h2> Upload a Design</h2>
+<label for="title">Title:</label><input type="text" name="title" value="<?php echo set_value('title'); ?>">
 <br/>
-<label for="price">Price:</label><input type="text" name="price">
+<label for="price">Price:</label><input type="text" name="price" value="<?php echo set_value('price'); ?>">
 <br/>
-<label for="type">Type:</label><input type="text" name="type">    
+Sales:<input type="radio" name="type" value="Sales" <?php echo set_radio('type', 'On Sales', TRUE); ?> />
+Private:<input type="radio" name="type" value="Private" <?php echo set_radio('type', 'Private'); ?> />
 <br/>
-<label for="rating">Rating:</label><input type="text" name="rating">
-<br/>
-<label for="image_path">Upload Design</label><input type="file" name="userfile" size="20" />
+<label for="image_path">Upload a File:</label><input type="file" value="<?php echo set_value('userfile')?>" name="userfile" size="20" />
 <br />
-<input type="submit" value="Upload Design" />
+<input type="submit" value="Submit" />
 </form>
+<h2> Current Design </h2>
+<table border = '1'> 
+<tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Type</th><th>Design_ID</th><th>Action</th></tr>
+<?php
+    $customer_id = $this->session->userdata('customer_id');
+    $this->db->where('customer_id', $customer_id)->where('type !=', 'remove'); 
+    $query = $this->db->get('design');
+    echo "Total Record Returned: " .  $query->num_rows();
+    if ($query->num_rows() > 0)
+    {
+    foreach ($query->result() as $row)
+    {
+       if($row->type != 'remove'){
+       echo "<tr>";
+       echo "<td>". $row->title . "</td>";
+       echo "<td><img src='" . $row->image_path . "' width=42' height='42'/></td>";
+       echo "<td>" . $row->price . "</td>";
+       echo "<td>" . $row->type . "</td>";
+       echo "<td>". $row->design_id . "</td>";
+       $design_id = $row->design_id;
+       echo "<td><a href=" . site_url("upload/remove?id=". $design_id) ." onclick=\"return confirm('Are you sure you want to delete the remove this design')\">[Remove]</a></td>";
+       echo "</tr>";
+       }
+    }
+    }
+?>
+ </table>
 </body>
+<!-- to add to the models to others-->
+
 </html>

@@ -26,11 +26,15 @@ Private:<input type="radio" name="type" value="Private" <?php echo set_radio('ty
 </form>
 <h2> Current Design </h2>
 <table border = '1'> 
-<tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Type</th><th>Design_ID</th><th>Action</th></tr>
+<tr><th>Titles</th><th>Image_Path</th><th>Price($)</th><th>Type</th><th>Design_ID</th><th>Action</th></tr>
 <?php
     $customer_id = 1;
     $this->db->where('customer_id', 1); 
+	$this->db->where('type !=', 'remove');
     $query = $this->db->get('design');
+	echo "hahaha";
+	echo $this->db->last_query();
+	
     echo "Total Record Returned: " .  $query->num_rows();
     if ($query->num_rows() > 0)
     {

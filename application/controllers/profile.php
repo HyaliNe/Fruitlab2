@@ -14,7 +14,9 @@ class Profile extends CI_Controller {
 	 * profile
 	 *
 	 **/
-	public function index() {
+	public function index($userId = 0) {
+
+	
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'email', 'required|valid_email');
@@ -48,8 +50,12 @@ class Profile extends CI_Controller {
 
 	}
 	
-	public function retrieve()
+	//view
+	public function retrieve($userId = 0)
 	{
+		
+	//	echo "User Id: $userId";	
+		
 		$this->load->model('account_model');
 		//retrieve email, then use it to query
 		$customer_id = $this->session->userdata('customer_id');
