@@ -15,7 +15,9 @@ class Account_model extends CI_Model {
  *
  * @return 	array 	Return ['result'] TRUE if any or FALSE and return ['role'] if any.
  */
-	public function validate($email, $password) {
+	
+    
+    public function validate($email, $password) {
 
 		$result = array();
 		$result['result'] = FALSE;
