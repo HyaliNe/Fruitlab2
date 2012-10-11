@@ -179,8 +179,7 @@ class Account_model extends CI_Model {
 		$data = $this->db->update('customer', $user_data);
 		return $data;
 	}
-
+        
 }
-
 /* End of file account_model.php */
 /* Location: ./models/account_model.php */
