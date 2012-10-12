@@ -137,11 +137,9 @@ class Account_model extends CI_Model {
 	{
 		$result = array();
 		$result['result'] = FALSE;
-		
-		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no');
+		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no','balance');
 		$this->db->where('customer_id', $customer_id);
 		$query = $this->db->get('customer',1);	//LIMIT 1
-		
 		if($query->num_rows == 1)
 		{	
 			//storing the row return from the query
@@ -180,6 +178,11 @@ class Account_model extends CI_Model {
 		return $data;
 	}
         
+        public function getBalance($user){
+               $this->db->where('customer_id',$user['customer_id']);
+               $data = $this->db->get('customer');
+               return $data;
+        }
 }
 /* End of file account_model.php */
 /* Location: ./models/account_model.php */

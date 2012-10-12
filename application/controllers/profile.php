@@ -71,6 +71,11 @@ class Profile extends CI_Controller {
 			$this->load->view('includes/template', $data);
 		}
 	}
+        
+        public function getBalance($user){
+            
+            
+        }
 }
 
 
