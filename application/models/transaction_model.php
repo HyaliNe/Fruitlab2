@@ -19,7 +19,7 @@ class transaction_model extends CI_Model {
                 }
           return $result;
      }      
-     public function getSingleCartItemByID($id){
+     public function getSingleLineItemByID($id){
          $result = array();
          $result['result'] = FALSE;
          $this->db->select("singlelineitem,design_id,quantity,collar_id,material_id,colour_id");
@@ -40,7 +40,7 @@ class transaction_model extends CI_Model {
           return $result;
      }
      
-     public function getCartlist($id){
+     public function getCartlistByID($id){
          $result = array();
          $result['result'] = FALSE;
          $this->db->select('cart_list_id,singlelineitem,cart_id');
