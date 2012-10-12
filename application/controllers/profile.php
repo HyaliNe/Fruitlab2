@@ -4,7 +4,7 @@
  * profile Page
  *
  * @package		Fruitlab
- * @author		Guo Liang
+ * @author		Guo Liang, Chen Deshun
  *
  */
 
@@ -71,11 +71,50 @@ class Profile extends CI_Controller {
 			$this->load->view('includes/template', $data);
 		}
 	}
-        
-        public function getBalance($user){
-            
-            
-        }
+	
+	/**
+	 * Load user profile page
+	 *
+	 * Check if userid is provided then retrive and display, otherwise load error message
+	 *
+	 * @access	public
+	 * 
+	 * @param	int	ID of the user to fetch from database.
+	 *
+	 * @return 
+	 */	
+	public function profile($id = 0) {
+		
+		if ( $id = 0 ) {
+			$data['message_title'] = "Profile not found";
+			$data['message'] = "Sorry, we are unable to locate the profile you are requesting to view.";
+				
+			$data['main_content'] = "message";
+		} else {
+			$this->load->model('account_model');
+			
+			$data = $this->account_model->retrieve_profile($id);
+			
+			if ( $data['result'] ) {
+				
+				//start retriving stuff that the profile page needs after confirming that the user exsist.
+				$data['activity'] = $this->account_model->fetchActivityRecord($id);
+				
+				//to uo liang
+				//decide the template to load. Leave it for you since I haven't done it.
+				$data['main_content'] = ;
+				
+			} else {
+				// How can I make it such that I dont have to retype this bullshit error message twice in the method.
+				$data['message_title'] = "Profile not found";
+				$data['message'] = "Sorry, we are unable to locate the profile you are requesting to view.";
+				
+				$data['main_content'] = "message";
+			}
+		}
+		
+		$this->load->view('includes/template', $data);
+	}
 }
 
 
