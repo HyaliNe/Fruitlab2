@@ -177,6 +177,19 @@ class Account_model extends CI_Model {
 		$data = $this->db->update('customer', $user_data);
 		return $data;
 	}
+	
+	public function fetchActivityRecord($customer_id)
+	{
+		$result = array();
+		$result['result'] = FALSE;
+		
+		//this will select out activity done by the customer with id customer_id
+		$this->db->select('activity_id, creator_id, timestamp, affected_id, message');
+		$this->db->where('customer_id', $customer_id);
+		$ownactivity = $this->db->get('activity');	
+
+		//retrieve friend activity
+	}
 
 }
 
