@@ -1,5 +1,16 @@
 <?php
 
+
+
+//$this->db->select('*');
+//$this->db->from('blogs');
+//$this->db->join('comments', 'comments.id = blogs.id');
+//$query = $this->db->get();
+// Produces: 
+// SELECT * FROM blogs
+// JOIN comments ON comments.id = blogs.id
+
+
 class transaction_model extends CI_Model {
      public function getCartByID($id){
          $result = array();
