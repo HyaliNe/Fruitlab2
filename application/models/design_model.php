@@ -83,7 +83,7 @@ class Design_model extends CI_model {
 		$activity_data = array(
 						'timestamp' => $date,
 						'creator_id' => $user['customer_id'],
-						'message' => $user['customer_id'] . " gave review to " . $user['design_id'],
+						'message' => $user['customer_id'] . " gave review to " . $user['design_id'] . "on " . $date,
 						'type' => $type,
 						'affected_id' => $user['design_id']
 						);
