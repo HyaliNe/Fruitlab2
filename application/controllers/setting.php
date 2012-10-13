@@ -52,6 +52,10 @@ class Setting extends CI_Controller {
 		$data['first_name'] = $this->input->post('first_name');
 		$data['last_name'] = $this->input->post('last_name');
 		$data['country'] = $this->input->post('country');
+		$data['date_of_birth'] = $this->input->post('date_of_birth');
+		$data['hp_no'] = $this->input->post('hp_no');
+		$data['about_you'] = $this->input->post('about_you');
+		$data['gender'] = $this->input->post('gender');
 		$data['email'] = $this->input->post('email');
 		$data['password'] = $this->input->post('dbpassword');
 		$this->load->view('includes/template', $data);

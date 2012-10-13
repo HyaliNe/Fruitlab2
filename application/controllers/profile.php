@@ -83,16 +83,17 @@ class Profile extends CI_Controller {
 	 *
 	 * @return 
 	 */	
-	public function profile($id = 0) {
-		
-		if ( $id = 0 ) {
+	public function userprofile($id = 0) {
+
+		if ( $id == 0 ) {
 			$data['message_title'] = "Profile not found";
 			$data['message'] = "Sorry, we are unable to locate the profile you are requesting to view.";
-				
+
 			$data['main_content'] = "message";
 		} else {
 			$this->load->model('account_model');
-			
+
+			//retrieve profile
 			$data = $this->account_model->retrieve_profile($id);
 			
 			if ( $data['result'] ) {
@@ -100,9 +101,9 @@ class Profile extends CI_Controller {
 				//start retriving stuff that the profile page needs after confirming that the user exsist.
 				$data['activity'] = $this->account_model->fetchActivityRecord($id);
 				
-				//to uo liang
+				//to guo liang
 				//decide the template to load. Leave it for you since I haven't done it.
-				$data['main_content'] = ;
+				$data['main_content'] = "account/profile";
 				
 			} else {
 				// How can I make it such that I dont have to retype this bullshit error message twice in the method.
@@ -112,7 +113,6 @@ class Profile extends CI_Controller {
 				$data['main_content'] = "message";
 			}
 		}
-		
 		$this->load->view('includes/template', $data);
 	}
 }
