@@ -1,5 +1,21 @@
 <?php
 class transaction_model extends CI_Model {
+    
+    public function getCustomerPaymentByCartList($user){
+        $result = array();
+        $result['result'] = FALSE;
+        $this->db->select('*');
+        $this->db->where('design.customer_id', $user); 
+        $this->db->from('singlelineitem');
+        $this->db->join('design', 'design.design_id = singlelineitem.id');
+        $query = $this->db->get();
+        $i = 0;
+        foreach ($query->result() as $row){
+            
+        }
+        return $result;
+    }
+    
     public function getAllCustomer(){
         $result = array();
         $result['result'] = FALSE;
@@ -30,36 +46,61 @@ class transaction_model extends CI_Model {
         }
         return $result;
     }
-    //you can define additional parameter here
     public function withdraw($user,$amount){
-        $result['result'] = TRUE;
-        $this->db->where('customer_id',$user['customer_id']);
+        $result['result'] = FALSE;
+        $this->db->where('customer_id',$user);
         $this->db->select('balance');
-        $balance = $this->db->get('customer');
-        if( ($balance - $amount) > 0 ){//withdrawal success
+        $query = $this->db->get('customer',1);
+        if($query->num_rows == 1)
+	{
+            $row = $query->row();
+            $balance = $row->balance;
+        }
+        if( ($balance - $amount) >= 0 ){//withdrawal success
             $newbalance = $balance - $amount;
-            $userdata = array(
+            $userData = array(
             'balance' => $newbalance
              );
-            $this->db->where('customer_id',$user['customer_id']);
-            $this->db->update('customer',$data);
-        }
-    }
-
-    public function deposit($user,$amount){
-        $result['result'] = TRUE;
-        $this->db->where('customer_id',$user['customer_id']);
-        $this->db->select('balance');
-        $balance = $this->db->get('customer');
-        if(($balance + $amount) > 1000){ //limit constraints to 1000
-            $newbalance  = $balance + $amount;
-            $data = array(
-                'balanace' => $newbalance
+            $this->db->where('customer_id',$user);
+            $this->db->update('customer',$userData);
+            $value = 0 - $amount;
+            $transData = array(
+              'customer_id' => $user,
+              'trans_amt' => $value,
+              'remarks' => 'Debit'
             );
-            $this->db->where('customer_id',$user['customer_id']);
-            $this->db->update('customer',$data);
+            $this->db->insert('transaction', $transData);
+            $result['result'] = TRUE;
         }
+        return $result;
     }
+    public function deposit($user,$amount){
+        $result['result'] = FALSE;
+        $this->db->where('customer_id',$user);
+        $this->db->select('balance');
+        $query = $this->db->get('customer');
+        if($query->num_rows == 1)
+	{
+            $row = $query->row();
+            $balance = $row->balance;
+        }
+        if(($balance + $amount) <= 1000){
+            $newbalance  = $balance + $amount;
+            $userData = array(
+                'balance' => $newbalance
+            );
+            $this->db->where('customer_id',$user);
+            $this->db->update('customer',$userData);
+            $transData = array(
+              'customer_id' => $user,
+              'trans_amt' => $amount,
+              'remarks' => 'Credit'
+            );
+            $this->db->insert('transaction', $transData);
+        }
+        $result['result'] = FALSE;
+    }
+    
     
     
     public function getCartByID($id){
@@ -127,7 +168,7 @@ class transaction_model extends CI_Model {
                         //alvin has added this to reuse method
                         $result['status'] = $row->status;
                         $result['customer_id'] = $row->customer_id;
-                        $result['balance'] = $row->customer_id;
+                        $result['balance'] = $row->balance;
 			
 		}
 		//return to the calling class, then the calling class need to 
