@@ -137,7 +137,8 @@ class Account_model extends CI_Model {
 	{
 		$result = array();
 		$result['result'] = FALSE;
-		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no','balance');
+		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no,balance,status,customer_id');
+		//$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no','balance','status','balance');
 		$this->db->where('customer_id', $customer_id);
 		$query = $this->db->get('customer',1);	//LIMIT 1
 		if($query->num_rows == 1)
@@ -155,6 +156,10 @@ class Account_model extends CI_Model {
 			$result['about_you'] = $row->about_you;
 			$result['hp_no'] = $row->hp_no;
 			$result['date_of_birth'] = $row->date_of_birth;
+                        //alvin has added this to reuse method
+                        $result['status'] = $row->status;
+                        $result['customer_id'] = $row->customer_id;
+                        $result['balance'] = $row->customer_id;
 			
 		}
 		//return to the calling class, then the calling class need to 
@@ -178,11 +183,7 @@ class Account_model extends CI_Model {
 		return $data;
 	}
         
-        public function getBalance($user){
-               $this->db->where('customer_id',$user['customer_id']);
-               $data = $this->db->get('customer');
-               return $data;
-        }
+     
 }
 /* End of file account_model.php */
 /* Location: ./models/account_model.php */

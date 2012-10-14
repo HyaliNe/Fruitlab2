@@ -2,6 +2,9 @@
 <body>
 <form>  
     <h2>Withdraw Balance</h2>
+    <label for="currentbalance">Current Balance</label><input type="text" name="balance" readonly="readonly"/>
+    <label for="withdraw">Withdraw</label><input type="text" name="withdraw" />
+    <label for="deposit">Deposit</label><input type="text" name="deposit"/>
     <table border='1'>        
       <thead><th>Transaction ID</th><th>Date</th><th>Credit/Debit</th><th>Remarks</th></thead>
        <tbody>

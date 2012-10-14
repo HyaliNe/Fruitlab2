@@ -3,7 +3,6 @@
 class Design extends CI_Controller {
 	
 	public function index($id = 0 ) {
-		
 		if($id == 0) {
 			
 			$data['main_content'] = 'design/design';
@@ -22,7 +21,7 @@ class Design extends CI_Controller {
 		
 		if ($design['exist']) {
 			$data['design_id']		= $design['design_id'];
-			$data['customer_id']	= $design['customer_id'];
+			$data['customer_id']	=        $design['customer_id'];
 			$data['image_path']		= $design['image_path'];
 			$data['rating']			= $design['rating'];
 			$data['price']			= $design['price'];
