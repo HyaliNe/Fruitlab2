@@ -95,7 +95,8 @@
 			          <a class="btn" href="#"><i class="icon-user"></i> <?php echo $this->session->userdata('email'); ?></a>
 			          <a class="btn dropdown-toggle btn-warning" data-toggle="dropdown" href="#"><span class="caret"></span></a>
 			          <ul class="dropdown-menu">
-						<li><a href="<?php echo site_url('profile/retrieve'); ?>"><i class="icon-home"></i> Profile</a></li>
+						<?php $profile = 'user/' . $this->session->userdata('customer_id'); ?>
+						<li><a href="<?php echo site_url($profile); ?>"><i class="icon-home"></i> Profile</a></li>
 							<!-- added a a href for settings, this will redirect to the correct settings page -->
 			            <li><a href="<?php echo site_url('setting/retrieve'); ?>"><i class="icon-wrench"></i> Settings</a></li>
 			            <li><a href="<?php echo site_url('logout'); ?>"><i class="icon-off"></i> Logout</a></li>

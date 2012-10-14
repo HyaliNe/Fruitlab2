@@ -77,7 +77,11 @@ class Account_model extends CI_Model {
 						'first_name' => $user['first_name'],
 						'last_name' => $user['last_name'],
 						'password' => sha1($user['password']),
-						'country' => $user['country']
+						'country' => $user['country'],
+						'date_of_birth' => $user['date_of_birth'],
+						'about_you' => $user['about_you'],
+						'hp_no' => $user['hp_no'],
+						'gender' => $user['gender']
 						
 						);
 		$this->db->where('email', $user['email']);
@@ -111,7 +115,7 @@ class Account_model extends CI_Model {
 		$result = array();
 		$result['result'] = FALSE;
 		
-		$this->db->select('first_name,last_name,country,password');
+		$this->db->select('first_name,last_name,country,password,date_of_birth,about_you,hp_no,gender');
 		$this->db->where('email', $email);
 		$query = $this->db->get('customer',1);	//LIMIT 1
 		
@@ -127,6 +131,10 @@ class Account_model extends CI_Model {
 			$result['email'] = $email;		//need not query since already available
 			$result['country'] = $row->country;
 			$result['password'] = $row->password;
+			$result['date_of_birth'] = $row->date_of_birth;
+			$result['about_you'] = $row->about_you;
+			$result['hp_no'] = $row->hp_no;
+			$result['gender'] = $row->gender;
 		}
 		//return to the calling class, then the calling class need to 
 		//check result['result'] to see whether there are result from the query
@@ -182,8 +190,23 @@ class Account_model extends CI_Model {
 		$data = $this->db->update('customer', $user_data);
 		return $data;
 	}
-        
-     
+	
+	public function fetchActivityRecord($customer_id)
+	{
+		
+		//this will select out activity done by the customer with id customer_id
+		$this->db->select('activity_id, creator_id, timestamp, affected_id, message');
+		$this->db->where('creator_id', $customer_id);
+		$this->db->or_where('affected_id', $customer_id); 
+		
+		$ownactivity = $this->db->get('activity');
+
+		//retrieve friend
+
+		//array will be returned. handle with caution
+		return $ownactivity->result();
+	}
+
 }
 /* End of file account_model.php */
 /* Location: ./models/account_model.php */
