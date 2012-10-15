@@ -7,7 +7,12 @@ class Friends extends CI_Controller {
 	}
 	function index()
 	{  
-            $data['resultset'] = '';
+            //$customer_id = $this->session->userdata('customer_id');
+            $customer_id = 1;
+            //$this->sessions->userdata("customer_1");
+            $this->load->model('account_model');            
+            $data['friendlist'] = $this->account_model->getFriendlist($customer_id);
+            $data['resultset'] = ''; 
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
 			$data['js'] = 'jquery.ui.core';
