@@ -153,7 +153,6 @@ class Account_model extends CI_Model {
 		{	
 			//storing the row return from the query
 			$row = $query->row();
-
 			//array of result
 			$result['result'] = TRUE;
 			$result['first_name'] = $row->first_name;
@@ -167,7 +166,7 @@ class Account_model extends CI_Model {
                         //alvin has added this to reuse method
                         $result['status'] = $row->status;
                         $result['customer_id'] = $row->customer_id;
-                        $result['balance'] = $row->customer_id;
+                        $result['balance'] = $row->balance;
 			
 		}
 		//return to the calling class, then the calling class need to 
@@ -193,20 +192,27 @@ class Account_model extends CI_Model {
 	
 	public function fetchActivityRecord($customer_id)
 	{
-		
 		//this will select out activity done by the customer with id customer_id
 		$this->db->select('activity_id, creator_id, timestamp, affected_id, message');
 		$this->db->where('creator_id', $customer_id);
 		$this->db->or_where('affected_id', $customer_id); 
-		
 		$ownactivity = $this->db->get('activity');
-
-		//retrieve friend
 
 		//array will be returned. handle with caution
 		return $ownactivity->result();
 	}
-
+        //get friendlist functionality
+        public function getFriendList($customer_id){
+            $this->db->select('*');
+            $this->db->where('customer_id',$customer_id);
+            $query = $this->db->get('is_friends_with');
+            $i = 0;
+            foreach($query->result() as $row){
+                $data = $this->retrieve_profile($row->customer_id);
+                print_r($data);
+            }
+        }
+        
 }
 /* End of file account_model.php */
 /* Location: ./models/account_model.php */
