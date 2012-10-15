@@ -203,14 +203,21 @@ class Account_model extends CI_Model {
 	}
         //get friendlist functionality
         public function getFriendList($customer_id){
+            $result['result'] = true;
             $this->db->select('*');
             $this->db->where('customer_id',$customer_id);
             $query = $this->db->get('is_friends_with');
             $i = 0;
             foreach($query->result() as $row){
                 $data = $this->retrieve_profile($row->customer_id);
-                print_r($data);
+                $result[$i]['first_name'] = $data['first_name'];
+                $result[$i]['last_name'] = $data['last_name'];
+                $result[$i]['country'] = $data['country'];
+                $result[$i]['email'] = $data['email'];
+                $result[$i]['hp_no'] = $data['hp_no'];
+                $i++;
             }
+            return $result;
         }
         
 }
