@@ -57,7 +57,7 @@
 				<div class="control-group">
 					<label class="control-label" for="country">Country</label>
 			     	<div class="controls">
-						<?php echo country_dropdown('country', $country); ?>
+						<?php echo country_dropdown('country', value_of_country($country)); ?>
 			         </div> <!-- .controls -->
 				 </div> <!-- .control-group -->				
 			</div> <!-- end of .span3 -->

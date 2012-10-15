@@ -33,7 +33,7 @@
 			<label class="control-label" for="country">Country</label>					
 		</td>
 		<td>
-			<?php echo $country; ?>					
+			<?php echo value_of_country($country); ?>					
 		</td>
 		</tr>
 		<tr>

@@ -18,17 +18,34 @@ function country_dropdown($name = 'country', $selected_country = '') {
 	$CI->config->load('country_list');
 	$countries = config_item('country_list');
 	
-	$html = "<select name = '{$name}'>";
+	$html = "<select name = '{$name}' id = '{$name}'>";
 	$html .= "<option value = ''>Please select a country</option>";
 	
 	foreach ($countries as $key => $value) {
 		$selected = (strtolower($value) === strtolower($selected_country)) ? "SELECTED": "" ;
-		$html .= "<option value = '{$selected_country}' {$selected}>{$value}</option> ";
+		$html .= "<option value = '{$key}' {$selected}>{$value}</option> ";
 	}
 	
 	$html .= "</select>";
 	return $html;
-}		
+}
+
+//function to return the value of country given a key
+function value_of_country($input)
+{
+	//Get an instance of CodeIgniter before loading country_list
+	$CI =& get_instance();
+	$CI->config->load('country_list');
+	$countries = config_item('country_list');
+	
+	foreach ($countries as $key => $value)
+	{
+		if($input == $key)
+		{
+			return $value;
+		}
+	}
+}	
 
 /* End of file MY_form_helper.php */
 /* Location: ./helpers/MY_form_helper.php */
