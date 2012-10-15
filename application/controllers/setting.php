@@ -20,6 +20,8 @@ class Setting extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('first_name', 'first name', 'required|trim');
 		$this->form_validation->set_rules('last_name', 'last name', 'required|trim');
+		$this->form_validation->set_rules('hp_no', 'handphone no', 'min_length[8]|max_length[20]');
+		$this->form_validation->set_rules('about_you', 'about you', 'max_length[150]');
 	
 		$this->form_validation->set_rules('password', 'Password', 'required|matches[password2]|trim');			
 		$this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim');	
