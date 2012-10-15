@@ -83,6 +83,7 @@
 		</tr>	
 		</table>		
 		
+		<!-- testing area to retrieve activity -->
 		<table>
 		<?php foreach($activity as $singleactivity):?>
 
@@ -91,5 +92,7 @@
 		</tr>	
 
 		<?php endforeach;?>
+		
+		<!-- testing area to retrieve design -->
 		
 </div>

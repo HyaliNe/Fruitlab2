@@ -7,5 +7,7 @@
 	<?php echo $price; ?></br>
 	<?php echo $title; ?></br>
 	<?php echo $type?></br>
-	
+
+	<?php $sharelink = "design/" . $design_id;	?>
+	<div class="fb-like" data-href="<?php echo site_url($sharelink);?>" data-send="true" data-width="450" data-show-faces="true"></div>	
 </div>
