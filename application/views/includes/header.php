@@ -31,6 +31,16 @@
 		<?php //Load additional javascript. Everything is inline to format the output of the code.
 		 if ( !empty($js) ) : ?><?php foreach ($js as $key => $value) : ?>.js("<?php echo base_url(). 'js/' .$value.'.js'; ?>")<?php endforeach ?><?php endif ?>;
 	</script>
+	
+	<!-- include facebook SDK -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=231963610242030";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>

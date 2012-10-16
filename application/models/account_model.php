@@ -78,10 +78,10 @@ class Account_model extends CI_Model {
 						'last_name' => $user['last_name'],
 						'password' => sha1($user['password']),
 						'country' => $user['country'],
-						'date_of_birth' => $user['date_of_birth'],
-						'about_you' => $user['about_you'],
-						'hp_no' => $user['hp_no'],
-						'gender' => $user['gender']
+						'date_of_birth' => (($user['date_of_birth'] != null) ? $user['date_of_birth'] : null),
+						'about_you' => (($user['about_you'] != null) ? $user['about_you'] : null),
+						'hp_no' => (($user['hp_no'] != null) ? $user['hp_no'] : null),
+						'gender' => (($user['gender'] != null) ? $user['gender'] : null)
 						
 						);
 		$this->db->where('email', $user['email']);

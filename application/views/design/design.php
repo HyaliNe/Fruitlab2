@@ -7,6 +7,7 @@
 		<button type="submit" class="btn">Search</button>
 	</form>
 	
+	
 	<?php if(isset($search_exist) && $search_exist) {?>
 		<div>
 			<?php foreach($search_result->result() as $item) {?>
@@ -17,6 +18,9 @@
 				<?php echo $item->price; ?></br>
 				<?php echo $item->title; ?></br>
 				<?php echo $item->type?></br>
+				<!-- this sharing is not working yet, need to test in actual environment-->
+				<?php $sharelink = "design/" . $item->design_id;	?>
+			<div class="fb-like" data-href="<?php echo site_url($sharelink);?>" data-send="true" data-width="450" data-show-faces="true"></div>	
 			<?php } ?>
 			
 		</div>
