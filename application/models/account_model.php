@@ -210,6 +210,7 @@ class Account_model extends CI_Model {
             $i = 0;
             foreach($query->result() as $row){
                 $data = $this->retrieve_profile($row->customer_id);
+                $result[$i]['customer_id'] = $data['customer_id'];
                 $result[$i]['first_name'] = $data['first_name'];
                 $result[$i]['last_name'] = $data['last_name'];
                 $result[$i]['country'] = $data['country'];

@@ -54,11 +54,11 @@
     <table border='1'> 
         <tr><th>Name</th><th>Email</th><th>Country</th><th>Telephone</th></tr>
     <?php
-    for($i = 0;$i < sizeof($friendlist);$i++){
+    for($i = 1;$i < sizeof($friendlist);$i++){
         if(isset($friendlist[$i])){
         $friend = $friendlist[$i];
     ?>    
-        <tr><td><?=$friend['first_name'].' '.$friend['last_name']?></td><td><?=$friend['email']?></td><td><?=$friend['country']?></td><td><?=$friend['hp_no']?></td></tr>
+        <tr><td><a href=<?=  site_url('user/'.$friend['customer_id'])?>><?=$friend['first_name'].' '.$friend['last_name']?></a></td><td><?=$friend['email']?></td><td><?=$friend['country']?></td><td><?=$friend['hp_no']?></td></tr>
     <?
         }
     }
@@ -85,7 +85,8 @@ Female:<input type="radio" name="gender" value="female" <?php echo set_radio('ge
 if($resultset != null){
     foreach($resultset->result() as $row){
         echo "<tr>";
-	echo "<td><a href=#>".$row->first_name."</a></td><td>".$row->email ."</td>";
+        $profilelink = "user/" . $row->customer_id;        
+	echo "<td><a href=" .site_url($profilelink) .">".$row->first_name."</a></td><td>".$row->email ."</td>";
 	echo "<td>".$row->gender."</td><td>".$row->date_of_birth ."</td>";
             $customer_id2 = $row->customer_id;
             $this->db->select('customer_id');

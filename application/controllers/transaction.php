@@ -15,9 +15,7 @@ class Transaction extends CI_Controller {
         public function paymenthistory($customer_id = 0) {
                 $this->load->model("transaction_model");
                 $data['sales'] = $this->transaction_model->getCustomerPaymentByCartList($customer_id);
-		$data['main_content'] = 'transaction/paymenthistory';
-                $this->load->library('table');
-                echo $this->table->generate();
+                $data['main_content'] = 'transaction/paymenthistory';
 		$this->load->view('includes/template', $data);
 	}
         public function viewearnings() {

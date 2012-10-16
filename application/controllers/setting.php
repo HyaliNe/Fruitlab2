@@ -10,10 +10,6 @@
 
 class Setting extends CI_Controller {
 	
-	/**
-	 * Setting
-	 *
-	 **/
 	public function index() {
 		
 		$password_correct = false;
