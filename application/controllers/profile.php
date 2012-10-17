@@ -15,9 +15,6 @@ class Profile extends CI_Controller {
 	 *
 	 **/
 	public function index($userId = 0) {
-
-	
-
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('email', 'email', 'required|valid_email');
 		$this->form_validation->set_rules('hp_no', 'Handphone no', 'numeric|max_length[20]|min_length[8]');

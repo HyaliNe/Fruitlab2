@@ -29,7 +29,7 @@ class Upload extends CI_Controller {
             //load the config class libraries here
             $this->load->library('form_validation');
             $this->form_validation->set_rules('title', 'title', 'required|trim');
-	    $this->form_validation->set_rules('price', 'price', 'required|trim|decimal');
+	    $this->form_validation->set_rules('price', 'price', 'required|trim|numeric');
 	    $this->form_validation->set_rules('type', 'type', 'required|trim');//sales,private,hidden
             //by default is error free method
             //do the file upload method;
@@ -65,4 +65,4 @@ class Upload extends CI_Controller {
 }
 
 /* End of file account.php */
-/* Location: ./controllers/account.php */	
+/* Location: ./controllers/account.php */

@@ -66,8 +66,11 @@ class Friends extends CI_Controller {
             $this->load->view('includes/template', $data);
         }
         function search(){
+            $customer_id = 1;
+            $this->load->model('account_model');
             $data["error"] = '';
             $data["main_content"]  = 'friend_display';
+            $data['friendlist'] = $this->account_model->getFriendlist($customer_id);
             $postdata = $this->input->post();
             if(isset($postdata['fname']) && $_POST['fname'] != ''){
                 $name = $postdata['fname'];
