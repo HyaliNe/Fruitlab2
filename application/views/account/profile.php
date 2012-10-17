@@ -92,7 +92,7 @@
 		</tr>	
 
 		<?php endforeach;?>
-		
+		</table>
 		<!-- testing area to retrieve design -->
 		
 </div>
