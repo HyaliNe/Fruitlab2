@@ -18,6 +18,7 @@
 				<?php echo $item->price; ?></br>
 				<?php echo $item->title; ?></br>
 				<?php echo $item->type?></br>
+				<?php echo $item->num_of_rating?></br>
 				<!-- this sharing is not working yet, need to test in actual environment-->
 				<?php $sharelink = "design/" . $item->design_id;	?>
 			<div class="fb-like" data-href="<?php echo site_url($sharelink);?>" data-send="true" data-width="450" data-show-faces="true"></div>	

@@ -27,6 +27,7 @@ class Design extends CI_Controller {
 			$data['price']			= $design['price'];
 			$data['title']			= $design['title'];
 			$data['type']			= $design['type'];
+			$data['num_of_rating']	= $design['num_of_rating'];
 			
 			$data['main_content'] = 'design/single_design';
 		} else {

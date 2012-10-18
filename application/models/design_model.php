@@ -34,6 +34,7 @@ class Design_model extends CI_model {
 			$design['price'] = $row->price;
 			$design['title'] = $row->title;
 			$design['type'] = $row->type;
+			$design['num_of_rating'] = $row->num_of_rating;
 			
 		}
 		
@@ -95,18 +96,28 @@ class Design_model extends CI_model {
 	public function rate($user)
 	{
 		$date = date('Y-m-d H:i:s');
+		//assume that num_of_rating is being passed in using hidden to here
+		$num_of_rating = $this->input->post('num_of_rating');
+		//assume old average rating is being passed in using hidden to here
+		$old_average = $this->input->post('old_rating');
+		
+		//calculate the new average rating
+		$input_rating = $this->input->post('rating');
+		$new_num_of_rating = $num_of_rating + 1;
+		//formula to calculate the new average rating
+		$new_rating = (($old_average * $num_of_rating) + $input_rating) / $new_num_of_rating;
 		
 		$user_data = array(
-						'rating' => $user['rating'],
-						'customer_id' => $user['customer_id'],
+						'rating' => $new_rating,
 						'design_id' => $user['design_id'],
-						'timestamp' => $date
+						'num_of_rating' => $new_num_of_rating
 						);
 		
-		$data = $this->db->insert('rating', $user_data);
+		$this->db->where('design_id', $user['design_id']);
+		$data = $this->db->update('design', $user_data);
 		
 		//add info to activity
-		$type = "rate";
+	/* 	$type = "rate";
 		$activity_data = array(
 						'timestamp' => $date,
 						'creator_id' => $user['customer_id'],
@@ -114,7 +125,7 @@ class Design_model extends CI_model {
 						'type' => $type,
 						'affected_id' => $user['design_id']
 						);
-		$activity = $this->db->insert('activity', $activity_data);				
+		$activity = $this->db->insert('activity', $activity_data);	 */			
 		
 		return $data;		
 	}
