@@ -74,32 +74,41 @@
 										{
 											echo site_url();
 										}		?>">FruitLab</a>
+			<form class="navbar-form form-search pull-left" action="<?php echo site_url('design/searchDesign'); ?>" method="post">
+			  <div class="input-append">
+			    <input type="text" class="span4 search-query" name="search_clause" placeholder="Search for design ..."/>
+			    <button type="submit" class="btn"><i class = "icon-search"></i></button>
+			  </div>
+			</form>
+    										
 				<?php if ( $this->session->userdata('email') ) : ?>
-		<ul class="nav">
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Design
-					<b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu">
-					<a href="<?php echo site_url('upload_form'); ?>"> Create design</a>
-					<a href="<?php echo site_url('upload_form'); ?>"> Search design</a>
-				</ul>
-			</li>
-			<li class="dropdown">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Friends
-					<b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu">
-					<a href="<?php echo site_url('upload_form'); ?>"> View friends</a>
-					<a href="<?php echo site_url('upload_form'); ?>"> Search friends</a>
-				</ul>
-			</li>			
-		</ul>
-	      <div class="nav-collapse collapse pull-right">
-            <ul class="nav">
-				
+		<div class="nav-collapse collapse pull-right">
+			<ul class="nav">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						Design
+						<b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<a href="#">Create New Design</a>
+						<a href="#">Manage Designs</a>
+					</ul>
+				</li>
+				<li>
+				<a href="#"><i class="icon-shopping-cart"></i> Cart</a>
+				</li>
+				<li style = "margin-right: 20px; position: relative;">
+							<div class="btn-group">
+								<a href = "#" class = "btn btn-link" data-toggle="dropdown"><i class = "icon-eye-close"></i> </a>
+								<ul class="dropdown-menu">
+								<li><a href="#">1 friend request</a></li>        
+								<li><a href="#">No New Notification</a></li>
+							  </ul>
+							  
+							</div>
+							<div class="badge badge-important" style = "position: absolute; top:3px; left:30px; z-index:99">3</div>
+						</li>			
+			
 				<li>
 					<div class="btn-group">
 			          <a class="btn" href="#"><i class="icon-user"></i> <?php echo $this->session->userdata('email'); ?></a>
@@ -113,35 +122,19 @@
 			          </ul>
 			        </div>
 				</li>
+			</ul>
 
 				<?php else: ?>
-	      <div class="nav-collapse collapse">
-            <ul class="nav">
-	
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-				<li class="active"><a href="<?php echo site_url('register'); ?>">Register</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-
-            <form class="navbar-form pull-right" action = "<?php echo site_url('login/validate'); ?>" method = "post">
-              <input class="span2" type="text" id="inputEmail" name="email" placeholder="Email">
-              <input class="span2" type="password" id="inputPassword" name = "password" placeholder="Password">
-
-              <button type="submit" class="btn">Sign in</button>
-            </form>
-
+				<div class="nav-collapse collapse pull-right">
+	            <ul class="nav">				
+					<li>
+						<div class="btn-group">
+							<a class="btn btn-inverse btn-small" href="<?php echo site_url('register'); ?>">Register</a>
+							<a class="btn btn-small" href="<?php echo site_url('login'); ?>">Login</a>
+						</div>
+					</li>
+		      	</ul>
+		
 		<?php endif; ?>
 
           </div><!--/.nav-collapse -->

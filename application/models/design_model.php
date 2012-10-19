@@ -35,7 +35,6 @@ class Design_model extends CI_model {
 			$design['title'] = $row->title;
 			$design['type'] = $row->type;
 			$design['num_of_rating'] = $row->num_of_rating;
-			
 		}
 		
 		return $design;
@@ -128,6 +127,19 @@ class Design_model extends CI_model {
 		$activity = $this->db->insert('activity', $activity_data);	 */			
 		
 		return $data;		
+	}
+	
+	public function fetchComment($id)
+	{
+				
+		$this->db->select('message', 'customer_id', 'timestamp');
+		$this->db->where('design_id', $id);		
+		$comment= $this->db->get('comment');
+		
+		if($comment)
+		{
+			return $comment->result();
+		}	
 	}
 }
 
