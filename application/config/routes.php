@@ -41,7 +41,10 @@
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 $route['design/(:num)'] = 'design/singleDesign/$1';
-$route['user/(:num)'] = 'profile/profile/$1'
+$route['user/(:num)'] = 'profile/profile/$1';
+$route['user/(:num)/design'] = 'design/browseDesginByUser/$1';
+$route['cart'] = 'cart/viewCart';
+$route['customise/(:num)'] = 'cart/customise/$1';
 
 
 /* End of file routes.php */

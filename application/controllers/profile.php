@@ -102,7 +102,7 @@ class Profile extends CI_Controller {
 				
 				//to uo liang
 				//decide the template to load. Leave it for you since I haven't done it.
-				$data['main_content'] = ;
+				$data['main_content'] = "";
 				
 			} else {
 				// How can I make it such that I dont have to retype this bullshit error message twice in the method.
@@ -115,8 +115,13 @@ class Profile extends CI_Controller {
 		
 		$this->load->view('includes/template', $data);
 	}
+	
+	
 }
 
 
 /* End of file profile.php */
 /* Location: ./controller/profile.php */	
+
+?>
+

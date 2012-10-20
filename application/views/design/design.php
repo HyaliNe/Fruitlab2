@@ -2,6 +2,15 @@
 	<h1> General area for design? catalog/ tag page maybe?</h1>
 	
 	either way we have a simple search base on title here</br>
+	<?php if (validation_errors()): ?>
+
+		<div class="alert alert-error">
+		  <a class="close" data-dismiss="alert" href="#">×</a>
+		  <h4 class="alert-heading">Error!</h4>
+			<?php echo validation_errors(); ?>
+		</div>
+
+	<?php endif ?>
 	<form action = "<?php echo site_url('design/searchDesign'); ?>" method = "post"/>
 		<input class="span5" name="search_clause" type="text">
 		<button type="submit" class="btn">Search</button>
