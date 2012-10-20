@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Upload A Design</title>
+<title>Create New Design</title>
 </head>
 <body>
 <?php echo $error;?>
@@ -12,17 +12,75 @@
 		<?php echo validation_errors(); ?>
 		</div>
     <?php endif ?>
-<h2> Upload a Design</h2>
-<label for="title">Title:</label><input type="text" name="title" value="<?php echo set_value('title'); ?>">
-<br/>
-<label for="price">Price:</label><input type="text" name="price" value="<?php echo set_value('price'); ?>">
-<br/>
-Sales:<input type="radio" name="type" value="Sales" <?php echo set_radio('type', 'On Sales', TRUE); ?> />
-Private:<input type="radio" name="type" value="Private" <?php echo set_radio('type', 'Private'); ?> />
-<br/>
-<label for="image_path">Upload a File:</label><input type="file" value="<?php echo set_value('userfile')?>" name="userfile" size="20" />
-<br />
-<input type="submit" value="Submit" />
+<h2> Create New Design</h2>
+
+<div class="row">
+	<div class="span4 offset1">
+		<div class="row">
+			<div class="span2">
+				Title
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<input type="text" name="title" value="<?php echo set_value('title'); ?>">
+			</div>		
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="span4 offset1">
+		<div class="row">
+			<div class="span2">
+				Price
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<input type="text" name="price" value="<?php echo set_value('price'); ?>">
+			</div>		
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="span4 offset1">
+		<div class="row">
+			<div class="span2">
+				Type
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<input type="radio" name="type" value="Sales" <?php echo set_radio('type', 'On Sales', TRUE); ?> />Sales
+				<input type="radio" name="type" value="Private" <?php echo set_radio('type', 'Private'); ?> />Private
+			</div>		
+		</div>		
+	</div>
+</div>
+
+<div class="row">
+	<div class="span12 offset1">
+		<div class="row">
+			<div class="span1">
+				Image
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<span class="add-on"><i class="icon-envelope"></i></span>
+				<input type="file" value="<?php echo set_value('userfile')?>" name="userfile" />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="span2 offset1">
+		<input type="submit" value="Create" />
+	</div>
+</div>
 </form>
 <h2> Current Design </h2>
 <table border = '1'> 

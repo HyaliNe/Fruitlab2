@@ -179,24 +179,6 @@ class transaction_model extends CI_Model {
 		//return to the calling class, then the calling class need to 
 		//check result['result'] to see whether there are result from the query
 		return $result;
-    }
-     
-     public function getCartlistByID($id){
-         $result = array();
-         $result['result'] = FALSE;
-         $this->db->select('cart_list_id,singlelineitem,cart_id');
-         $this->db->where('cart_list_id',1);
-         $query = $this->db->get("cartlist");
-            if($query->num_rows == 1)
-		{
-                        //storing the row return from the query
-			$row = $query->row();
-			$result['cart_list_id'] = $row->cart_list_id;
-			$result['singlelineitem'] = $row->singlelineitem;
-			$result['cart_id'] = $row->reference;		//need not query since already
-                        $result['result'] = TRUE;
-                }
-          return $result;
-     }   
+    }  
      }
 ?>

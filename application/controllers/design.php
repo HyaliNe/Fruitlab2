@@ -19,6 +19,9 @@ class Design extends CI_Controller {
 		
 		$design = $this->design_model->fetchSingleDesign($id);
 		
+		$comment = $this->design_model->fetchComment($id);
+
+		
 		if ($design['exist']) {
 			$data['design_id']		= $design['design_id'];
 			$data['customer_id']	=        $design['customer_id'];
@@ -27,6 +30,8 @@ class Design extends CI_Controller {
 			$data['price']			= $design['price'];
 			$data['title']			= $design['title'];
 			$data['type']			= $design['type'];
+			$data['num_of_rating']	= $design['num_of_rating'];
+			$data['comment']		= $comment;
 			
 			$data['main_content'] = 'design/single_design';
 		} else {

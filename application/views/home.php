@@ -1,4 +1,7 @@
+
+
     <div class="container">
+
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
         <h1>Design Your Shirt With Style!</h1>
@@ -9,13 +12,16 @@
 	<div class="container">
 		<h3>Best Selling Designs</h3>
 		<ul class="thumbnails">
+			
 			<?php for ($i = 0; $i < 12; $i++): ?>
-			  <li class="span2">
+			  <li>
 			    <div class="thumbnail">
 			      <img src="http://placehold.it/150x100" alt="">
 			    </div>
 			  </li>
+
 			<?php endfor; ?>
+
 		</ul>		
 	</div>
 
@@ -37,4 +43,5 @@
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
       </div>
-</div>
+
+	</div>
