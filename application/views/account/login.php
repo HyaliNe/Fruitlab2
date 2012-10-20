@@ -1,7 +1,6 @@
 <div class="container">
 	<div class = "page-header">
 		<h1>Login</h1><br>
-		<p>Some message here</p>
 	</div> <!-- end of .page-header -->	
 
 

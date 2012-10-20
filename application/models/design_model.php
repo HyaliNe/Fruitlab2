@@ -34,7 +34,7 @@ class Design_model extends CI_model {
 			$design['price'] = $row->price;
 			$design['title'] = $row->title;
 			$design['type'] = $row->type;
-			
+			$design['num_of_rating'] = $row->num_of_rating;
 		}
 		
 		return $design;
@@ -66,6 +66,86 @@ class Design_model extends CI_model {
 		
 	}
 	
+	public function comment($user)
+	{
+		$date = date('Y-m-d H:i:s');
+		
+		$user_data = array(
+						'message' => $user['comment'],
+						'customer_id' => $user['customer_id'],
+						'design_id' => $user['design_id'],
+						'timestamp' => $date
+						);
+		
+		$data = $this->db->insert('comment', $user_data);
+		
+		//add info to activity
+		$type = "comment";
+		$activity_data = array(
+						'timestamp' => $date,
+						'creator_id' => $user['customer_id'],
+						'message' => $user['customer_id'] . " gave review to " . $user['design_id'] . "on " . $date,
+						'type' => $type,
+						'affected_id' => $user['design_id']
+						);
+		$activity = $this->db->insert('activity', $activity_data);				
+		
+		return $data;
+	}
+	
+	public function rate($user)
+	{
+		$date = date('Y-m-d H:i:s');
+		//assume that num_of_rating is being passed in using hidden to here
+		$num_of_rating = $this->input->post('num_of_rating');
+		//assume old average rating is being passed in using hidden to here
+		$old_average = $this->input->post('old_rating');
+		
+		//calculate the new average rating
+		$input_rating = $this->input->post('rating');
+		$new_num_of_rating = $num_of_rating + 1;
+		//formula to calculate the new average rating
+		$new_rating = (($old_average * $num_of_rating) + $input_rating) / $new_num_of_rating;
+		
+		$user_data = array(
+						'rating' => $new_rating,
+						'design_id' => $user['design_id'],
+						'num_of_rating' => $new_num_of_rating
+						);
+		
+		$this->db->where('design_id', $user['design_id']);
+		$data = $this->db->update('design', $user_data);
+		
+		//add info to activity
+	/* 	$type = "rate";
+		$activity_data = array(
+						'timestamp' => $date,
+						'creator_id' => $user['customer_id'],
+						'message' => $user['customer_id'] . " rated " . $user['design_id'],
+						'type' => $type,
+						'affected_id' => $user['design_id']
+						);
+		$activity = $this->db->insert('activity', $activity_data);	 */			
+		
+		return $data;		
+	}
+	
+	public function fetchComment($id)
+	{			
+		$this->db->select('message, comment.customer_id, timestamp, img_path');
+		$this->db->from('comment');
+		$this->db->where('design_id', $id);	
+		$this->db->join('customer', 'customer.customer_id = comment.customer_id');
+		
+		$comment = $this->db->get();
+
+		if($comment)
+		{
+			return $comment;
+		}
+	}
+}
+
 	/**
 	 * Search the database for all design by a userid
 	 *
@@ -90,6 +170,4 @@ class Design_model extends CI_model {
 		
  		return $query;
 	 }
-}
-
 ?>
