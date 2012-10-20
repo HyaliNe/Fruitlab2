@@ -32,9 +32,11 @@ class Activity_model extends CI_Model {
 		
 		$this->db->from('activity');
 		$this->db->where('customer_id', $userid);
-		$thid->db->limit(20);
+		$this->db->limit(20);
 		
 		$query = $this->db->get();
+		
+		$activityList = array();
 		
 		if(!$query->num_rows()>0)
 			return false;
@@ -57,7 +59,7 @@ class Activity_model extends CI_Model {
 			$firstcount = true;
 			foreach ($friendlist->result() as $row)
 			{
-				if(firstcount) {
+				if($firstcount) {
 					$this->db->where('userid', $row->customer_id2);
 					$firstcount = false;
 				} else {
@@ -80,7 +82,38 @@ class Activity_model extends CI_Model {
 		
 		return false;
 	}
+	
+	function fetchName($id) {
+		$this->db->select('first_name, last_name ');
+		$this->db->from('customer');
+		$this->db->where('customer_id', $id);
+		
+		$query = $this->db->get();
+		
+		if ($query->num_rows() > 0) {
+		   $row = $query->row();
 
+		   return $row->first_name ." ". $row->last_name;
+		} 
+		else 
+			return false;
+	}
+	
+	function fetchDesignTitle($id) {
+		$this->db->select('title');
+		$this->db->from('design');
+		$this->db->where('design_id', $id);
+		
+		$query = $this->db->get();
+		
+		if ($query->num_rows() > 0) {
+		   $row = $query->row();
 
+		   return $row->title;
+		} 
+		else 
+			return false;		
+	}
+}
 
 ?>
