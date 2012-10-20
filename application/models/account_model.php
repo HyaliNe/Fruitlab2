@@ -145,7 +145,7 @@ class Account_model extends CI_Model {
 	{
 		$result = array();
 		$result['result'] = FALSE;
-		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no,balance,status,customer_id');
+		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no,balance,status,customer_id,img_path');
 		//$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no','balance','status','balance');
 		$this->db->where('customer_id', $customer_id);
 		$query = $this->db->get('customer',1);	//LIMIT 1
@@ -162,6 +162,7 @@ class Account_model extends CI_Model {
 			$result['gender'] = $row->gender;
 			$result['about_you'] = $row->about_you;
 			$result['hp_no'] = $row->hp_no;
+			$result['img_path'] = $row->img_path;
 			$result['date_of_birth'] = $row->date_of_birth;
                         //alvin has added this to reuse method
                         $result['status'] = $row->status;
@@ -178,6 +179,7 @@ class Account_model extends CI_Model {
 	{
 		//creating a new array
 		$user_data = array(
+						'img_path'=> (($user['img_path'] != null) ? $user['img_path'] : null),
 						'gender' => (($user['gender'] != null) ? $user['gender'] : null),	
 						'country' => (($user['country'] != null) ? $user['country'] : null),
 						'hp_no' => (($user['hp_no'] != null) ? $user['hp_no'] : null),
@@ -193,7 +195,7 @@ class Account_model extends CI_Model {
 	public function fetchActivityRecord($customer_id)
 	{
 		//this will select out activity done by the customer with id customer_id
-		$this->db->select('activity_id, creator_id, timestamp, affected_id, message');
+		$this->db->select('activity_id, creator_id, timestamp, affected_id');
 		$this->db->where('creator_id', $customer_id);
 		$this->db->or_where('affected_id', $customer_id); 
 		$ownactivity = $this->db->get('activity');

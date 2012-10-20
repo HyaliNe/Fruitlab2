@@ -20,11 +20,7 @@ class Design extends CI_Controller {
 		$design = $this->design_model->fetchSingleDesign($id);
 		
 		$comment = $this->design_model->fetchComment($id);
-		$num_of_comment=0;
-		foreach($comment as $singlecomment)
-		{
-			$num_of_comment++;
-		}
+
 		
 		if ($design['exist']) {
 			$data['design_id']		= $design['design_id'];
@@ -36,7 +32,6 @@ class Design extends CI_Controller {
 			$data['type']			= $design['type'];
 			$data['num_of_rating']	= $design['num_of_rating'];
 			$data['comment']		= $comment;
-			$data['num_of_comment']	= $num_of_comment;
 			
 			$data['main_content'] = 'design/single_design';
 		} else {

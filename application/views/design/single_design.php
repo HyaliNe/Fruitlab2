@@ -64,22 +64,22 @@
 	<br>
 	<div class="row">
 		<div class="span4">
-			Comment(<?php echo $num_of_comment;?>)
+			Comment(<?php echo $comment->num_rows();?>)
 		</div>
 	</div>
 	<hr>
-	<?php foreach($comment as $singlecomment):?>
+	<?php foreach($comment->result() as $singlecomment):?>
 		<div class="row">
 			<div class="span12">
 				<div class="thumbnail pull-left">
-					<img src="http://placehold.it/80x60" alt="">
+					<img src="<?php echo $singlecomment->img_path;?>" alt="">
 				</div>
 				<div class="span6">
 					<div class="span5 pull-left lead">
 						<?php echo $singlecomment->message;?>
 					</div>				
 					<div class="span3 offset4">
-						<?php echo "50 seconds ago";?>
+						<?php echo $singlecomment->timestamp;;?>
 					</div>
 					
 				</div>

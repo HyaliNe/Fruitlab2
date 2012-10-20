@@ -130,16 +130,18 @@ class Design_model extends CI_model {
 	}
 	
 	public function fetchComment($id)
-	{
-				
-		$this->db->select('message', 'customer_id', 'timestamp');
-		$this->db->where('design_id', $id);		
-		$comment= $this->db->get('comment');
+	{			
+		$this->db->select('message, comment.customer_id, timestamp, img_path');
+		$this->db->from('comment');
+		$this->db->where('design_id', $id);	
+		$this->db->join('customer', 'customer.customer_id = comment.customer_id');
 		
+		$comment = $this->db->get();
+
 		if($comment)
 		{
-			return $comment->result();
-		}	
+			return $comment;
+		}
 	}
 }
 

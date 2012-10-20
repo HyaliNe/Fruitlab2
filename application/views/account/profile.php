@@ -2,7 +2,7 @@
 	
 	<div class = "page-header">
 		<table>
-		<tr><td><img src="<?php echo site_url('img/user_add.png'); ?>" alt="user" width="124" height="124" ></td>
+		<tr><td><img src="<?php echo $img_path; ?>" alt="user" width="124" height="124" ></td>
 		<td><h1><?php echo $first_name, " " , $last_name;?></h1></td></tr>
 		</table>
 	</div> <!-- end of .page-header -->
@@ -88,7 +88,7 @@
 		<?php foreach($activity as $singleactivity):?>
 
 		<tr>
-		<td><?php echo $singleactivity->message;?></td>
+		<td><?php echo "some message";?></td>
 		</tr>	
 
 		<?php endforeach;?>
