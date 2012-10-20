@@ -52,18 +52,17 @@ class Activity_model extends CI_Model {
 		$this->db->where('customer_id', $userid);
 		
 		$friendlist = $this->db->get();
-		
-		if(!$friendlist->num_rows() > 0 ){
+		if($friendlist->num_rows() > 0 ){
 			//setup query to select activity of all friends friends
 			$this->db->from('activity');
 			$firstcount = true;
 			foreach ($friendlist->result() as $row)
 			{
 				if($firstcount) {
-					$this->db->where('userid', $row->customer_id2);
+					$this->db->where('customer_id', $row->customer_id2);
 					$firstcount = false;
 				} else {
-					$this->db->or_where('userid', $row->customer_id2);
+					$this->db->or_where('customer_id', $row->customer_id2);
 				}
 			    
 			}

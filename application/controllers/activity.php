@@ -3,9 +3,20 @@
 class Activity extends CI_Controller {
 	
 	public function index() {
+		$this->activityList(8, true);
+		
+	}
+	
+	//I'm thinking most likely the activity list won't be used in a single page. 
+	//So let me know I'll update so that it sets a marker to show that the list exist then leaves the data in the $data array
+	public function activityList($id, $friendsActivity = false) 
+	{
 		$this->load->model('activity_model');
 		
-		$activityList = $this->activity_model->fetchActivity(8);
+		if($friendsActivity)
+			$activityList = $this->activity_model->fetchFriendsActivity($id);
+		else
+			$activityList = $this->activity_model->fetchActivity($id);
 		$data['listExist'] = false;
 		
 		if($activityList) {
@@ -26,6 +37,8 @@ class Activity extends CI_Controller {
 				//fetch related design name/username.
 				//prepare message to display includes html link tags
 				$currentRow = $row->type;
+				if($friendsActivity) 
+					$friendsName = $this->activity_model->fetchName($row->customer_id);
 				if($currentRow == 'ADD_FRIEND' || $currentRow == 'REMOVE_FRIEND' ) {
 					$name = $this->activity_model->fetchName($row->affected_id);
 					$message;
@@ -35,8 +48,9 @@ class Activity extends CI_Controller {
 							$message = "Added";
 						else 
 							$message = "Removed";
-						
-						$message = $message." <a href='site_url('user/$row->affected_id')'>$name</a> as friend.";
+						if($friendsActivity) 
+							$message = $friendsName ." ". strtolower($message);
+						$message = $message." <a href='".site_url('user/'.$row->affected_id)."'>$name</a> as friend.";
 						array_push($processedList, $message);
 					}
 					
@@ -53,8 +67,10 @@ class Activity extends CI_Controller {
 							$message = 'Purchased';
 						else
 							$message = 'Rated';
-						
-						$message = $message." the design <a href='site_url('design/$row->affected_id')'>$title</a>.";
+
+						if($friendsActivity) 
+							$message = $friendsName ." ". strtolower($message);
+						$message = $message." the design <a href='".site_url('design/'.$row->affected_id)."'>$title</a>.";
 						array_push($processedList, $message);
 					}
 				}
@@ -70,12 +86,6 @@ class Activity extends CI_Controller {
 		}
 		
 		$this->load->view('includes/template', $data);
-		
-	}
-	
-	public function friendsActivity() 
-	{
-		
 	}	
 }
 

@@ -144,7 +144,7 @@ class Design_model extends CI_model {
 			return $comment;
 		}
 	}
-}
+
 
 	/**
 	 * Search the database for all design by a userid
@@ -170,4 +170,5 @@ class Design_model extends CI_model {
 		
  		return $query;
 	 }
+ }
 ?>
