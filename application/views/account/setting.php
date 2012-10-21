@@ -1,43 +1,8 @@
-<head>
-<link rel="stylesheet" href="js/Alvin/themes/base/jquery.ui.all.css">
-	<script src="js/Alvin/jquery-1.7.1.js"></script>
-	<script src="js/Alvin/ui/jquery.ui.core.js"></script>
-	<script src="js/Alvin/ui/jquery.ui.widget.js"></script>
-	<script src="js/Alvin/ui/jquery.ui.datepicker.js"></script>
-<script>
-	 $(function() {
-		//must be placed at the top of the block
-		var dates = $( "#date_of_birth" ).datepicker({
-			defaultDate: "+1w",
-			changeMonth: true,
-		    changeYear : true,
-			yearRange: '1921:' + new Date().getFullYear(),
-			numberOfMonths: 1,
-			onSelect: function( selectedDate ) {
-				var option = this.id == "date_of_birth" ? "minDate" : "maxDate",
-					instance = $( this ).data( "datepicker" ),
-					date = $.datepicker.parseDate(
-						instance.settings.dateFormat ||
-						$.datepicker._defaults.dateFormat,
-						selectedDate, instance.settings );
-				dates.not( this ).datepicker( "option", option, date );
-			}
-		});
-		$("date_of_birth").datepicker( "option", "dateFormat", "yy/mm/dd");
-		//$("#startdate").datepicker('setDate', new Date());//new line of code to start code
-		//$("#enddate").datepicker('setDate', new Date());//new line of code to start code
-	});
-
-</script>
-</head>
-
 <div class="container">
 	
 	<div class = "page-header">
 		<h1>Settings</h1><br>
 	</div> <!-- end of .page-header -->	
-	<!-- commit before adding datepicker-->
-        
 	<form class="form-vertical" action = "<?php echo site_url('setting'); ?>" method = "post"/>
 			 	
 		<?php if (validation_errors()): ?>
@@ -74,8 +39,8 @@
 				</div> <!-- end of .control-group -->					
 			</div> <!-- end of .span3 -->
 		</div> <!-- end of .row -->
-
-
+                
+               
 		<div class="row">
 			<div class="span3">
 
@@ -133,7 +98,7 @@
 				</div> <!-- end of .control-group -->
 			</div> <!-- end of .span3 -->			
 		</div>			
-
+               
 		<div class="row">
 			<div class="span3">
 
@@ -155,7 +120,7 @@
 				</div> <!-- end of .control-group -->
 			</div> <!-- end of .span3 -->
 		</div>			
-		
+		  <h3>Reset your password:</h3>
 		<div class="row">
 			<div class="span3">
 				<div class="control-group">
