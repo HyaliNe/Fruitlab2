@@ -8,21 +8,19 @@ class Transaction extends CI_Controller {
             $data['main_content'] = 'transaction/display_customers';
             $this->load->view('includes/template', $data);
         }    
-        public function financialsummary() {
-		$data['main_content'] = 'transaction/financialsummary';
-		$this->load->view('includes/template', $data);
-	}
-        public function paymenthistory($customer_id = 0) {
+        public function purchasestatement($customer_id = 0){
+            $this->load->model("transaction_model");
+            $data['purchases'] = $this->transaction_model->getCustomerPurchaseHistory($customer_id);
+            $data['main_content'] = 'transaction/purchasestatement';
+            $this->load->view('includes/template', $data);
+        }
+        public function viewearnings($customer_id = 0) {
                 $this->load->model("transaction_model");
                 $data['sales'] = $this->transaction_model->getCustomerPaymentByCartList($customer_id);
-                $data['main_content'] = 'transaction/paymenthistory';
+                $data['main_content'] = 'transaction/viewearnings';
 		$this->load->view('includes/template', $data);
 	}
-        public function viewearnings() {
-		$data['main_content'] = 'transaction/viewearnings';
-		$this->load->view('includes/template', $data);
-	}
-    public function withdrawbalance() {
+        public function withdrawbalance() {
             $customer_id = 1;    
             $this->load->model("transaction_model");
             $this->load->library('form_validation');

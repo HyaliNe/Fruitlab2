@@ -21,7 +21,9 @@ http://www.jotorres.com/2012/02/codeigniter-tables-class/
 		echo "<td>".$customer['gender']."</td><td>". $customer['balance'] ."</td>";
 		echo "<td>".$customer['country'] ."</td>";
 		echo "<td><input type='checkbox' disabled='disabled' $checked/></td>";
-                echo "<td><a href=".site_url("transaction/paymenthistory/" . $customer['customer_id']).">[Payment History]</a><br/></td>";
+                echo "<td>
+                    <a href=".site_url("transaction/viewearnings/" . $customer['customer_id']).">[View Earnings]</a>
+                    <a href=".site_url("transaction/purchasestatement/" . $customer['customer_id']).">[Purchase Statement]</a><br/></td>";
                 echo "</tr>";
         }
         ?>
