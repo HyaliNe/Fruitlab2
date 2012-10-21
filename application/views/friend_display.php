@@ -73,8 +73,8 @@
 <label>Age Range:</label><input type="text" id="fromage" name="fromage" value="<?php echo set_value('fromage'); ?>"/>
 - <input type="text" id="toage" name="toage" value="<?php echo set_value('toage'); ?>"/>
 <br/>
-Male:<input type="radio" name="gender" value="male" <?php echo set_radio('gender', 'male'); ?> />
-Female:<input type="radio" name="gender" value="female" <?php echo set_radio('gender', 'female'); ?> />
+Male:<input type="radio" name="gender" value="M" <?php echo set_radio('gender', 'male'); ?> />
+Female:<input type="radio" name="gender" value="F" <?php echo set_radio('gender', 'female'); ?> />
 <br/>
 <br/>
 <input type="submit" value="Submit"><input type="Reset"/>

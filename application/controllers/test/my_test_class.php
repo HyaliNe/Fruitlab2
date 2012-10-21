@@ -1,25 +1,16 @@
 <?php
-require_once(APPPATH . '/controllers/test/profile.php');
 
-class My_test_class extends Toast
+class transaction_test
 {
-	function My_test_class()
+	function customer_id()
 	{
-		parent::Toast(__FILE__); // Remember this
-	}
-
-	function test_some_action()
-	{
-		// Test code goes here
-		$my_var = 2 + 2;
-		$this->_assert_equals($my_var, 4);
-	}
-
-	function test_some_other_action()
-	{
-		// Test code goes here
-		$my_var = true;
-		$this->_assert_false($my_var);
+                $this->load->model('transaction_model');
+                $result = $this->transaction_model->getCustomerPaymentByCartList($id);
+		print_r($result);
+                $test = 1 + 1;
+                $expected_result = 2;
+                $test_name = 'Adds one plus one';
+                echo $this->unit->run($test, $expected_result, $test_name);
 	}
 }
 ?>

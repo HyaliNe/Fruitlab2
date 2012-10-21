@@ -87,6 +87,7 @@
 <tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Type</th><th>Design_ID</th><th>Action</th></tr>
 <?php
     $customer_id = $this->session->userdata('customer_id');
+    echo $customer_id;
     $this->db->where('customer_id', $customer_id)->where('type !=', 'remove'); 
     $query = $this->db->get('design');
     echo "Total Record Returned: " .  $query->num_rows();

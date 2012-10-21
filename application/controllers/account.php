@@ -13,10 +13,10 @@ class Account extends CI_Controller {
 	
 	public function index() {
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('email', 'email field', 'required|trim');
+		$this->form_validation->set_rules('Email', 'email', 'required|valid_email|trim');
 	}
-		
-	public function register_success() {
+             /**/       
+	public function  register_success() {
 		$data['main_content'] = 'account/register_success';
 		$this->load->view('includes/template', $data);
 	}

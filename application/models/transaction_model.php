@@ -31,6 +31,7 @@ class transaction_model extends CI_Model {
         $i = 0;
         foreach ($query->result() as $row){
             $result['customer'][$i] = 
+            $this->load->model('account_model');
             $this->account_model->retrieve_profile($row->customer_id);
             $i++;
         }

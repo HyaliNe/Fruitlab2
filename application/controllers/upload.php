@@ -19,6 +19,7 @@ class Upload extends CI_Controller {
         }
 	function index()
 	{       
+            $customer_id = $this->session->userdata('customer_id');
             //configurations files for uploading images
             $config['upload_path'] = './uploads/';
 	    $config['allowed_types'] = 'gif|jpg|png';
@@ -29,7 +30,7 @@ class Upload extends CI_Controller {
             //load the config class libraries here
             $this->load->library('form_validation');
             $this->form_validation->set_rules('title', 'title', 'required|trim');
-	    $this->form_validation->set_rules('price', 'price', 'required|trim|numeric');
+	    $this->form_validation->set_rules('price', 'price', 'required|trim|is_natural_no_zero');
 	    $this->form_validation->set_rules('type', 'type', 'required|trim');//sales,private,hidden
             //by default is error free method
             //do the file upload method;
@@ -50,9 +51,8 @@ class Upload extends CI_Controller {
                      $price = $postdata['price'];
                      $title = $postdata['title'];
                      $type = $postdata['type'];
-                     //customer id waiting for the glchua2
                      $db = "INSERT INTO design (customer_id,image_path,price,title,type)
-                     VALUES(1,'". $filepath. "'," . $price . ",'" . $title . "','" . $type . "')";
+                     VALUES($customer_id,'". $filepath. "'," . $price . ",'" . $title . "','" . $type . "')";
                      echo $db;
                      $this->db->query($db);
                      $data = array('upload_data' => $this->upload->data());
