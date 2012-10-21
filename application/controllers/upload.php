@@ -13,7 +13,7 @@ class Upload extends CI_Controller {
                 $this->db->where('design_id', $id);
                 $result = $this->db->update('design', array('type' => 'remove')); 
                 $data['error'] = 'Design ID ='.$id .' has been successfully removed';
-                $data['main_content'] = 'upload_form';
+                $data['main_content'] = 'design/upload_form';
                 $this->load->view('includes/template', $data);
             }
         }
