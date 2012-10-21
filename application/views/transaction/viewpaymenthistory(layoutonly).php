@@ -13,6 +13,7 @@
 			</select>
 		</div>
 	</div>
+	<hr>
 <?php	$count=0;
 	foreach( $payment as $temp)
 	{	?>
@@ -42,17 +43,17 @@
 				</div>
 			</div>
 			<div class="span4">
-				<div class="row">
-					<div class="span2">
+				<div class="row lead">
+					<div class="span1">
 						Status: 
 					</div>
-					<div class="span2">
+					<div class="span1">
 						<?php echo "processing";?>
 					</div>
 				</div>
 				<div class="row">
 					<div class="span2">
-						<a href="#" >Contact Seller</a>
+						<button type="button" class="btn btn-info" value="Contact Seller">Contact Seller</button>
 					</div>				
 				</div>
 			</div>
@@ -62,7 +63,7 @@
 <?php	$count++;
 	}	?>
 
-	<div class="pagination">
+	<div class="pagination offset4">
 	  <ul>
 		<li><a href="#">Prev</a></li>
 		<li><a href="#">1</a></li>

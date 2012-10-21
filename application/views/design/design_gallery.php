@@ -1,7 +1,7 @@
 <div class="container">
 
 	<div class="page-header">
-		Someone gallery
+		<h1>Someone gallery</h1>
 	</div>
 	<div class="row">	
 	<?php

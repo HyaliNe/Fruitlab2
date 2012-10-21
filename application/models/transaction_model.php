@@ -10,6 +10,7 @@ class transaction_model extends CI_Model {
         $this->db->join('singlecartitem','singlecartitem.design_id = design.design_id');
         $query = $this->db->get();
         $i = 0;
+		$this->load->model('account_model');
         foreach ($query->result() as $row){
             $result[$i]["price"] = $row->price;
             $result[$i]["quantity"] = $row->quantity;
@@ -28,6 +29,7 @@ class transaction_model extends CI_Model {
         $this->db->where('role_id',2);
         $query = $this->db->get('customer');
         $i = 0;
+		$this->load->model('account_model');
         foreach ($query->result() as $row){
             $result['customer'][$i] = 
             $this->retrieve_profile($row->customer_id);
