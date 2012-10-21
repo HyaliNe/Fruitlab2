@@ -14,7 +14,7 @@ class Friends extends CI_Controller {
             $data['friendlist'] = $this->account_model->getFriendlist($customer_id);
             $data['resultset'] = ''; 
             $data["error"] = '';
-            $data["main_content"]  = 'friend_display';
+            $data["main_content"]  = 'account/friend_display';
 			$data['js'] = 'jquery.ui.core';
 			$data['js'] = 'jquery.ui.datepicker';
 			$data['js'] = 'jquery-ui-1.8.18.custom';
@@ -62,7 +62,7 @@ class Friends extends CI_Controller {
 			$data['js'] = 'jquery.ui.core';
 			$data['js'] = 'jquery.ui.datepicker';
 			$data['js'] = 'jquery-ui-1.8.18.custom';			
-            $data['main_content'] = 'friend_display';
+            $data['main_content'] = 'account/friend_display';
             $this->load->view('includes/template', $data);
         }
         function search(){
@@ -94,7 +94,7 @@ class Friends extends CI_Controller {
 			$data['js'] = 'jquery.ui.core';
 			$data['js'] = 'jquery.ui.datepicker';
 			$data['js'] = 'jquery-ui-1.8.18.custom';			
-            $data['main_content'] = 'friend_display';
+            $data['main_content'] = 'account/friend_display';
             $this->load->view('includes/template', $data);
         }
         
