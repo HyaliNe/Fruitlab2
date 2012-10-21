@@ -8,6 +8,8 @@
 	<script src="js/Alvin/ui/jquery.ui.widget.js"></script>
 	<script src="js/Alvin/ui/jquery.ui.datepicker.js"></script>
 <script>
+    
+    s
 	 $(function() {
 		//must be placed at the top of the block
 		var dates = $( "#fromage, #toage" ).datepicker({
