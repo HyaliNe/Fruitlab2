@@ -66,7 +66,7 @@
 		<div class="span2 offset8">
 			<form name="" action="" method="post">
 				<input type="hidden" name="price" id="price" value="" /><br>
-				<input type="submit" value="Paypal Checkout " class="btn btn-info btn-large"/>
+				<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" alt="Paypal checkout" align="left" style="margin-right:7px;">
 			</form>
 		</div>
 	</div>
