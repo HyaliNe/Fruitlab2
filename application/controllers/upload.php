@@ -19,8 +19,6 @@ class Upload extends CI_Controller {
         }
 	function index()
 	{       
-            
-            
             $customer_id = $this->session->userdata('customer_id');
             //configurations files for uploading images
             $config['upload_path'] = './uploads/';
@@ -54,17 +52,20 @@ class Upload extends CI_Controller {
                      $title = $postdata['title'];
                      $type = $postdata['type'];
                      $tags = $postdata['tag'];
-                     
-           
+                     print_r($tags);
                      $db = "INSERT INTO design (customer_id,image_path,price,title,type)
                      VALUES($customer_id,'". $filepath. "'," . $price . ",'" . $title . "','" . $type . "')";
                      echo $db;
                      $this->db->query($db);
-                     $this->db->insert_id();//helper method to get the insert id when inserting into the database
+                     $insertid =  $this->db->insert_id();//helper method to get the insert id when inserting into the database
+                     foreach($tags as $tag){
+                         $db = "INSERT INTO taglist VALUES($tag,$insertid)";
+                         $this->db->query($db); 
+                     }
                      $data = array('upload_data' => $this->upload->data());
-					$data['main_content'] = 'design/upload_success';
+                     $data['main_content'] = 'design/upload_success';
                 }
-			}
+		}
             $this->load->view('includes/template', $data);
     }
 

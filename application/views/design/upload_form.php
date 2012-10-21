@@ -43,12 +43,11 @@
 		</div>		
 	</div>
 </div>
-
 <div class="row">
 	<div class="span4 offset1">
 		<div class="row">
 			<div class="span2">
-				Type
+				Type:
 			</div>
 		</div>
 		<div class="row">
@@ -60,11 +59,36 @@
 	</div>
 </div>
 
+<?php
+   /*
+    * @todo display all the tag from the database
+    * insert everything into the taglist
+    * send to guoliang the updated database to insert intot the atag list from the current database
+    * get the last insert id from the database to the inser into the database
+    * create the tag cloud for jason to integrate into the database
+    * write a foreach method to insert each into the database
+    * after which insert the column into the database
+    * @todo refactor to insert the tag id into model views
+    * @todo the type of clothes to add the list
+    * @todo mistake multiple checkbox values
+    */
+?>
+<br/>
+Assign a Tag to your Clothes:<br/>
+<?php
+   $query =  $this->db->query('Select tag_id,name from tag');
+   foreach ($query->result() as $row){
+     echo  $row->name . " " ."<input type='checkbox' name='tag[]' value=". $row->tag_id .">";
+   }
+?>
+<br/>
+<br/>
+ 
 <div class="row">
 	<div class="span12 offset1">
 		<div class="row">
 			<div class="span1">
-				Image
+				Upload Image:
 			</div>
 		</div>
 		<div class="row">
