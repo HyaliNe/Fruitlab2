@@ -49,6 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
+//$db['default']['username'] = 'xquisite_fruitlab';
+//$db['default']['password'] = 'Qu6OS3RIyLbS';
 $db['default']['username'] = 'root';
 $db['default']['password'] = 'mysql';
 $db['default']['database'] = 'fruitlab';

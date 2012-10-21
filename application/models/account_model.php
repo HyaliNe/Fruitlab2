@@ -30,9 +30,9 @@ class Account_model extends CI_Model {
 		if ($query->num_rows == 1) { 
 			$row = $query->row();
 			
-			$result['result'] = TRUE;
-			$result['role'] = $row->role_id;
-			$result['status'] = $row->status;	//additional att to prevent ban user from logging in
+			$result['result']      = TRUE;
+			$result['role']        = $row->role_id;
+			$result['status']      = $row->status;	//additional att to prevent ban user from logging in
 			$result['customer_id'] = $row->customer_id;
 		}
 		
@@ -54,14 +54,14 @@ class Account_model extends CI_Model {
 	public function create_account($user)
 	{		
 		
-		$user_data = array(
-						'email' => $user['email'],
-						'first_name' => $user['first_name'],
-						'last_name' => $user['last_name'],
-						'password' => sha1($user['password']),
-						'role_id' => '2',			//1 is admin, 2 is customer
+		$user_data           = array(
+						'email'          => $user['email'],
+						'first_name'     => $user['first_name'],
+						'last_name'      => $user['last_name'],
+						'password'       => sha1($user['password']),
+						'role_id'        => '2',			//1 is admin, 2 is customer
 					//	'date_created' => time(),						
-						'country' => $user['country']
+						'country'        => $user['country']
 
 					);
 		
@@ -73,7 +73,7 @@ class Account_model extends CI_Model {
 	public function update_settings($user)
 	{
 		//creating a new array
-		$user_data = array(
+		$user_data       = array(
 						'first_name' => $user['first_name'],
 						'last_name' => $user['last_name'],
 						'password' => sha1($user['password']),

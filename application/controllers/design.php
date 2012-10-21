@@ -3,14 +3,10 @@
 class Design extends CI_Controller {
 	
 	public function index($id = 0 ) {
-		if($id == 0) {
+
 			
 			$data['main_content'] = 'design/design';
 			$this->load->view('includes/template', $data);
-			
-		} else {
-			$this->singleDesign($id);
-		}
 
 	}
 	
@@ -24,7 +20,7 @@ class Design extends CI_Controller {
 		
 		if ($design['exist']) {
 			$data['design_id']		= $design['design_id'];
-			$data['customer_id']	=        $design['customer_id'];
+			$data['customer_id']	= $design['customer_id'];
 			$data['image_path']		= $design['image_path'];
 			$data['rating']			= $design['rating'];
 			$data['price']			= $design['price'];
@@ -45,19 +41,61 @@ class Design extends CI_Controller {
 	}
 	
 	public function searchDesign(){
-		$this->load->model('design_model');
 		
-		$result = $this->design_model->searchByTitle($this->input->post('search_clause'));
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('search_clause', '', 'required');
+		$this->form_validation->set_message('required', 'We can\'t search if you don\'t know what to search for.');
 		
-		if($result != false){
-			$data['search_result'] = $result;
-			$data['search_exist'] = true;
+		if($this->form_validation->run()) { 
+			$this->load->model('design_model');
+		
+			$result = $this->design_model->searchByTitle($this->input->post('search_clause'));
+		
+			if($result != false){
+				$data['search_result'] = $result;
+				$data['search_exist'] = true;
 
-		} else {
-			$data['search_exist'] = false;
+			} else {
+				$data['search_exist'] = false;
+			}
 		}
 		
 		$data['main_content'] = 'design/design';
+		$this->load->view('includes/template', $data);
+	}
+	
+	/**
+	 * Load all design of a user
+	 *
+	 * Check if userid is provided then retrive and display, otherwise load error message
+	 *
+	 * @access	public
+	 * 
+	 * @param	int	ID of the user to fetch from database.
+	 *
+	 * @return 
+	 */	
+	public function browseDesginByUser($id = 0) {
+		
+		if ( $id == 0 ) {
+			$data['message_title'] = "User not found";
+			$data['message'] = "Sorry, we are unable to locate the user you are requesting to view.";
+				
+			$data['main_content'] = "message";
+		} else {
+			echo $id;
+			$this->load->model('design_model');
+			$result = $this->design_model->retriveDesignsByUser($id);
+			
+			if($result != false) {
+				$data['search_result'] = $result;
+				$data['search_result'] = true;
+			} else {
+				$data['search_exist'] = false;
+			}
+			
+			$data['main_content'] = "design/design";
+		}
 		$this->load->view('includes/template', $data);
 	}
 }

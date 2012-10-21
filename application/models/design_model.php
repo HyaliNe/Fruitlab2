@@ -39,6 +39,7 @@ class Design_model extends CI_model {
 		
 		return $design;
 	}
+	
 	/**
 	 * Search the database for design base on title
 	 *
@@ -143,6 +144,31 @@ class Design_model extends CI_model {
 			return $comment;
 		}
 	}
-}
 
+
+	/**
+	 * Search the database for all design by a userid
+	 *
+	 * Retrive and return related products if exist
+	 *
+	 * @access	public
+	 * 
+	 * @param	search clause
+	 *
+	 * @return array
+	 */	
+	 public function retriveDesignsByUser($id, $lowerlimit = 0, $upperlimit = 20) {
+ 		$this->db->from('design');
+ 		$this->db->where('customer_id', $id);
+ 		$this->db->limit($upperlimit, $lowerlimit);
+		
+ 		$query = $this->db->get();
+		echo $id;
+		echo $this->db->last_query();
+ 		if(!$query->num_rows()>0)
+ 			return false;
+		
+ 		return $query;
+	 }
+ }
 ?>
