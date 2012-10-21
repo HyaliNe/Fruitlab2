@@ -29,6 +29,7 @@ class transaction_model extends CI_Model {
         $this->db->where('role_id',2);
         $query = $this->db->get('customer');
         $i = 0;
+		$this->load->model('account_model');
         foreach ($query->result() as $row){
             $result['customer'][$i] = 
             $this->account_model->retrieve_profile($row->customer_id);
