@@ -7,9 +7,7 @@
  * @author		Guo Liang, Chen Deshun
  *
  */
-
 class Profile extends CI_Controller {
-	
 	/**
 	 * profile
 	 *

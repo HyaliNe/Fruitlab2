@@ -162,7 +162,7 @@ class Account_model extends CI_Model {
 			$result['gender'] = $row->gender;
 			$result['about_you'] = $row->about_you;
 			$result['hp_no'] = $row->hp_no;
-			 $result['img_path'] = $row->img_path;
+			$result['img_path'] = $row->img_path;
 			$result['date_of_birth'] = $row->date_of_birth;
                         //alvin has added this to reuse method
                         $result['status'] = $row->status;
