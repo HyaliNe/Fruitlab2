@@ -6,6 +6,12 @@ class Upload extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 	}
+        
+        function tagcloud(){
+             $data['main_content'] = 'design/tagcloud';
+             $this->load->view('includes/template', $data);
+        }
+        
         function remove(){
             $getdata = $this->input->get();
             $id = $getdata["id"];

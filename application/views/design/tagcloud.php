@@ -51,10 +51,21 @@
     </style>
 </head>
 <body>
-
 <?php 
-
+//@to make the cut here 
+//@to link to the shirt with the taglist
+//put on hold for others
 $classes = array('popular','somewhat-popular','very-popular','ultra-popular');
+$query = $this->db->query("Select title,count(title) as no from taglist t,design d where t.design_id = d.design_id group by title");
+
+$rows = $query->result();
+foreach($rows as $row){
+    echo '<br/>';
+    echo $row->no;
+    echo '<br/>';
+    echo $row->title;
+    echo '<br/>';
+}
 
 $cloud = array (
 	0=> array (
