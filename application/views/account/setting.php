@@ -3,7 +3,7 @@
 	<div class = "page-header">
 		<h1>Settings</h1><br>
 	</div> <!-- end of .page-header -->	
-	
+	<!-- commit before adding datepicker-->
 	<form class="form-vertical" action = "<?php echo site_url('setting'); ?>" method = "post"/>
 			 	
 		<?php if (validation_errors()): ?>
