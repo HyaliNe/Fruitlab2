@@ -22,7 +22,7 @@ class Friends extends CI_Controller {
         }
         
         function add(){
-            $customer = $this->session->userdata('customer_id');
+            $cstomer = $this->session->userdata('customer_id');
             $data['resultset'] = '';
             $getdata = $this->input->get();
             $data['error'] = '';
