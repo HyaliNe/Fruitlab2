@@ -2,13 +2,54 @@
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
+  <title>Tag Cloud example</title> 
+  <style type="text/css">
+  body {
+        background-color: #fff;
+        color: #000;
+        margin: 2em;
+        font: 0.9em/1.6em Arial, Helvetica, sans-serif;
+        }
 
-  <title>Tag Cloud example</title>
-  <link rel="stylesheet" type="text/css" href="styles.css" />
+    ul#tags {
+        margin: 0;
+        padding: 0;
+        list-style:none;
+        width: 400px;
+    }
+
+    ul#tags li {
+        display:inline;
+                line-height: 1em;
+    }
+
+    ul#tags li a:link, ul#tags li a:visited {
+        text-decoration:none;
+        color: #33ccff;
+    }
+
+    ul#tags li a:hover {
+        color: #003df5;
+    }
+
+    ul#tags li.popular {
+        font-size: 140%;
+    }
+
+    ul#tags li.somewhat-popular {
+        font-size: 240%;
+    }
+
+    ul#tags li.very-popular {
+        font-size: 300%;
+    }
+
+    ul#tags li.ultra-popular {
+        font-size: 400%;
+    }
+    </style>
 </head>
-
 <body>
 
 <?php 
