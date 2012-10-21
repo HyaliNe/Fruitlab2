@@ -4,7 +4,7 @@
 </head>
 <body>
 <?php echo $error;?>
-<?php echo form_open_multipart('upload');?>
+<?php echo form_open_multipart('upload'); ?>
     <?php if (validation_errors()): ?>
 		<div class="alert alert-error">
 		<a class="close" data-dismiss="alert" href="#">×</a>
@@ -12,76 +12,62 @@
 		<?php echo validation_errors(); ?>
 		</div>
     <?php endif ?>
-<h2> Create New Design</h2>
 
+<legend>Create New Design</legend>
 <div class="row">
-	<div class="span4 offset1">
+	<div class="span5 offset1">
+		<div class="row">
+			<div class="span4">
+				<div class="row">
+					<div class="span2">
+						<label>Title</label>
+						<input type="text" name="title" value="<?php echo set_value('title'); ?>">
+					</div>		
+				</div>		
+			</div>
+		</div>
+		<div class="row">
+			<div class="span4">
+				<div class="row">
+					<div class="span2">
+						<label>Price</label>
+						<input type="text" name="price" value="<?php echo set_value('price'); ?>">
+					</div>		
+				</div>		
+			</div>
+		</div>
 		<div class="row">
 			<div class="span2">
-				Title
+				<label>Type</label>
+				<label class="radio inline">
+					<input type="radio" name="type" value="Sales" <?php echo set_radio('type', 'On Sales', TRUE); ?> />Sales
+				</label>
+
+				<label class="radio inline">
+					<input type="radio" name="type" value="Private" <?php echo set_radio('type', 'Private'); ?> />Private
+				</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="span4">
-				<input type="text" name="title" value="<?php echo set_value('title'); ?>">
-			</div>		
-		</div>		
-	</div>
-</div>
-
-<div class="row">
-	<div class="span4 offset1">
+					</label>Image</label>
+					<span class="add-on"><i class="icon-envelope"></i></span>
+					<input type="file" value="<?php echo set_value('userfile')?>" name="userfile" />
+			</div>
+		</div>
 		<div class="row">
 			<div class="span2">
-				Price
+				<input type="submit" value="Create" class="btn btn-large btn-info" />
 			</div>
 		</div>
-		<div class="row">
-			<div class="span4">
-				<input type="text" name="price" value="<?php echo set_value('price'); ?>">
-			</div>		
-		</div>		
 	</div>
-</div>
 
-<div class="row">
-	<div class="span4 offset1">
-		<div class="row">
-			<div class="span2">
-				Type
-			</div>
-		</div>
-		<div class="row">
-			<div class="span4">
-				<input type="radio" name="type" value="Sales" <?php echo set_radio('type', 'On Sales', TRUE); ?> />Sales
-				<input type="radio" name="type" value="Private" <?php echo set_radio('type', 'Private'); ?> />Private
-			</div>		
-		</div>		
-	</div>
-</div>
 
-<div class="row">
-	<div class="span12 offset1">
-		<div class="row">
-			<div class="span1">
-				Image
-			</div>
-		</div>
-		<div class="row">
-			<div class="span4">
-				<span class="add-on"><i class="icon-envelope"></i></span>
-				<input type="file" value="<?php echo set_value('userfile')?>" name="userfile" />
-			</div>
-		</div>
+	</form>
+	<div class="span5">
+		<img src="./img/shirt.jpg" alt="">	<!-- this part will be changing -->
 	</div>
 </div>
-
-<div class="row">
-	<div class="span2 offset1">
-		<input type="submit" value="Create" />
-	</div>
-</div>
-</form>
 <h2> Current Design </h2>
 <table border = '1'> 
 <tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Type</th><th>Design_ID</th><th>Action</th></tr>

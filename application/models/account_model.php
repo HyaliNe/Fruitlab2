@@ -195,8 +195,8 @@ class Account_model extends CI_Model {
 	public function fetchActivityRecord($customer_id)
 	{
 		//this will select out activity done by the customer with id customer_id
-		$this->db->select('activity_id, creator_id, timestamp, affected_id');
-		$this->db->where('creator_id', $customer_id);
+		$this->db->select('activity_id, customer_id, timestamp, affected_id');
+		$this->db->where('customer_id', $customer_id);
 		$this->db->or_where('affected_id', $customer_id); 
 		$ownactivity = $this->db->get('activity');
 

@@ -95,7 +95,7 @@
 					</ul>
 				</li>
 				<li>
-				<a href="#"><i class="icon-shopping-cart"></i> Cart</a>
+				<a href="<?php echo site_url('dummycartcontroller');?>"><i class="icon-shopping-cart"></i> Cart</a>
 				</li>
 				<li style = "margin-right: 20px; position: relative;">
 							<div class="btn-group">
