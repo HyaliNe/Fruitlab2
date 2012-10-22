@@ -52,21 +52,10 @@
 </head>
 <body>
 <?php 
-//@to make the cut here 
-//@to link to the shirt with the taglist
-//put on hold for others
 $classes = array('popular','somewhat-popular','very-popular','ultra-popular');
-$query = $this->db->query("Select title,count(title) as no from taglist t,design d where t.design_id = d.design_id group by title");
-
-$rows = $query->result();
-foreach($rows as $row){
-    echo '<br/>';
-    echo $row->no;
-    echo '<br/>';
-    echo $row->title;
-    echo '<br/>';
-}
-
+//@fix $query = $this->db->query("Select title,count(title) as no from taglist t,
+//design d where t.design_id = d.design_id group by title");
+/*
 $cloud = array (
 	0=> array (
 		'tag' => 'badger',
@@ -99,8 +88,18 @@ $cloud = array (
 		'tag' => 'weasel',
 		'count' => 9)
 	);
-
-
+*/
+$cloud = array();
+$query = $this->db->query("Select tag.tag_id,name,count(name) as no from tag,taglist where tag.tag_id = taglist.tag_id group by name;");
+$rows = $query->result();
+foreach($rows as $row){
+    $data = array(
+      'tag' =>  $row->name,
+      'count' => $row->no
+    );
+    $cloud[sizeof($cloud)] = $data ;
+}
+//print_r($cloud);
 
 //get highest and lowest count
 $boundaryUpper = 1;
@@ -135,12 +134,13 @@ for($a = 0; $a < 4; $a++ ) {
 		$score_classes[$i] = $classes[$a];
     }
 }
-
-
+//@todo refactor search by tag using the upload class function write an sql queries
+//write an sql queries to search by tag cloud on upload model,using diff
 
 echo '<ul id="tags">';
 foreach($cloud as $item) {
-	echo '<li class="'. $score_classes[$item['count']] .'"><a href="articlesbytag.php?tag='.$item['tag'].'">'. $item['tag'] .'</a></li>' ."\n";
+        echo '<li class="'. $score_classes[$item['count']] .'"><a href=#>'. $item['tag'] .'</a></li>' ."\n";
+	//echo '<li class="'. $score_classes[$item['count']] .'"><a href="'.site_url('upload/searchtag/'.$item['tag']).'">'. $item['tag'] .'</a></li>' ."\n";
 }
 echo '</ul>';
 ?>
