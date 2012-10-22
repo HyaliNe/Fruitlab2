@@ -1,6 +1,5 @@
 <div class="container">
 	<h1> General area for design? catalog/ tag page maybe?</h1>
-	
 	either way we have a simple search base on title here</br>
 	<?php if (validation_errors()): ?>
 

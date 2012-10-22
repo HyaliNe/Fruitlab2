@@ -65,6 +65,10 @@ class Design_model extends CI_model {
 		return $query;
 		
 	}
+        
+        
+        //@todo search by tags after which amend the categories files
+        
 	
 	public function comment($user)
 	{
