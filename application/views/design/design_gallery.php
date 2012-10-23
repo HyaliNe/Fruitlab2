@@ -24,7 +24,7 @@
 	</div>
 	<div class="row">	
 	<?php
-		foreach($result->result() as $design)
+		foreach($search_result->result() as $design)
 		{	?>
 			<div class="span3">
 				<div class="row">

@@ -108,7 +108,7 @@ class Design extends CI_Controller {
 		$result = $this->design_model->searchById($id);
 		
 		if($result != false){
-			$data['result'] = $result;
+			$data['search_result'] = $result;
 			$data['search_exist'] = true;
 
 		} else {
