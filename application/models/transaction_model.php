@@ -11,6 +11,7 @@ class transaction_model extends CI_Model {
         $this->db->join('singlecartitem','singlecartitem.design_id = design.design_id');
         $query = $this->db->get();
         $i = 0;
+		$this->load->model('account_model');
         foreach ($query->result() as $row){
             $result[$i]["price"] = $row->price;
             $result[$i]["quantity"] = $row->quantity;
@@ -178,7 +179,45 @@ class transaction_model extends CI_Model {
                 }
           return $result;
      }
-     */
-   
-     }
+     
+     public function retrieve_profile($customer_id)
+	{
+		$result = array();
+		$result['result'] = FALSE;
+		$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no,balance,status,customer_id');
+		//$this->db->select('first_name,last_name,country,gender, about_you, email, date_of_birth, hp_no','balance','status','balance');
+		$this->db->where('customer_id', $customer_id);
+		$query = $this->db->get('customer',1);	//LIMIT 1
+		if($query->num_rows == 1)
+		{	
+			//storing the row return from the query
+			$row = $query->row();
+
+			//array of result
+			$result['result'] = TRUE;
+			$result['first_name'] = $row->first_name;
+			$result['last_name'] = $row->last_name;
+			$result['email'] = $row->email;		//need not query since already available
+			$result['country'] = $row->country;
+			$result['gender'] = $row->gender;
+			$result['about_you'] = $row->about_you;
+			$result['hp_no'] = $row->hp_no;
+			$result['date_of_birth'] = $row->date_of_birth;
+                        //alvin has added this to reuse method
+                        $result['status'] = $row->status;
+                        $result['customer_id'] = $row->customer_id;
+                        $result['balance'] = $row->balance;
+			
+		}
+		//return to the calling class, then the calling class need to 
+		//check result['result'] to see whether there are result from the query
+		return $result;
+    }
+
+	public function purchaseshirt()
+	{
+		//should get data from collar, material and colour table
+
+	}
+}
 ?>

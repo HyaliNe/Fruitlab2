@@ -45,17 +45,24 @@ class Upload extends CI_Controller {
                      $data['main_content'] = 'design/upload_form';
                 }else{
                      $filedata = $this->upload->data();
-                     $filepath = 'uploads/'. $filedata['file_name'];
+                     $filepath = $filedata['file_name'];
                      $postdata = $this->input->post();
                      $price = $postdata['price'];
                      $title = $postdata['title'];
                      $type = $postdata['type'];
+					 $customer_id = $this->input->post('customer_id');
                      //customer id waiting for the glchua2
-                     $db = "INSERT INTO design (customer_id,image_path,price,title,type)
-                     VALUES(1,'". $filepath. "'," . $price . ",'" . $title . "','" . $type . "')";
-                     echo $db;
-                     $this->db->query($db);
-                     $data = array('upload_data' => $this->upload->data());
+					 $user_data = array(
+									"customer_id" => $customer_id,
+									"image_path" => $filepath,
+									"price" => $price,
+									"title" => $title,
+									"type" => $type
+									);
+									
+					$this->db->insert('design', $user_data);
+
+                    $data = array('upload_data' => $this->upload->data());
 					$data['main_content'] = 'design/upload_success';
                 }
 			}

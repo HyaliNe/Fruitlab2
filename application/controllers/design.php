@@ -3,10 +3,14 @@
 class Design extends CI_Controller {
 	
 	public function index($id = 0 ) {
-
+		if($id == 0) {
 			
 			$data['main_content'] = 'design/design';
 			$this->load->view('includes/template', $data);
+			
+		} else {
+			$this->singleDesign($id);
+		}
 
 	}
 	
@@ -45,7 +49,7 @@ class Design extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('search_clause', '', 'required');
 		$this->form_validation->set_message('required', 'We can\'t search if you don\'t know what to search for.');
-		
+
 		if($this->form_validation->run()) { 
 			$this->load->model('design_model');
 		
@@ -59,11 +63,11 @@ class Design extends CI_Controller {
 				$data['search_exist'] = false;
 			}
 		}
-		
-		$data['main_content'] = 'design/design';
+		//changed to design/design_gallery instead of design/design
+		$data['main_content'] = 'design/design_gallery';
 		$this->load->view('includes/template', $data);
 	}
-	
+
 	/**
 	 * Load all design of a user
 	 *
@@ -98,4 +102,20 @@ class Design extends CI_Controller {
 		}
 		$this->load->view('includes/template', $data);
 	}
+	public function retrieveDesign($id){
+		$this->load->model('design_model');
+		
+		$result = $this->design_model->searchById($id);
+		
+		if($result != false){
+			$data['result'] = $result;
+			$data['search_exist'] = true;
+
+		} else {
+			$data['search_exist'] = false;
+		}
+		
+		$data['main_content'] = 'design/design_gallery';
+		$this->load->view('includes/template', $data);
+	}	
 }
