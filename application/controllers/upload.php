@@ -13,7 +13,7 @@ class Upload extends CI_Controller {
                 $this->db->where('design_id', $id);
                 $result = $this->db->update('design', array('type' => 'remove')); 
                 $data['error'] = 'Design ID ='.$id .' has been successfully removed';
-                $data['main_content'] = 'upload_form';
+                $data['main_content'] = 'design/upload_form';
                 $this->load->view('includes/template', $data);
             }
         }
@@ -29,7 +29,7 @@ class Upload extends CI_Controller {
             //load the config class libraries here
             $this->load->library('form_validation');
             $this->form_validation->set_rules('title', 'title', 'required|trim');
-	    $this->form_validation->set_rules('price', 'price', 'required|trim|numeric');
+	    $this->form_validation->set_rules('price', 'price', 'required|trim|is_natural_no_zero');
 	    $this->form_validation->set_rules('type', 'type', 'required|trim');//sales,private,hidden
             //by default is error free method
             //do the file upload method;
@@ -64,8 +64,21 @@ class Upload extends CI_Controller {
 
                     $data = array('upload_data' => $this->upload->data());
 					$data['main_content'] = 'design/upload_success';
+                     $tags = $postdata['tag'];
+                     print_r($tags);
+                     $db = "INSERT INTO design (customer_id,image_path,price,title,type)
+                     VALUES($customer_id,'". $filepath. "'," . $price . ",'" . $title . "','" . $type . "')";
+                     echo $db;
+                     $this->db->query($db);
+                     $insertid =  $this->db->insert_id();//helper method to get the insert id when inserting into the database
+                     foreach($tags as $tag){
+                         $db = "INSERT INTO taglist VALUES($tag,$insertid)";
+                         $this->db->query($db); 
+                     }
+                     $data = array('upload_data' => $this->upload->data());
+                     $data['main_content'] = 'design/upload_success';
                 }
-			}
+		}
             $this->load->view('includes/template', $data);
     }
 

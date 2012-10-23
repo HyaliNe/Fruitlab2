@@ -50,29 +50,43 @@
     }
 ?>
 <body>
-    <h2>Filter Friends</h2>
+    <h2>Current Friends</h2>
+    <table border='1'> 
+        <tr><th>Name</th><th>Email</th><th>Country</th><th>Telephone</th></tr>
+    <?php
+    for($i = 1;$i < sizeof($friendlist);$i++){
+        if(isset($friendlist[$i])){
+        $friend = $friendlist[$i];
+    ?>    
+        <tr><td><a href=<?=  site_url('user/'.$friend['customer_id'])?>><?=$friend['first_name'].' '.$friend['last_name']?></a></td><td><?=$friend['email']?></td><td><?=$friend['country']?></td><td><?=$friend['hp_no']?></td></tr>
+    <?
+        }
+    }
+    ?>
+    </table>
+    <h2>Find People</h2>
 <?php echo $error;?>
 <?php echo form_open('friends/search')?>
 <label for="fname">Name:</label><input type="text" name="fname" value="<?php echo set_value('title'); ?>"/>
 <label for="email">Email:</label><input type="text" name="email" value="<?php echo set_value('email'); ?>"/>
 <br/>
-Filter Age Group:
-<label for="fromage">From Age:</label><input type="text" id="fromage" name="fromage" value="<?php echo set_value('fromage'); ?>"/><label for="toage">To Age:</label><input type="text" id="toage" name="toage" value="<?php echo set_value('toage'); ?>"/>
+<label>Age Range:</label><input type="text" id="fromage" name="fromage" value="<?php echo set_value('fromage'); ?>"/>
+- <input type="text" id="toage" name="toage" value="<?php echo set_value('toage'); ?>"/>
 <br/>
-Male:<input type="radio" name="gender" value="male" <?php echo set_radio('gender', 'male'); ?> />
-Female:<input type="radio" name="gender" value="female" <?php echo set_radio('gender', 'female'); ?> />
+Male:<input type="radio" name="gender" value="M" <?php echo set_radio('gender', 'male'); ?> />
+Female:<input type="radio" name="gender" value="F" <?php echo set_radio('gender', 'female'); ?> />
 <br/>
 <br/>
 <input type="submit" value="Submit"><input type="Reset"/>
 </form>
 <table border = '1'> 
-<tr><th>Name</th><th>UserName</th><th>Age</th><th>Gender</th><th>Action</th></tr>
+<tr><th>Name</th><th>Email</th><th>Gender</th><th>Date of Birth</th><th>Status</th></tr>
 <?php
 if($resultset != null){
     foreach($resultset->result() as $row){
         echo "<tr>";
-        //to link to gguoliang pages
-	echo "<td><a href=#>".$row->first_name."</a></td><td>".$row->email ."</td>";
+        $profilelink = "user/" . $row->customer_id;        
+	echo "<td><a href=" .site_url($profilelink) .">".$row->first_name."</a></td><td>".$row->email ."</td>";
 	echo "<td>".$row->gender."</td><td>".$row->date_of_birth ."</td>";
             $customer_id2 = $row->customer_id;
             $this->db->select('customer_id');

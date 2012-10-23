@@ -87,18 +87,18 @@
 						<label for="password">Password*</label>					
 					</div>
 					<div class="controls">
-						<input type="password" name = "password" value = "<?php echo set_value('password'); ?>" />					
+						<input type="password" maxlength="10" name = "password" value = "<?php echo set_value('password'); ?>" />					
 					</div>
 				</div> <!-- end of .control-group -->					
 			</div> <!-- end of .span3 -->
 
 			<div class="span3">
-				<div class="control-group">
+				<div class="control-group"> 
 					<div class="control-label">
 						<label for="password2">Confirm Password*</label>					
 					</div>
 					<div class="controls">
-						<input type="password" name = "password2" value = "<?php echo set_value('password2'); ?>" />					
+						<input type="password" maxlength="10" name = "password2" value = "<?php echo set_value('password2'); ?>" />					
 					</div>
 				</div> <!-- end of .control-group -->					
 			</div> <!-- end of .span3 -->

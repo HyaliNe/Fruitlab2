@@ -21,13 +21,12 @@ class Register extends CI_Controller {
 		
 		// Country has a default value. Thus no validation is needed.
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('first_name', 'first name', 'required|trim');
-		$this->form_validation->set_rules('last_name', 'last name', 'required|trim');
-		
+		$this->form_validation->set_rules('first_name', 'first name', 'required|trim|alpha');
+		$this->form_validation->set_rules('last_name', 'last name', 'required|trim|alpha');
 		//this line will call for email_exist()
-		$this->form_validation->set_rules('email', 'Email', 'required|trim|callback_email_exist');
-		$this->form_validation->set_rules('password', 'Password', 'required|matches[password2]|trim');			
-		$this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim');			
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|callback_email_exist');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|matches[password2]|trim');			
+		$this->form_validation->set_rules('password2', 'Confirm Password', 'required|min_length[6]|trim');			
 				
 		if ($this->form_validation->run()) { 
 			// Load account model and call function to create account
