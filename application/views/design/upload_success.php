@@ -1,9 +1,23 @@
-<html>
-<head>
-<title>Upload Form</title>
-</head>
-<body>
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Upload Success</h1>						
+				</div>
+			</div>
 
+			<div class="row-fluid">
+				<div class="span10">
+		
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
+<div class="container">
 <h3>Your file was successfully uploaded!</h3>
 
 <ul>
@@ -14,5 +28,4 @@
 
 <p><?php echo anchor('upload', 'Upload Another File!'); ?></p>
 
-</body>
-</html>
+</div>

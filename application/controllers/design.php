@@ -50,14 +50,31 @@ class Design extends CI_Controller {
 		$result = $this->design_model->searchByTitle($this->input->post('search_clause'));
 		
 		if($result != false){
-			$data['search_result'] = $result;
+			$data['result'] = $result;
+			$data['search_exist'] = true;
+
+		} else {
+			$data['search_exist'] = false;
+		}
+		//changed to design/design_gallery instead of design/design
+		$data['main_content'] = 'design/design_gallery';
+		$this->load->view('includes/template', $data);
+	}
+	
+	public function retrieveDesign($id){
+		$this->load->model('design_model');
+		
+		$result = $this->design_model->searchById($id);
+		
+		if($result != false){
+			$data['result'] = $result;
 			$data['search_exist'] = true;
 
 		} else {
 			$data['search_exist'] = false;
 		}
 		
-		$data['main_content'] = 'design/design';
+		$data['main_content'] = 'design/design_gallery';
 		$this->load->view('includes/template', $data);
-	}
+	}	
 }

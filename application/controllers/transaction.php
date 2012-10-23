@@ -57,6 +57,17 @@ class Transaction extends CI_Controller {
             if($this->form_validation->run()){
             }
     }
+	
+	public function purchaseshirt()
+	{
+		$this->load->model("transaction_model");
+		//this call should return all the necessary information to populate the purchaseshirt view
+		$transaction = $this->transaction_model->purchaseshirt($this->input->post());
+		
+		$data['purchaseshirt'] = $transaction;
+		$data['main_content'] = 'transaction/purchaseshirt';
+		$this->load->view('includes/template');
+	}
 }
 
 

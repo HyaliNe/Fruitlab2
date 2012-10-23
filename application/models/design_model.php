@@ -51,7 +51,7 @@ class Design_model extends CI_model {
 	 * @return array
 	 */	
 	public function searchByTitle($input, $lowerlimit = 0, $upperlimit = 20) {
-		
+		$this->db->select('*');
 		$this->db->from('design');
 		$this->db->like('title', $input);
 		$this->db->limit($upperlimit, $lowerlimit);
@@ -64,6 +64,20 @@ class Design_model extends CI_model {
 		return $query;
 		
 	}
+
+	public function searchById($input) {
+		$this->db->select('*');
+		$this->db->from('design');
+		$this->db->where('customer_id', $input);
+		
+		$query = $this->db->get();
+		
+		if($query->num_rows() < 0)
+			return false;
+		
+		return $query;
+		
+	}	
 	
 	public function comment($user)
 	{

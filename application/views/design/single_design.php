@@ -1,8 +1,27 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Single Design</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p></p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
 <div class="container">
 	
 	<div class = "row">
 		<div class="span4">
-				<img src="<?php echo site_url($image_path); ?>" />
+				<img src="<?php echo site_url('uploads/'.$image_path); ?>" />
 		</div>
 		<div class="span6">
 			<div class = "row">	<br>
@@ -51,7 +70,7 @@
 			<div class = "row">	
 				<div class="span4 offset1">
 					<!-- a form to lead to customize product -->
-					<form class="form-vertical" action="<?php echo site_url('make_product');?>" method="post">
+					<form class="form-vertical" action="<?php echo site_url('transaction/purchaseshirt');?>" method="post">
 						<input type="hidden" name="design_id" id="design_id" value="<?php echo $design_id;?>" />
 						<input type="hidden" name="price" id="price" value="<?php echo $price;?>" />
 						<input type="hidden" name="title" id="title" value="<?php echo $title;?>" />
@@ -72,7 +91,7 @@
 		<div class="row">
 			<div class="span12">
 				<div class="thumbnail pull-left">
-					<img src="<?php echo $singlecomment->img_path;?>" alt="">
+					<img src="<?php echo site_url('uploads/'.$singlecomment->img_path);?>" alt="">
 				</div>
 				<div class="span6">
 					<div class="span5 pull-left lead">

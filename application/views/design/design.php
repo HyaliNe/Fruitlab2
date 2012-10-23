@@ -1,5 +1,23 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>General area for design? catalog/ tag page maybe?</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p></p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
 <div class="container">
-	<h1> General area for design? catalog/ tag page maybe?</h1>
 	
 	either way we have a simple search base on title here</br>
 	<form action = "<?php echo site_url('design/searchDesign'); ?>" method = "post"/>

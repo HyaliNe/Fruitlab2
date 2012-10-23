@@ -181,6 +181,12 @@ class transaction_model extends CI_Model {
 		//return to the calling class, then the calling class need to 
 		//check result['result'] to see whether there are result from the query
 		return $result;
-    }  
-     }
+    }
+
+	public function purchaseshirt()
+	{
+		//should get data from collar, material and colour table
+
+	}
+}
 ?>

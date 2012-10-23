@@ -1,8 +1,25 @@
-<html>
-<head>
-<title>Create New Design</title>
-</head>
-<body>
+
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Create New Design</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p>Let your creative juice flow and make some design!</p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
+
+<div class="container">
 <?php echo $error;?>
 <?php echo form_open_multipart('upload'); ?>
     <?php if (validation_errors()): ?>
@@ -52,7 +69,8 @@
 			<div class="span4">
 					</label>Image</label>
 					<span class="add-on"><i class="icon-envelope"></i></span>
-					<input type="file" value="<?php echo set_value('userfile')?>" name="userfile" />
+					<input type="file" accept="image/*" value="<?php echo set_value('userfile')?>" name="userfile" />
+					<input type="hidden" value="<?php echo $this->session->userdata('customer_id');?>" name="customer_id" />
 			</div>
 		</div>
 		<div class="row">
@@ -95,7 +113,7 @@
     }
 ?>
  </table>
-</body>
+</div>
 <!-- to add to the models to others-->
 
 </html>
