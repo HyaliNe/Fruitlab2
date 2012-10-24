@@ -111,14 +111,13 @@ class Design_model extends CI_model {
 		//assume that num_of_rating is being passed in using hidden to here
 		$num_of_rating = $this->input->post('num_of_rating');
 		//assume old average rating is being passed in using hidden to here
-		$old_average = $this->input->post('old_rating');
+		$old_average = $this->input->post('old_average');
 		
 		//calculate the new average rating
 		$input_rating = $this->input->post('new_rating');
 		$new_num_of_rating = $num_of_rating + 1.00;
 		//formula to calculate the new average rating
 		$new_rating = (($old_average * $num_of_rating) + $input_rating) / $new_num_of_rating;
-		
 		$user_data = array(
 						'rating' => $new_rating,
 						'design_id' => $user['design_id'],
@@ -127,7 +126,6 @@ class Design_model extends CI_model {
 		
 		$this->db->where('design_id', $user['design_id']);
 		$data = $this->db->update('design', $user_data);
-		
 		//add info to activity
 	/* 	$type = "rate";
 		$activity_data = array(

@@ -52,7 +52,7 @@
 					Rating:
 				</div>
 				<div class="span3">
-					<?php echo $rating;?>/5.00
+					<?php echo round($rating,2);?>/5.00
 				</div>		
 			</div>
 			<hr>

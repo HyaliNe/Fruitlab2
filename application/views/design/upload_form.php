@@ -85,18 +85,8 @@
 			* @todo the type of clothes to add the list
 			* @todo mistake multiple checkbox values
 			*/
-		?>
-			<div class="control-group">
-				<label class="control-label" for="tag">Assign a Tag to your Clothes</label>
-				<div class="control">
-					<?php
-					   $query =  $this->db->query('Select tag_id,name from tag');
-					   foreach ($query->result() as $row){
-						 echo  $row->name . " " ."<input type='checkbox' name='tag[]' value=". $row->tag_id .">";
-					   }
-					?>				
-				</div>
-			</div>
+		?>	
+
 		</div>
 			<div class="control-group">
 				<div class="controls">

@@ -21,7 +21,7 @@
 
 <?php print_r($this->cart->contents()); echo form_open('path/to/controller/update/function'); ?>
 
-<table cellpadding="6" cellspacing="1" style="width:100%" border="1">
+<table class="table table-striped table-bordered" style="width:100%" >
 
 <tr>
   <th>QTY</th>

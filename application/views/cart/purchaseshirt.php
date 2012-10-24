@@ -23,6 +23,7 @@
 		<div class="span6">
 			<legend>Purchase Shirt</legend>
 			<form action="<?php echo site_url('cart/addToCart'); ?>" method="post" class="form-horizontal well">
+				<input type="hidden" value="<?php echo $design_id;?>" name="designID" />
 				<div class="row">
 					<div class="control-group">
 						<label class="control-label" for="collarID">Collar type</label>
