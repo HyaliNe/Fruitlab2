@@ -78,7 +78,7 @@
 			<form class="navbar-form form-search pull-left" action="<?php echo site_url('design/searchDesign'); ?>" method="post">
 			  <div class="input-append">
 			    <input type="text" class="span4 search-query" name="search_clause" placeholder="Search for design ..."/>
-			    <button type="submit" class="btn btn-nav"><i class = "icon-search"></i></button>
+			    <button type="submit" class="btn btn-nav "><i class = "icon-search"></i></button>
 			  </div>
 			</form>
     										
