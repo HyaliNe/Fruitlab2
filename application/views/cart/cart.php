@@ -1,3 +1,22 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Deshun's cart</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p></p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
 <div class="container">
 
 <?php print_r($this->cart->contents()); echo form_open('path/to/controller/update/function'); ?>

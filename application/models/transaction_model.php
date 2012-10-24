@@ -137,7 +137,7 @@ class transaction_model extends CI_Model {
         return $result;
     }
     
-    /*
+
     public function getCartByID($id){
          $result = array();
          $result['result'] = FALSE;
@@ -156,10 +156,10 @@ class transaction_model extends CI_Model {
                 }
           return $result;
      }      
-     */
+
     
     
-     /*
+ 
      public function getSingleLineItemByID($id){
          $result = array();
          $result['result'] = FALSE;
@@ -214,11 +214,5 @@ class transaction_model extends CI_Model {
 		//check result['result'] to see whether there are result from the query
 		return $result;
     }
-
-	public function purchaseshirt()
-	{
-		//should get data from collar, material and colour table
-
-	}
 }
 ?>

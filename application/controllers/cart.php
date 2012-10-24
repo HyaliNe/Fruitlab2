@@ -30,7 +30,7 @@
 		 }
 		 
 		 
-		 $data['main_content'] = 'cart/custom_shirt';
+		 $data['main_content'] = 'cart/purchaseshirt';
  		 $this->load->view('includes/template', $data);
 		 
 	 }
@@ -41,8 +41,7 @@
 		 $collar	= $this->input->post('collardID');
 		 $design	= $this->input->post('designID');
 		 $material	= $this->input->post('materialID');
-		 //$qty		= $this->input->post('qty');
-		 $qty		= 1;
+		 $qty		= $this->input->post('quantity');
 		 //$size		= $this->input->post('size');
 		 $price		= 0; //fetch price of design, collar and color from database and compute
 		 

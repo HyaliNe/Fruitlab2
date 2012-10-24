@@ -1,15 +1,30 @@
-<div class="container">
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Deshun's cart</h1>						
+				</div>
+			</div>
 
-	<div class="page-header">
-		<h1>Deshun's cart</h1>
+			<div class="row-fluid">
+				<div class="span10">
+					<p></p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
 	</div>
+</div> <!-- end of .hero-unit -->
+<div class="container">
 	
 	<div class="row">
 		<div class="span3">
 		<h4>Cart Item</h4><hr>
 		</div>
 	</div>
-	
+	<?php print_r($this->cart->contents()); echo form_open('path/to/controller/update/function'); ?>
 <?php
 	for($i=1; $i <3; $i++)
 	{	?>
@@ -28,10 +43,7 @@
 					Quantity:
 				</div>			
 				<div class="span3">
-					<select>
-						<option value="1">1</option>
-						<option value="2">2</option>
-					</select>
+					quantity
 				</div>
 				<div class="span1">
 					<form name="remove" id="remove" action="" method="post">

@@ -30,12 +30,12 @@
 				<div class="row">
 					<div class="span3">
 					<form action="<?php echo site_url('design/'.$design->design_id);?>" method="post"/>
-					<input type="image" src="<?php echo site_url('uploads/'. $design->image_path)?>">
+						<input type="image" src="<?php echo site_url('uploads/'. $design->image_path)?>">
 					</form>
 					</div>
 				</div>
 				<div class="row">
-					<div class="span3" style="text-align:center; padding-left:16px;">
+					<div class="span3" style="text-align:center; padding-left:100px;">
 						<div class="row">
 							<div class="span1">
 							<?php echo $design->title;?>

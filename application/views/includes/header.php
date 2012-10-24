@@ -111,7 +111,8 @@
 							<div class="badge badge-important" style = "position: absolute; top:3px; left:30px; z-index:99">3</div>
 						</li>
 				<li>
-				<a href="<?php echo site_url('dummycartcontroller');?>"><i class="icon-shopping-cart"></i>Cart</a>
+		<!--	<a href="<?php echo site_url('dummycartcontroller');?>"><i class="icon-shopping-cart"></i>Cart</a>	-->
+				<a href="<?php echo site_url('cart/viewCart');?>"><i class="icon-shopping-cart"></i>Cart</a>
 				</li>						
 			
 				<li>

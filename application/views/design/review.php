@@ -26,7 +26,8 @@
 	</td></tr>
 	<tr><td>design id</td><td>
 	<input type="text" id="design_id" name="design_id" value= "<?php echo set_value('design_id'); ?>" />
-	<input type="hidden" name="customer_id" value="<?php echo $this->session->userdata('customer_id'); ?>" />
+	<?php $customer_id = $this->session->userdata('customer_id');	?>
+	<input type="hidden" name="customer_id" value="$customer_id" />
 	</td></tr>	
 	</table>
 		
@@ -34,7 +35,7 @@
 	</form>
 
 	<p><h4>rating</h4></p>
-	<form action = "<?php echo site_url('review/rate'); ?>" method = "post"/>
+	<form class="foraction = "<?php echo site_url('review/rate'); ?>" method = "post"/>
 	
 	design_id: 	<input type="text" id="design_id" name="design_id" value= "<?php echo set_value('design_id'); ?>" /></br>
 		<input type="hidden" name="customer_id" value="<?php echo $this->session->userdata('customer_id'); ?>" />
