@@ -32,6 +32,7 @@ class Design extends CI_Controller {
 			$data['type']			= $design['type'];
 			$data['num_of_rating']	= $design['num_of_rating'];
 			$data['comment']		= $comment;
+			$data['commented']		= $design['commented'];
 			
 			$data['main_content'] = 'design/single_design';
 		} else {
@@ -79,7 +80,7 @@ class Design extends CI_Controller {
 	 *
 	 * @return 
 	 */	
-	public function browseDesginByUser($id = 0) {
+	public function browseDesignByUser($id = 0) {
 		
 		if ( $id == 0 ) {
 			$data['message_title'] = "User not found";
@@ -93,29 +94,13 @@ class Design extends CI_Controller {
 			
 			if($result != false) {
 				$data['search_result'] = $result;
-				$data['search_result'] = true;
+				$data['search_exist'] = true;
 			} else {
 				$data['search_exist'] = false;
 			}
 			
-			$data['main_content'] = "design/design";
+			$data['main_content'] = "design/design_gallery";
 		}
 		$this->load->view('includes/template', $data);
 	}
-	public function retrieveDesign($id){
-		$this->load->model('design_model');
-		
-		$result = $this->design_model->searchById($id);
-		
-		if($result != false){
-			$data['search_result'] = $result;
-			$data['search_exist'] = true;
-
-		} else {
-			$data['search_exist'] = false;
-		}
-		
-		$data['main_content'] = 'design/design_gallery';
-		$this->load->view('includes/template', $data);
-	}	
 }

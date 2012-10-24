@@ -23,6 +23,18 @@ class Design_model extends CI_model {
 		
 		$query = $this->db->get();
 		
+		//query comment table to check if the user have already commented
+		$design['commented'] = false;
+		$customer_id = $this->session->userdata('customer_id');
+		$this->db->from('comment');
+		$this->db->where('customer_id', $customer_id);
+		$this->db->where('design_id', $id);
+		$comment = $this->db->get();
+		if($comment->num_rows == 1)
+		{
+			$design['commented'] = true;
+		}	
+		
 		if ($query->num_rows == 1) { 
 			$design['exist'] = true;
 			$row = $query->row();
@@ -65,20 +77,6 @@ class Design_model extends CI_model {
 		return $query;
 		
 	}
-
-	public function searchById($input) {
-		$this->db->select('*');
-		$this->db->from('design');
-		$this->db->where('customer_id', $input);
-		
-		$query = $this->db->get();
-		
-		if($query->num_rows() < 0)
-			return false;
-		
-		return $query;
-		
-	}	
 	
 	public function comment($user)
 	{
@@ -94,7 +92,7 @@ class Design_model extends CI_model {
 		$data = $this->db->insert('comment', $user_data);
 		
 		//add info to activity
-		$type = "comment";
+	/*	$type = "comment";
 		$activity_data = array(
 						'timestamp' => $date,
 						'creator_id' => $user['customer_id'],
@@ -102,7 +100,7 @@ class Design_model extends CI_model {
 						'type' => $type,
 						'affected_id' => $user['design_id']
 						);
-		$activity = $this->db->insert('activity', $activity_data);				
+		$activity = $this->db->insert('activity', $activity_data);	*/			
 		
 		return $data;
 	}
@@ -113,14 +111,13 @@ class Design_model extends CI_model {
 		//assume that num_of_rating is being passed in using hidden to here
 		$num_of_rating = $this->input->post('num_of_rating');
 		//assume old average rating is being passed in using hidden to here
-		$old_average = $this->input->post('old_rating');
+		$old_average = $this->input->post('old_average');
 		
 		//calculate the new average rating
-		$input_rating = $this->input->post('rating');
-		$new_num_of_rating = $num_of_rating + 1;
+		$input_rating = $this->input->post('new_rating');
+		$new_num_of_rating = $num_of_rating + 1.00;
 		//formula to calculate the new average rating
 		$new_rating = (($old_average * $num_of_rating) + $input_rating) / $new_num_of_rating;
-		
 		$user_data = array(
 						'rating' => $new_rating,
 						'design_id' => $user['design_id'],
@@ -129,7 +126,6 @@ class Design_model extends CI_model {
 		
 		$this->db->where('design_id', $user['design_id']);
 		$data = $this->db->update('design', $user_data);
-		
 		//add info to activity
 	/* 	$type = "rate";
 		$activity_data = array(
@@ -177,8 +173,6 @@ class Design_model extends CI_model {
  		$this->db->limit($upperlimit, $lowerlimit);
 		
  		$query = $this->db->get();
-		echo $id;
-		echo $this->db->last_query();
  		if(!$query->num_rows()>0)
  			return false;
 		
