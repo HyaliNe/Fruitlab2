@@ -6,17 +6,7 @@ class Upload extends CI_Controller {
 		parent::__construct();
 		$this->load->helper(array('form', 'url'));
 	}
-        function remove(){
-            $getdata = $this->input->get();
-            $id = $getdata["id"];
-            if($id != null){
-                $this->db->where('design_id', $id);
-                $result = $this->db->update('design', array('type' => 'remove')); 
-                $data['error'] = 'Design ID ='.$id .' has been successfully removed';
-                $data['main_content'] = 'design/upload_form';
-                $this->load->view('includes/template', $data);
-            }
-        }
+
 	function index()
 	{       
             //configurations files for uploading images
@@ -67,10 +57,6 @@ class Upload extends CI_Controller {
 					
                     $insertid = $this->db->insert_id(); //helper method to get the insert id when inserting into the database
                     $tags     = $postdata['tag'];
-
-					echo "<pre>";
-					print_r($this->input->post('tag'));
-					echo "</pre>";
 										
 					if (!empty($tags)) {
 	                     foreach ($tags as $tag) {
@@ -78,7 +64,7 @@ class Upload extends CI_Controller {
 	                         $this->db->query($db);
 	                	}
 					}
-
+					 $data['user_data'] = $user_data;
                      $data['upload_data']  = $this->upload->data();
                      $data['main_content'] = 'design/upload_success';
                 }
@@ -99,7 +85,7 @@ class Upload extends CI_Controller {
 		}
 		return $result;
 	}
-
+	
 }
 
 
