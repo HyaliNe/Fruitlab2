@@ -159,7 +159,7 @@ class Design_model extends CI_model {
 	/**
 	 * Search the database for all design by a userid
 	 *
-	 * Retrive and return related products if exist
+	 * Retrieve and return related products if exist
 	 *
 	 * @access	public
 	 * 
@@ -178,5 +178,63 @@ class Design_model extends CI_model {
 		
  		return $query;
 	 }
+
+
+	/**
+	 *
+	 * Check if Design belongs to customer id
+	 *
+	 * @access	public
+	 * 
+	 * @param 	int design id	
+	 * @param 	int customer id	
+	 *
+	 * @return 	TRUE if design belong to customer id 	
+	 */
+
+	public function designBelong($design_id, $customer_id) {
+		$this->db->where('design_id', $design_id)->where('customer_id', $customer_id);
+		$query = $this->db->get('design');
+
+		return ($query->num_rows() > 0) ? TRUE : FALSE;
+	}
+	
+	/**
+	 *
+	 * Delete design by setting type = 'remove in db 
+	 *
+	 * @access	public
+	 * 
+	 * @param 	int design id	
+	 * @param 	int customer id		
+	 *
+	 * @return 	TRUE if succeed and FALSE if fail. 	
+	 */
+
+	public function deleteDesign($design_id, $customer_id = "") {
+		$proceed = TRUE;
+		
+		// Check if design need to be belong to user
+		if (!empty($customer_id)) {
+			// Check if design belong to customer id.
+			$designBelong = $this->designBelong($design_id, $customer_id);
+			$proceed = ($designBelong) ? TRUE : FALSE;
+		}
+		
+		if ($proceed) {
+			// Design existed.
+			$this->db->where('design_id', $design_id);
+			$query = $this->db->update('design', array('type' => 'remove'));
+
+			$result['result']  = TRUE;
+			$result['message'] = "Design has been successfully deleted!";			 
+			
+		} else {
+			$result['result'] = FALSE;
+			$result['message'] = "Design does not exist";
+		}
+
+		return $result;
+	}
  }
 ?>

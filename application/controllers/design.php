@@ -103,4 +103,30 @@ class Design extends CI_Controller {
 		}
 		$this->load->view('includes/template', $data);
 	}
+	
+	// Manage own design
+	public function own($data = "") {
+		$customer_id = $this->session->userdata('customer_id');
+		$this->load->model('design_model');
+		$designs = $this->design_model->retriveDesignsByUser($customer_id);
+		
+		$data['data']         = (!empty($data)) ? $data['result'] : NULL;
+		$data['designs']      = $designs;
+		$data['main_content'] = 'design/own_design';
+		$this->load->view('includes/template', $data);
+	}
+	
+	// Remove Own Design
+	public function remove($design_id){
+		$customer_id = $this->session->userdata('customer_id');
+        if ($design_id != null) {
+			$this->load->model('design_model');
+			$result = $this->design_model->deleteDesign($design_id, $customer_id);
+
+			$data['result'] = $result;
+			$this->own($data);
+        }
+    }
+    
+	
 }
