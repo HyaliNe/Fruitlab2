@@ -96,7 +96,7 @@
 					<ul class="dropdown-menu">
 						<a href="<?php echo site_url('upload');?>">Create New Design</a>
 						<?php $retrieveDesign = 'retrieveDesign/' . $this->session->userdata('customer_id'); ?>
-						<a href="<?php echo site_url($retrieveDesign);?>">Manage Designs</a>
+						<a href="<?php echo site_url('design/own');?>">Manage Designs</a>
 					</ul>
 				</li>
 				<li style = "margin-right: 30px; position: relative;">

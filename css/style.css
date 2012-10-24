@@ -31,7 +31,37 @@ h3, h4 {
 	color: #C03600;
 	text-shadow: 1px 1px 1px #FFFFFF;
 	font-family: 'Rock Salt', cursive;
-	
+	padding-bottom: 17px;
+}
+
+table th {
+	background-color: #ECEBDD;
+	border-bottom: 1px solid #B6B49F;
+}
+
+table {
+	font-size: 14px;
+}
+
+.table-hover tbody tr:hover td {
+/*	background-color: #F3F1DA;
+*/	background-color: rgba(45, 42, 33, 0.08);
+	color: #AF3B25;
+	transition: 0.8s;
+	-webkit-transition: 0.8s;
+    -moz-transition: 0.8s;
+    -o-transition: 0.8s;
+    -ms-transition: 0.8s;	
+}
+
+.table-hover tbody tr:hover th {
+	background-color: #ECEBDD;
+}
+
+.thumbnail {
+	background-color: #FFFFFF;
+	width: 100px;
+	height: 100px;
 }
 
 div.navbar div.navbar-inner {
@@ -99,9 +129,9 @@ div.page-header {
 
 footer {
 	background-color: #2D2A21;
+	color: #928777;
 	min-height: 50px;
 	padding-top: 20px;
-	color: #928777;
 	margin-top: 30px;
 }
 
