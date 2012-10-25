@@ -84,8 +84,7 @@ class Design extends CI_Controller {
 		
 		if ( $id == 0 ) {
 			$data['message_title'] = "User not found";
-			$data['message'] = "Sorry, we are unable to locate the user you are requesting to view.";
-				
+			$data['message'] = "Sorry, we are unable to locate the user you are requesting to view.";				
 			$data['main_content'] = "message";
 		} else {
 			echo $id;
@@ -109,6 +108,12 @@ class Design extends CI_Controller {
 		$customer_id = $this->session->userdata('customer_id');
 		$this->load->model('design_model');
 		$designs = $this->design_model->retriveDesignsByUser($customer_id);
+		// $this->load->model('tag_model');
+		//  $tags_query = $this->tag_model->getDesignTags(3);
+		// 
+		// echo "<pre>";
+		// print_r($tags_query->result());
+		// echo "</pre>";
 		
 		$data['data']         = (!empty($data)) ? $data['result'] : NULL;
 		$data['designs']      = $designs;

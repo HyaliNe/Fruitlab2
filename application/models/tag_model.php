@@ -12,12 +12,19 @@ class Tag_model extends CI_Model {
  * @return 	array 	Return ['result'] TRUE if any or FALSE and return ['role'] if any.
  */
 	
-    
     public function getTags() {
 		
 		$result = NULL;
 		$query  = $this->db->get('tag');		
 		return $query->result();
+	}
+	
+	public function getDesignTags($design_id) {
+		$result = NULL;
+		$this->db->where('design_id', $design_id)->join('tag', 'tag.tag_id = taglist.tag_id');
+		$query = $this->db->get('taglist');
+		
+		return $query;
 	}
         
 }

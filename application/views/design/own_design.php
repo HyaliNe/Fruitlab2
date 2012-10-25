@@ -25,7 +25,7 @@
 			<h3>Manage your own design!</h3>			
 		</div>
 	</div>
-	
+		
 	<?php if (!empty($data)): 
 			$alert_type = ($data['result']) ? 'alert-success' : 'alert-error';
 			$alert_heading = ($data['result']) ? 'Success' : 'Error';
@@ -45,7 +45,9 @@
 		<div class="span8">
 			<table class = "table table-hover table-bordered">
 				<tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Action</th></tr>
-				<?php foreach($designs->result() as $design): ?>
+				<?php 
+				foreach($designs->result() as $design): 
+				?>
 					<tr>
 						<td><?php echo $design->title ?></td>
 						<td><img class="thumbnail" src = "<?php echo site_url('uploads/'.$design->image_path); ?>" /></td>
