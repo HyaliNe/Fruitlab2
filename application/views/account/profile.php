@@ -40,6 +40,14 @@
 
 <div class="container">
 	
+	<?php
+	
+	// echo "<pre>";
+	// print_r($designs);
+	// echo "</pre>";
+	// 
+	?>
+	
 	<div class="row">
 		<div class="span10">
 			<div class="row">
@@ -48,49 +56,27 @@
 				</div>
 			</div>
 			
-			<div class="row">
-				<div class="span12">
-					<div class = "profile_gallery well clearfix">
-						<ul class="thumbnails">
-							<?php for ($i = 0; $i < 11; $i++): ?>
-								<li class = "span1">
-							      <!-- <img src="http://placehold.it/150x100" alt=""> -->
-									<img src="http://www.linkcious.com/thumbnail/img.php?src=http://fruitlab.bizcept.com/img/empty_shirt.png&h=100&w=100" alt="" />									
-								</li>
-							<?php endfor; ?>							
-						</ul>
-					</div>					
-				</div>
-			</div> <!-- end of .row -->
 			
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="span10">
 			<div class="row">
 				<div class="span12">
-					<h3>Buyer Gallery</h3>
+					<div class="designs clearfix">
+						<?php foreach ($designs as $design): ?>
+						
+						<figure class="design">
+							<img src="<?php echo site_url('uploads/'.$design->image_path); ?>" class = "thumbnail" alt="" />									
+							<div class="design_overlay">
+								<p><?php echo $design->title; ?></p>
+							</div>
+						</figure>
+						
+						<?php endforeach; ?>
+						
+					</div>
 				</div>
 			</div>
 			
-			<div class="row">
-				<div class="span12">
-					<div class = "profile_gallery well clearfix">
-						<ul class="thumbnails">
-							<?php for ($i = 0; $i < 11; $i++): ?>
-								<li class = "span1">
-							      <!-- <img src="http://placehold.it/150x100" alt=""> -->
-									<img src="http://www.linkcious.com/thumbnail/img.php?src=http://fruitlab.bizcept.com/img/crop_shirt.png&h=100&w=100" alt="" />									
-								</li>
-							<?php endfor; ?>							
-						</ul>
-					</div>					
-				</div>
-			</div> <!-- end of .row -->
-			
+						
 		</div>
-	</div>
-	
+	</div>	
 	
 </div>

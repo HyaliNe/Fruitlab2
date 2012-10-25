@@ -55,7 +55,7 @@ class Profile extends CI_Controller {
 		$data = $this->account_model->retrieve_profile($customer_id);
 		
 		//if query has result
-		if($data['result'])
+		if ($data['result'])
 		{	
 			//setting it such that template know which page to redirect to
 			$data['main_content'] = 'account/profile';
@@ -67,7 +67,7 @@ class Profile extends CI_Controller {
 	/**
 	 * Load user profile page
 	 *
-	 * Check if userid is provided then retrive and display, otherwise load error message
+	 * Check if userid is provided then retrieve and display, otherwise load error message
 	 *
 	 * @access	public
 	 * 
@@ -75,6 +75,7 @@ class Profile extends CI_Controller {
 	 *
 	 * @return 
 	 */	
+	
 	public function userprofile($id = 0) {
 
 		if ( $id == 0 ) {
@@ -95,6 +96,11 @@ class Profile extends CI_Controller {
 				
 				//to guo liang
 				//decide the template to load. Leave it for you since I haven't done it.
+
+				$this->load->model('design_model');
+				$designs = $this->design_model->retriveDesignsByUser($id);
+				$data['designs'] = $designs->result();
+
 				$data['main_content'] = "account/profile";
 				
 			} else {

@@ -175,7 +175,7 @@ class Design_model extends CI_model {
  		$query = $this->db->get();
  		if(!$query->num_rows()>0)
  			return false;
-		
+
  		return $query;
 	 }
 

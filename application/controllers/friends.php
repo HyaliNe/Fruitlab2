@@ -11,16 +11,13 @@ class Friends extends CI_Controller {
             $this->load->model('account_model');            
 			$friendlist = $this->account_model->getFriendlist($customer_id);
 			
-			if($friendlist)
+			if ($friendlist)
 			{
 				$data['friendlist'] = $friendlist;
             }
             $data['resultset'] = ''; 
             $data['error'] = '';
             $data['main_content']  = 'account/friend_display';
-			$data['js'] = 'jquery.ui.core';
-			$data['js'] = 'jquery.ui.datepicker';
-			$data['js'] = 'jquery-ui-1.8.18.custom';
             $this->load->view('includes/template', $data);
         }
         
@@ -56,14 +53,14 @@ class Friends extends CI_Controller {
 			// $data['js'] = 'jquery-ui-1.8.18.custom';			
             // $this->load->view('includes/template', $data);
         }
-        function remove(){
+        function remove() {
             $customer = $this->session->userdata('customer_id');
 
             $data['error'] = '';
             $data['resultset'] = '';
             $getdata = $this->input->get();
             $customer_id2 = $getdata["id"];
-            if($customer_id2){
+            if ($customer_id2) {
                 $result = $this->db->delete('is_friends_with',array('customer_id'=>$customer_id,'customer_id2'=>$customer_id2));
                 if($result){
                     $data['error'] == 'Successfully deleted friends from the database';
@@ -77,14 +74,12 @@ class Friends extends CI_Controller {
             $data['main_content'] = 'account/friend_display';
 			$this->load->view('includes/template', $data);
         }
-        function search(){
+
+        function search() {
             $customer_id = $this->input->post('customer_id');
             $this->load->model('account_model');
             $data["error"] = '';
             $data['friendlist'] = $this->account_model->searchFriend($this->input->post());
-			$data['js'] = 'jquery.ui.core';
-			$data['js'] = 'jquery.ui.datepicker';
-			$data['js'] = 'jquery-ui-1.8.18.custom';			
 			$data['main_content'] = 'account/friend_display';
             $this->load->view('includes/template', $data);
         }

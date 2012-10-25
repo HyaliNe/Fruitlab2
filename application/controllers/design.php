@@ -72,7 +72,7 @@ class Design extends CI_Controller {
 	/**
 	 * Load all design of a user
 	 *
-	 * Check if userid is provided then retrive and display, otherwise load error message
+	 * Check if userid is provided then retrieve and display, otherwise load error message
 	 *
 	 * @access	public
 	 * 
@@ -108,11 +108,13 @@ class Design extends CI_Controller {
 		$customer_id = $this->session->userdata('customer_id');
 		$this->load->model('design_model');
 		$designs = $this->design_model->retriveDesignsByUser($customer_id);
+
+		
 		// $this->load->model('tag_model');
 		//  $tags_query = $this->tag_model->getDesignTags(3);
 		// 
 		// echo "<pre>";
-		// print_r($tags_query->result());
+		// print_r($designs->result());
 		// echo "</pre>";
 		
 		$data['data']         = (!empty($data)) ? $data['result'] : NULL;

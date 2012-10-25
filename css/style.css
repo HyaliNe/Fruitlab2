@@ -207,3 +207,42 @@ div.single_feed:last-child {
 	border: 1px solid #D6CCC1;
 	border-radius: 8px;
 }
+
+/************ PROFILE GALLERY ************/
+div.designs {
+	margin-bottom: 20px;
+}
+
+figure.design {
+	position: relative;
+	float: left;
+	margin: 0 10px;
+	padding: 0;
+}
+
+figure.design img {
+	width: 200px;
+	height: 200px;
+}
+
+figure.design div.design_overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+	padding: 20px;
+	color: #FFFFFF;
+	opacity: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	text-transform: uppercase;
+}
+
+figure.design:hover div.design_overlay {
+	opacity: 1;
+}
