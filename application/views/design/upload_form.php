@@ -58,18 +58,6 @@
 		</div>		
 	</div>
 </div>
-
-<?php
-   /*
-    * insert everything into the taglist
-    * send to guoliang the updated database to insert intot the atag list from the current database
-    * get the last insert id from the database to the inser into the database
-    * create the tag cloud for jason to integrate into the database
-    * write a foreach method to insert each into the database
-    * after which insert the column into the database
-    * @todo create a search by tag cloud options in deshun tag cloud
-    */
-?>
 <br/>
 Assign a Tag to your Clothes:<br/>
 <?php
