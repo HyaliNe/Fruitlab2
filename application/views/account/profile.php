@@ -26,7 +26,13 @@
 		</div>
 
 		<div class="span2 profile_action">
-			<a href="#" class = "btn-large btn btn-block"><i class = "icon-plus-sign"></i> Add Friend</a>
+		
+			<!-- need to implement changig button, if already friend then take away the add friend button -->
+			<form action="<?php echo site_url('friends/add');?>" method="post"/>
+				<input type="hidden" value="<?php echo $customer_id;?>" name="potential_friend_id"/>
+				<input type="hidden" value="<?php echo $this->session->userdata('customer_id');?>" name="customer_id" />
+				<input type="submit" class = "btn-large btn btn-block" value="Add Friend"/>			
+			</form>
 		</div>
 			
 	</div>
