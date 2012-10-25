@@ -78,7 +78,7 @@
 			<form class="navbar-form form-search pull-left" action="<?php echo site_url('design/searchDesign'); ?>" method="post">
 			  <div class="input-append">
 			    <input type="text" class="span4 search-query" name="search_clause" placeholder="Search for design ..."/>
-			    <button type="submit" class="btn"><i class = "icon-search"></i></button>
+			    <button type="submit" class="btn btn-nav"><i class = "icon-search"></i></button>
 			  </div>
 			</form>
     										
@@ -95,8 +95,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<a href="<?php echo site_url('upload');?>">Create New Design</a>
-						<?php $retrieveDesign = 'retrieveDesign/' . $this->session->userdata('customer_id'); ?>
-						<a href="<?php echo site_url($retrieveDesign);?>">Manage Designs</a>
+						<a href="<?php echo site_url('design/own');?>">Manage Designs</a>
 					</ul>
 				</li>
 				<li style = "margin-right: 30px; position: relative;">
