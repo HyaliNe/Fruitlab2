@@ -86,7 +86,6 @@
 			* @todo mistake multiple checkbox values
 			*/
 		?>	
-
 		</div>
 			<div class="control-group">
 				<div class="controls">

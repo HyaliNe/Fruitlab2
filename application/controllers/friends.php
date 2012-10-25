@@ -7,14 +7,17 @@ class Friends extends CI_Controller {
 	}
 	function index()
 	{  
-            //$customer_id = $this->session->userdata('customer_id');
-            $customer_id = 1;
-            //$this->sessions->userdata("customer_1");
+            $customer_id = $this->session->userdata('customer_id');
             $this->load->model('account_model');            
-            $data['friendlist'] = $this->account_model->getFriendlist($customer_id);
+			$friendlist = $this->account_model->getFriendlist($customer_id);
+			
+			if($friendlist)
+			{
+				$data['friendlist'] = $friendlist;
+            }
             $data['resultset'] = ''; 
-            $data["error"] = '';
-            $data["main_content"]  = 'account/friend_display';
+            $data['error'] = '';
+            $data['main_content']  = 'account/friend_display';
 			$data['js'] = 'jquery.ui.core';
 			$data['js'] = 'jquery.ui.datepicker';
 			$data['js'] = 'jquery-ui-1.8.18.custom';
@@ -22,27 +25,36 @@ class Friends extends CI_Controller {
         }
         
         function add(){
-            $cstomer = $this->session->userdata('customer_id');
+            $customer = $this->session->userdata('customer_id');
             $data['resultset'] = '';
-            $getdata = $this->input->get();
             $data['error'] = '';
-            $customer_id2 = $getdata["id"];
-            if($customer_id2){
+			$potential_friend_id = $this->input->post('potential_friend_id');
+			$customer_id = $this->input->post('customer_id');
+			
+            if($potential_friend_id){
+			
                 $result = $this->db->insert('is_friends_with',
                 array('customer_id'=> $customer_id
-                ,'customer_id2' => $customer_id2
+                ,'customer_id2' => $potential_friend_id
                 ));
-                if($result){
+
+                $result2 = $this->db->insert('is_friends_with',
+                array('customer_id2'=> $customer_id
+                ,'customer_id' => $potential_friend_id
+                ));				
+                if($result && $result2){
                     $data['error'] == 'Successfully added the friend';
+					redirect('user/'.$potential_friend_id);
                 }else{
                     $data['error'] == 'Does not exist in the database';
                 }
             }
-            $data['main_content'] = 'friend_display';
-			$data['js'] = 'jquery.ui.core';
-			$data['js'] = 'jquery.ui.datepicker';
-			$data['js'] = 'jquery-ui-1.8.18.custom';			
-            $this->load->view('includes/template', $data);
+			
+            // $data['main_content'] = 'account/friend_display';
+			// $data['js'] = 'jquery.ui.core';
+			// $data['js'] = 'jquery.ui.datepicker';
+			// $data['js'] = 'jquery-ui-1.8.18.custom';			
+            // $this->load->view('includes/template', $data);
         }
         function remove(){
             $customer = $this->session->userdata('customer_id');
@@ -63,38 +75,17 @@ class Friends extends CI_Controller {
 			$data['js'] = 'jquery.ui.datepicker';
 			$data['js'] = 'jquery-ui-1.8.18.custom';			
             $data['main_content'] = 'account/friend_display';
-            $this->load->view('includes/template', $data);
+			$this->load->view('includes/template', $data);
         }
         function search(){
-            $customer_id = 1;
+            $customer_id = $this->input->post('customer_id');
             $this->load->model('account_model');
             $data["error"] = '';
-            $data["main_content"]  = 'friend_display';
-            $data['friendlist'] = $this->account_model->getFriendlist($customer_id);
-            $postdata = $this->input->post();
-            if(isset($postdata['fname']) && $_POST['fname'] != ''){
-                $name = $postdata['fname'];
-                $this->db->like('first_name',$name);
-            }
-            if(isset($postdata['email']) && $_POST['email'] != ''){
-                $email = $postdata['email'];
-                $this->db->like('email',$email);
-            }
-            if((isset($postdata['gender']) && $_POST['gender']) != ''){
-                 $gender = $postdata['gender'];
-                 $this->db->where(array('gender' => $gender));
-            }
-            if((isset($postdata['fromage']) && $postdata['fromage'] != '' && $postdata['toage'] && $postdata['toage'] !='')){
-                    $fromage = $postdata['fromage'];
-                    $toage = $postdata['toage'];
-                    $this->db->where("date_of_birth BETWEEN '$fromage' AND '$toage'");
-            }
-            $query = $this->db->get("customer");
-            $data['resultset'] = $query;
+            $data['friendlist'] = $this->account_model->searchFriend($this->input->post());
 			$data['js'] = 'jquery.ui.core';
 			$data['js'] = 'jquery.ui.datepicker';
 			$data['js'] = 'jquery-ui-1.8.18.custom';			
-            $data['main_content'] = 'account/friend_display';
+			$data['main_content'] = 'account/friend_display';
             $this->load->view('includes/template', $data);
         }
         

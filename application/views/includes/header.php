@@ -86,7 +86,7 @@
 		<div class="nav-collapse collapse pull-right">
 			<ul class="nav">
 				<li>
-				<a href="#"><i class="icon-user"></i>Friends</a>
+				<a href="<?php echo site_url('friends');?>"><i class="icon-user"></i>Friends</a>
 				</li>			
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">

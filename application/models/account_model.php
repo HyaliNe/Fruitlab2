@@ -220,25 +220,45 @@ class Account_model extends CI_Model {
 		//array will be returned. handle with caution
 		return $ownactivity->result();
 	}
-        //get friendlist functionality
-        public function getFriendList($customer_id){
-            $result['result'] = true;
-            $this->db->select('*');
-            $this->db->where('customer_id',$customer_id);
-            $query = $this->db->get('is_friends_with');
-            $i = 0;
-            foreach($query->result() as $row){
-                $data = $this->retrieve_profile($row->customer_id);
-                $result[$i]['customer_id'] = $data['customer_id'];
-                $result[$i]['first_name'] = $data['first_name'];
-                $result[$i]['last_name'] = $data['last_name'];
-                $result[$i]['country'] = $data['country'];
-                $result[$i]['email'] = $data['email'];
-                $result[$i]['hp_no'] = $data['hp_no'];
-                $i++;
-            }
-            return $result;
-        }
+	
+    //get friendlist functionality
+	public function getFriendList($customer_id){
+		$result['result'] = true;
+
+		$this->db->select('customer_id2, img_path, first_name, last_name');
+		$this->db->from('is_friends_with');
+		$this->db->where('is_friends_with.customer_id',$customer_id);		
+		$this->db->join('customer', 'customer.customer_id = is_friends_with.customer_id2');	
+		$result = $this->db->get();
+		
+		// $i = 0;
+		// foreach($query->result() as $row){
+			//every single row retrieve a profile
+			// $data = $this->retrieve_profile($row->customer_id2);
+			// $result[$i]['first_name'] = $data['first_name'];
+			// $result[$i]['last_name'] = $data['last_name'];
+			// $result[$i]['img_path'] = $data['img_path'];
+			// $result[$i]['customer_id2'] = $row->customer_id2;
+			// $i++;
+		// }
+		return $result;
+	}
+	
+	public function searchFriend($user)
+	{
+		$this->db->select('customer_id2, img_path, first_name, last_name');
+		$this->db->from('is_friends_with');
+		$this->db->where('is_friends_with.customer_id',$user['customer_id']);		
+		$this->db->join('customer', 'customer.customer_id = is_friends_with.customer_id2');		
+		
+		if(isset($user['fname']) && $user['fname'] != '')
+		{
+			$this->db->like('first_name',$user['fname']);
+		}		
+		
+		$query = $this->db->get();
+		return $query;
+	}
         
 }
 /* End of file account_model.php */
