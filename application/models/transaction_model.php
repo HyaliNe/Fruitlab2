@@ -10,9 +10,10 @@ class transaction_model extends CI_Model {
         $this->db->join('cart', 'design.customer_id = cart.customer_id');
         $this->db->join('singlecartitem','singlecartitem.design_id = design.design_id');
         $query = $this->db->get();
-        $i = 0;
-		$this->load->model('account_model');
+        $i = 0;  
+	$this->load->model('account_model');
         foreach ($query->result() as $row){
+            $result[$i]["single_item_id"] = $row->single_item_id;
             $result[$i]["price"] = $row->price;
             $result[$i]["quantity"] = $row->quantity;
             $result[$i]["title"] =  $row->title;
@@ -20,6 +21,38 @@ class transaction_model extends CI_Model {
             $result[$i]["status"] = $row->status;
             $i++;
         }
+        return $result;
+    }
+    /*
+     * to retrieve the customer purchase transaction by cart_id,date,status,reference
+     * followed by title,price,quantity 
+     */
+    public function getCustomerPurchaseHistory($user){
+        $result = array();
+        $db = 'Select cart_id,date,status,reference_number from cart where customer_id = ' . $user;
+        $query = $this->db->query($db);
+        $cart = 0;
+        foreach ($query->result() as $row){
+            $row = $query->row();
+            $cart_id = $row->cart_id;
+            $result[$cart]['cart_id'] = $cart_id;
+            $result[$cart]['date'] = $row->date;
+            $result[$cart]['status'] = $row->status;
+            $result[$cart]['reference_number'] = $row->reference_number;
+            $this->db->select('title,price,quantity');
+            $this->db->from('singlecartitem')->join('design','singlecartitem.design_id = design.design_id');
+            $this->db->where('cart_id',$cart_id)->order_by('title','asc');
+            $query = $this->db->get();
+            $line = 0;
+            foreach($query->result() as $row){
+            $result[$cart]['singlelineitem'][$line]['title'] = $row->title;
+            $result[$cart]['singlelineitem'][$line]['price'] = $row->price;
+            $result[$cart]['singlelineitem'][$line]['quantity'] = $row->quantity;
+            $line++;
+            }
+        $cart++;
+        }
+       
         return $result;
     }
     
