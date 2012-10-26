@@ -4,22 +4,19 @@ class transaction_model extends CI_Model {
     public function getCustomerPaymentByCartList($user){
         $result = array();
         $result['result'] = FALSE;
-        $this->db->select('*');
-        $this->db->where('design.customer_id', $user);
-        $this->db->from("design");
+        $this->db->from("design")->where('design.customer_id', $user);
         $this->db->join('cart', 'design.customer_id = cart.customer_id');
         $this->db->join('singlecartitem','singlecartitem.design_id = design.design_id');
         $query = $this->db->get();
-        $i = 0;  
-	$this->load->model('account_model');
+        $design = 0;  
         foreach ($query->result() as $row){
-            $result[$i]["single_item_id"] = $row->single_item_id;
-            $result[$i]["price"] = $row->price;
-            $result[$i]["quantity"] = $row->quantity;
-            $result[$i]["title"] =  $row->title;
-            $result[$i]["image_path"] = $row->image_path;
-            $result[$i]["status"] = $row->status;
-            $i++;
+            $result[$design]["single_item_id"] = $row->single_item_id;
+            $result[$design]["price"] = $row->price;
+            $result[$design]["quantity"] = $row->quantity;
+            $result[$design]["title"] =  $row->title;
+            $result[$design]["image_path"] = $row->image_path;
+            $result[$design]["status"] = $row->status;
+            $design++;
         }
         return $result;
     }
