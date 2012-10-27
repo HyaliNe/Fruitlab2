@@ -99,8 +99,8 @@ class Profile extends CI_Controller {
 
 				$this->load->model('design_model');
 				$designs = $this->design_model->retriveDesignsByUser($id);
-				$data['designs'] = $designs->result();
-
+				
+				$data['designs'] = (!$designs) ? "" : $designs->result();
 				$data['main_content'] = "account/profile";
 				
 			} else {

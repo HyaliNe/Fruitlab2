@@ -37,30 +37,35 @@
 	 
 	 
 	 public function addToCart() {
-		 $color		= $this->input->post('colourID');
-		 $collar	= $this->input->post('collarID');
-		 $design	= $this->input->post('designID');
-		 $material	= $this->input->post('materialID');
+		 $colorID		= $this->input->post('colourID');
+		 $collarID	= $this->input->post('collarID');
+		 $designID	= $this->input->post('designID');
+		 $materialID	= $this->input->post('materialID');
 		 $qty		= $this->input->post('quantity');
 		 //$size		= $this->input->post('size');
 		 $price		= 1; //fetch price of design, collar and color from database and compute
 		 
 		$this->load->model('cart_model');
-		 if($this->cart_model->validateCombination($design, $collar, $color, $material)){		 
+		 if($this->cart_model->validateCombination($designID, $collarID, $colorID, $materialID)){		 
 			 $data = array(
-		                'id'      => $design,
+		                'id'      => $designID,
 		                'qty'     => $qty,
 		                'price'   => $price,
 		                'name'    => 'Custom T-Shirt with design by ',
 		                'options' => array(
 							//'Size' => $size, 
-							'Color' => $color, 
-							'Collar' => $collar,
-							'Design' => $design,
-							'material' => $material)
+							//'Color' => $color,
+							'colorID' => $colorID,
+							//'Collar' => $collar,
+							'collarID' => $collarID,
+							//'Design' => $design,
+							'designID' => $designID
+							//'material' => $material
+							)
 		             );
-			print_r($data);
-		 	$this->cart->insert($data); 
+
+//			print_r($data);
+		 	$this->cart->insert($data);
 		 	
 			//successfully added to cart
 			//return message to user
@@ -80,7 +85,6 @@
 			 //redirect('cart/viewCart');
 		 
 		 
-			 //todo stupid items is not inserted into session. unable to store cart info.
 	 }
 	 
 	 public function viewCart() {

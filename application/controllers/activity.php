@@ -3,7 +3,7 @@
 class Activity extends CI_Controller {
 	
 	public function index() {
-		$this->activityList(8, true);
+		$this->activityList(16, true);
 		
 	}
 	

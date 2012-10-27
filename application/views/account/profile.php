@@ -60,16 +60,23 @@
 			<div class="row">
 				<div class="span12">
 					<div class="designs clearfix">
+						<?php if (empty($designs)): ?>
+
+							Empty Gallery
+
+							<?php else: ?>
+						
 						<?php foreach ($designs as $design): ?>
 						
 						<figure class="design">
 							<img src="<?php echo site_url('uploads/'.$design->image_path); ?>" class = "thumbnail" alt="" />									
 							<div class="design_overlay">
-								<p><?php echo $design->title; ?></p>
+								<p><a href = "<?php echo site_url('design/'.$design->design_id); ?>" ><?php echo $design->title; ?></a></p>
 							</div>
 						</figure>
 						
 						<?php endforeach; ?>
+						<?php endif; ?>
 						
 					</div>
 				</div>
