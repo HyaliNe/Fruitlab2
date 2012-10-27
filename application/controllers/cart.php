@@ -59,8 +59,9 @@
 							//'Collar' => $collar,
 							'collarID' => $collarID,
 							//'Design' => $design,
-							'designID' => $designID
+							'designID' => $designID,
 							//'material' => $material
+							'materialID' => $materialID
 							)
 		             );
 
@@ -70,21 +71,34 @@
 			//successfully added to cart
 			//return message to user
 
-			$data['message_title'] = "added to cart";
-			$data['message'] = "added to cart";
+	 		$data['main_content'] = 'cart/cart';
+
 				
 		 } else {
 			 //display error message
 
  			$data['message_title'] = "FAILED to add to cart";
  			$data['message'] = "fail to add to cart";
-			 }
+			
+			$data['main_content'] = "message";
+		}
 				
- 			$data['main_content'] = "message";
+ 			
 			$this->load->view('includes/template', $data);
 			 //redirect('cart/viewCart');
 		 
 		 
+	 }
+	 
+	 public function update() {
+		 
+		 $this->cart->update($this->input->post());
+		 
+		 $data['updated'] = true;
+
+  		 $data['main_content'] = 'cart/cart';
+  		 $this->load->view('includes/template', $data);
+	
 	 }
 	 
 	 public function viewCart() {
@@ -92,13 +106,30 @@
  		$this->load->view('includes/template', $data);
 	 }
 	 
-	 public function checkOut() {
+	 public function checkout() {
 		 //take current cart display out details of the cart
 		 //ask the user to confirm
+		
+		 
+		 $data['main_content'] = "cart/cartpreview";
+		 $this->load->view('includes/template', $data);
 	 }
 	 
 	 public function payment() {
-		 //redirect to paypal for payment
+		 //redirect to paypal wait for paypal to sent response back then get
+		 
+		 //no paypal simulate fake paypal process
+		 
+		 //print_r($this->cart->contents());
+		 $this->load->model('transaction_model');
+		 $this->transaction_model->checkout($this->cart->contents());
+		 $this->cart->destroy();
+		 
+		 $data['message_title'] = "Purchase Successful";
+		 $data['message'] = "We are currently processing your purchase.";
+		 $data['main_content'] = 'message';
+		 $this->load->view('includes/template', $data);
+		 
 	 }
 
  }

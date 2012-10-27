@@ -214,5 +214,37 @@ class transaction_model extends CI_Model {
 		//check result['result'] to see whether there are result from the query
 		return $result;
     }
+	
+	public function checkout($items) {
+		
+		$cart = array(
+		   'status' => 'pending',
+		   'customer_id' => $this->session->userdata('customer_id'),
+		   'reference_number'=> SHA1(time()." ".$this->session->userdata('customer_id'))
+		);
+
+		$this->db->insert('cart', $cart);
+		
+		$cartID = $this->db->insert_id();
+
+		$itemsToSave = array();
+		
+		if(isset($items)) {
+			$tempArray = array();
+			foreach ($items as $key => $value) {
+				$tempArray['design_id'] = $value['options']['designID'];
+				$tempArray['quantity'] = $value['qty'];
+				$tempArray['material_id'] = $value['options']['materialID'];
+				$tempArray['colour_id'] = $value['options']['colorID'];
+				$tempArray['collar_id'] = $value['options']['colorID'];
+				$tempArray['cart_id'] = $cartID;
+				array_push($itemsToSave, $tempArray);
+			}
+			
+		}
+		
+		$this->db->insert_batch('singlecartitem', $itemsToSave);
+		
+	}
 }
 ?>

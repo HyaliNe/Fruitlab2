@@ -4,7 +4,7 @@
 			
 			<div class="row-fluid">
 				<div class="span10">
-					<h1>Deshun's cart</h1>						
+					<h1>Confirm cart</h1>						
 				</div>
 			</div>
 
@@ -30,7 +30,7 @@
 	<?php endif; ?>
 
 
-	<?php echo form_open('cart/update'); ?>
+	<?php echo form_open('cart/payment'); ?>
 
 <table class="table table-hover" style="width:100%" >
 
@@ -48,7 +48,7 @@
 	<?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
 
 	<tr>
-	  <td><?php echo form_input(array('name' => $i.'[qty]', 'value' => $items['qty'], 'maxlength' => '3', 'size' => '5')); ?></td>
+	  <td><?php echo $items['qty']; ?></td>
 	  <td>
 		<?php echo $items['name']; ?>
 
@@ -82,10 +82,9 @@
 </table>
 <p class = "pull-right">
 	<div class = "btn-group">
-		<input type = "submit" value = "Update Your Cart" class = "btn btn-success" />
-		<a href="checkout" value = "Checkout" class = "btn btn-success">Checkout</a>
+		<input type = "submit" value = "Proceed to Payment" class = "btn btn-success" />
 	</div>
 </p>
+	
 </form>
-
 </div>
