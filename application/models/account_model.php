@@ -26,7 +26,7 @@ class Account_model extends CI_Model {
 		$this->db->where('email', $email);
 		$this->db->where('password', $password );
 		$query = $this->db->get('customer', 1); //LIMIT 1
-
+		
 		if ($query->num_rows == 1) { 
 			$row = $query->row();
 			
