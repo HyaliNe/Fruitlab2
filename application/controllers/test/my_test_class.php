@@ -1,6 +1,6 @@
 <?php
 
-class transaction_test
+class transaction_test 
 {
 	function customer_id()
 	{

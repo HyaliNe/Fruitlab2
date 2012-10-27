@@ -3,6 +3,7 @@
     <h2>Purchase Statement</h2>
     <?php
     foreach($purchases as $s){
+        print_r($s);
      ?>
     <table border="1">
     <tr><th>Cart_ID</th><th>Date</th><th>Status</th><th>Reference</th></tr>
