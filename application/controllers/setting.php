@@ -4,7 +4,7 @@
  * Setting Page
  *
  * @package		Fruitlab
- * @author		Guo Liang with an S
+ * @author		Guo Liang
  *
  */
 
