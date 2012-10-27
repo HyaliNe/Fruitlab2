@@ -47,9 +47,6 @@ class Account_test extends CI_Controller {
 
 
 
-
-
-
 		
 		// DONT TOUCH THIS CODE
 		echo $this->unit->report();
