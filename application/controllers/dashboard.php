@@ -11,6 +11,18 @@
 class Dashboard extends CI_Controller {
 	
 	public function index() {
+		$this->load->model('activity_model');
+		
+		$activityList = $this->activity_model->activityList($this->session->userdata('customer_id'));
+		
+		if($activityList != false) {
+			$data['listExist'] = true;
+			$data['activity'] = $activityList;
+		} else {
+			$data['listExist'] = false;
+		}
+		
+		
 		$data['main_content'] = 'dashboard';
 		$this->load->view('includes/template', $data);
 		

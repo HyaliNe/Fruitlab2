@@ -80,7 +80,32 @@
 		</div>
 	</div>
 	
-	
+	<?php  if ($listExist) { ?>
+		<div class="activity_feed">
+			<div class="row">
+				<div class="span6">
+		
+		<?php foreach($activity as $row) ?>
+		<div class="single_feed">
+			<div class="row">
+				<div class = "span12">
+				    <div class="thumbnail pull-left">
+				      <img src="http://placehold.it/80x60" alt="">
+				    </div>
+					<p class = "span5 pull-left"><?php echo $row?></p>
+				</div>					
+			</div>	
+			<div class="row">
+				<div class = "span3 offset4"><small>59 seconds ago</small></div>
+			</div>		
+		</div>
+		</div> <!-- end of .span6 -->
+			
+	</div>
+</div> <!-- end of .activity_feed -->	
+	<?php } else { ?>
+			<p class = "span12">None of your friends has done anything. </p>
+			<?php } ?>
 	<div class="activity_feed">
 		<div class="row">
 			<div class="span6">

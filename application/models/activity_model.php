@@ -113,6 +113,75 @@ class Activity_model extends CI_Model {
 		else 
 			return false;		
 	}
+	
+	public function activityList($id, $friendsActivity = false) 
+	{
+		if($friendsActivity)
+			$activityList = $this->fetchFriendsActivity($id);
+		else
+			$activityList = $this->fetchActivity($id);
+		
+		if($activityList) {
+			$processedList = array();
+			foreach ($activityList->result() as $row ) {
+				
+				/*
+				ADD_FRIEND
+				REMOVE_FRIEND
+				
+				ADD_DESIGN
+				COMMENT_DESIGN
+				PURCHASE_DESIGN
+				RATE_DESIGN
+				*/
+				
+				//switch between cases. 
+				//fetch related design name/username.
+				//prepare message to display includes html link tags
+				$currentRow = $row->type;
+				if($friendsActivity) 
+					$friendsName = $this->fetchName($row->customer_id);
+				if($currentRow == 'ADD_FRIEND' || $currentRow == 'REMOVE_FRIEND' ) {
+					$name = $this->fetchName($row->affected_id);
+					$message;
+					
+					if($name != false) {
+						if ($currentRow == 'ADD_FRIEND')
+							$message = "<strong>Added</strong>";
+						else 
+							$message = "<strong>Removed</strong>";
+						if($friendsActivity) 
+							$message = $friendsName ." ". strtolower($message);
+						$message = $message." <a href='".site_url('user/'.$row->affected_id)."'>$name</a> as friend.";
+						array_push($processedList, $message);
+					}
+					
+				} else {
+					$title = $this->fetchDesignTitle($row->affected_id);
+					$message;
+					
+					if($title != false) {
+						if($currentRow == 'ADD_DESIGN')
+							$message = '<strong>Uploaded</strong>';
+						else if ($currentRow == 'COMMENT_DESIGN')
+							$message = '<strong>Commented</strong> on';
+						else if ($currentRow == 'PURCHASE_DESIGN')
+							$message = '<strong>Purchased</strong>';
+						else
+							$message = '<strong>Rated</strong>';
+
+						if($friendsActivity) 
+							$message = $friendsName ." ". strtolower($message);
+						$message = $message." the design <a href='".site_url('design/'.$row->affected_id)."'>$title</a>.";
+						array_push($processedList, $message);
+					}
+				}
+			}
+			return $processedList;
+
+		}
+		return false;
+	}
 }
 
 ?>
