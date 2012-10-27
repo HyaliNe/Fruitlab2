@@ -1,8 +1,8 @@
 <html>
-    <body>
+  <body>
     <h2>View Earnings</h2>
     <table border="1">
-    <tr><th>Single Item ID</th><th>Title</th><th>Price</th><th>Quantity</th><th>Total</th><th>Image</th></tr>
+    <tr><th>ID</th><th>Title</th><th>Price</th><th>Quantity</th><th>Total</th><th>Image</th></tr>
     <?php
     $sum = 0;
     foreach($sales as $s){ 
@@ -14,5 +14,5 @@
     ?>
     <tr><td></td><td></td><td></td><td>Total:<?=$sum?></td><td></td><td></td></tr>
     </table>    
-    </body>
+  </body>
 </html>

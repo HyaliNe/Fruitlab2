@@ -30,21 +30,20 @@
 		 }
 		 
 		 
-		 $data['main_content'] = 'cart/custom_shirt';
+		 $data['main_content'] = 'cart/purchaseshirt';
  		 $this->load->view('includes/template', $data);
 		 
 	 }
 	 
 	 
 	 public function addToCart() {
-		 $color		= $this->input->post('colorID');
-		 $collar	= $this->input->post('collardID');
+		 $color		= $this->input->post('colourID');
+		 $collar	= $this->input->post('collarID');
 		 $design	= $this->input->post('designID');
 		 $material	= $this->input->post('materialID');
-		 //$qty		= $this->input->post('qty');
-		 $qty		= 1;
+		 $qty		= $this->input->post('quantity');
 		 //$size		= $this->input->post('size');
-		 $price		= 0; //fetch price of design, collar and color from database and compute
+		 $price		= 1; //fetch price of design, collar and color from database and compute
 		 
 		$this->load->model('cart_model');
 		 if($this->cart_model->validateCombination($design, $collar, $color, $material)){		 
@@ -60,7 +59,7 @@
 							'Design' => $design,
 							'material' => $material)
 		             );
-
+			print_r($data);
 		 	$this->cart->insert($data); 
 		 	
 			//successfully added to cart

@@ -11,13 +11,14 @@
     <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
       body {
-        padding-top: 60px;
-        padding-bottom: 40px;
+        padding-top: 80px;
       }
     </style>
 
     <link href="<?php echo base_url(); ?>css/bootstrap-responsive.min.css" rel="stylesheet">
-
+    <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+	
 	<?php if ($css): ?>
 		<?php foreach ($css as $key => $value): ?>
 		<link href="<?php echo base_url(); ?>css/<?php echo $value; ?>.css" rel="stylesheet">
@@ -73,31 +74,31 @@
 										else
 										{
 											echo site_url();
-										}		?>">FruitLab</a>
+										}		?>"><img src = "<?php echo site_url(); ?>img/logo.png" /></a>
 			<form class="navbar-form form-search pull-left" action="<?php echo site_url('design/searchDesign'); ?>" method="post">
 			  <div class="input-append">
 			    <input type="text" class="span4 search-query" name="search_clause" placeholder="Search for design ..."/>
-			    <button type="submit" class="btn"><i class = "icon-search"></i></button>
+			    <button type="submit" class="btn btn-nav"><i class = "icon-search"></i></button>
 			  </div>
 			</form>
     										
 				<?php if ( $this->session->userdata('email') ) : ?>
 		<div class="nav-collapse collapse pull-right">
 			<ul class="nav">
+				<li>
+				<a href="<?php echo site_url('friends');?>"><i class="icon-user"></i>Friends</a>
+				</li>			
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						Design
 						<b class="caret"></b>
 					</a>
 					<ul class="dropdown-menu">
-						<a href="#">Create New Design</a>
-						<a href="#">Manage Designs</a>
+						<a href="<?php echo site_url('upload');?>">Create New Design</a>
+						<a href="<?php echo site_url('design/own');?>">Manage Designs</a>
 					</ul>
 				</li>
-				<li>
-				<a href="#"><i class="icon-shopping-cart"></i> Cart</a>
-				</li>
-				<li style = "margin-right: 20px; position: relative;">
+				<li style = "margin-right: 30px; position: relative;">
 							<div class="btn-group">
 								<a href = "#" class = "btn btn-link" data-toggle="dropdown"><i class = "icon-eye-close"></i> </a>
 								<ul class="dropdown-menu">
@@ -107,12 +108,16 @@
 							  
 							</div>
 							<div class="badge badge-important" style = "position: absolute; top:3px; left:30px; z-index:99">3</div>
-						</li>			
+						</li>
+				<li>
+		<!--	<a href="<?php echo site_url('dummycartcontroller');?>"><i class="icon-shopping-cart"></i>Cart</a>	-->
+				<a href="<?php echo site_url('cart/viewCart');?>"><i class="icon-shopping-cart"></i>Cart</a>
+				</li>						
 			
 				<li>
 					<div class="btn-group">
-			          <a class="btn" href="#"><i class="icon-user"></i> <?php echo $this->session->userdata('email'); ?></a>
-			          <a class="btn dropdown-toggle btn-warning" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+			          <a class="btn btn-nav" href="#"><i class="icon-user"></i> <?php echo $this->session->userdata('email'); ?></a>
+			          <a class="btn dropdown-toggle btn-nav" data-toggle="dropdown" href="#"><span class="caret" style = "border-top-color: #000000; border-bottom-color: #000000;"></span></a>
 			          <ul class="dropdown-menu">
 						<?php $profile = 'user/' . $this->session->userdata('customer_id'); ?>
 						<li><a href="<?php echo site_url($profile); ?>"><i class="icon-home"></i> Profile</a></li>
@@ -129,8 +134,8 @@
 	            <ul class="nav">				
 					<li>
 						<div class="btn-group">
-							<a class="btn btn-inverse btn-small" href="<?php echo site_url('register'); ?>">Register</a>
-							<a class="btn btn-small" href="<?php echo site_url('login'); ?>">Login</a>
+							<a class="btn btn-info " href="<?php echo site_url('register'); ?>">Register</a>
+							<a class="btn " href="<?php echo site_url('login'); ?>">Login</a>
 						</div>
 					</li>
 		      	</ul>

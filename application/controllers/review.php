@@ -33,14 +33,14 @@ class Review extends CI_Controller {
 		
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('comment', 'comment', 'max_length[150]');		
-		
+		$design_id = 'design/' . $this->input->post('design_id');
 		if($this->form_validation->run())
-		{
+		{	
 			$comment = $this->design_model->comment($this->input->post());
 		
 			if($comment)
 			{
-				redirect('design');
+				redirect($design_id);
 			}
 			else
 			{
@@ -60,7 +60,7 @@ class Review extends CI_Controller {
 		$rate = $this->design_model->rate($this->input->post());
 		
 		$redirect_string = 'design/' . $design_id;
-		$data['design_id'] = $design_id;
+		$data['design_id'] 	= $design_id;
 		
 		if($rate)
 		{

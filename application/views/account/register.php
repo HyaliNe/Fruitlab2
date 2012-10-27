@@ -1,18 +1,33 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Register an account</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p>Thank you for joining company name! Please take a few moment to register an account.</p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
+
 <div class="container">
 	
-	<div class = "page-header">
-		<h1>Register an account</h1><br>
-		<p>Please register an account before proceeding or <?php echo anchor('login', 'Log in here'); ?></p>
-	</div> <!-- end of .page-header -->	
-	
-	<form class="form-vertical" action = "<?php echo site_url('register'); ?>" method = "post"/>
+	<form class="form-vertical well span6" action = "<?php echo site_url('register'); ?>" method = "post"/>
 			 	
 		<?php if (validation_errors()): ?>
 
 			<div class="alert alert-error">
 			  <a class="close" data-dismiss="alert" href="#">×</a>
-			  <h4 class="alert-heading">Error!</h4>
-				<?php echo validation_errors(); ?>
+			  <h4 class="alert-heading">Error</h4>
+				<p><?php echo validation_errors(); ?></p>
 			</div>
 
 		<?php endif ?>
@@ -87,9 +102,9 @@
 					</div>
 				</div> <!-- end of .control-group -->					
 			</div> <!-- end of .span3 -->
-		</div> <!-- end of .row -->
-				
-			<input type="submit" class="btn btn-primary" value = "Register" />
+		</div> <!-- end of .row -->	
+			<hr>
+			<input type="submit" class="btn btn-info btn-block btn-large" value = "Register" />
 
 	</form>			
 </div>

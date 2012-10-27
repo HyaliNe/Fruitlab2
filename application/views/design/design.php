@@ -1,3 +1,22 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>General area for design? catalog/ tag page maybe?</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p></p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
 <div class="container">
 	<h1> General area for design? catalog/ tag page maybe?</h1>
 	either way we have a simple search base on title here</br>
@@ -14,8 +33,6 @@
 		<input class="span5" name="search_clause" type="text">
 		<button type="submit" class="btn">Search</button>
 	</form>
-	
-	
 	<?php if(isset($search_exist) && $search_exist) {?>
 		<div>
 			<?php foreach($search_result->result() as $item) {?>

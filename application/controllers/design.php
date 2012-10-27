@@ -3,10 +3,14 @@
 class Design extends CI_Controller {
 	
 	public function index($id = 0 ) {
-
+		if($id == 0) {
 			
 			$data['main_content'] = 'design/design';
 			$this->load->view('includes/template', $data);
+			
+		} else {
+			$this->singleDesign($id);
+		}
 
 	}
 	
@@ -28,6 +32,7 @@ class Design extends CI_Controller {
 			$data['type']			= $design['type'];
 			$data['num_of_rating']	= $design['num_of_rating'];
 			$data['comment']		= $comment;
+			$data['commented']		= $design['commented'];
 			
 			$data['main_content'] = 'design/single_design';
 		} else {
@@ -45,7 +50,7 @@ class Design extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('search_clause', '', 'required');
 		$this->form_validation->set_message('required', 'We can\'t search if you don\'t know what to search for.');
-		
+
 		if($this->form_validation->run()) { 
 			$this->load->model('design_model');
 		
@@ -59,15 +64,15 @@ class Design extends CI_Controller {
 				$data['search_exist'] = false;
 			}
 		}
-		
-		$data['main_content'] = 'design/design';
+		//changed to design/design_gallery instead of design/design
+		$data['main_content'] = 'design/design_gallery';
 		$this->load->view('includes/template', $data);
 	}
-	
+
 	/**
 	 * Load all design of a user
 	 *
-	 * Check if userid is provided then retrive and display, otherwise load error message
+	 * Check if userid is provided then retrieve and display, otherwise load error message
 	 *
 	 * @access	public
 	 * 
@@ -75,12 +80,11 @@ class Design extends CI_Controller {
 	 *
 	 * @return 
 	 */	
-	public function browseDesginByUser($id = 0) {
+	public function browseDesignByUser($id = 0) {
 		
 		if ( $id == 0 ) {
 			$data['message_title'] = "User not found";
-			$data['message'] = "Sorry, we are unable to locate the user you are requesting to view.";
-				
+			$data['message'] = "Sorry, we are unable to locate the user you are requesting to view.";				
 			$data['main_content'] = "message";
 		} else {
 			echo $id;
@@ -89,13 +93,48 @@ class Design extends CI_Controller {
 			
 			if($result != false) {
 				$data['search_result'] = $result;
-				$data['search_result'] = true;
+				$data['search_exist'] = true;
 			} else {
 				$data['search_exist'] = false;
 			}
 			
-			$data['main_content'] = "design/design";
+			$data['main_content'] = "design/design_gallery";
 		}
 		$this->load->view('includes/template', $data);
 	}
+	
+	// Manage own design
+	public function own($data = "") {
+		$customer_id = $this->session->userdata('customer_id');
+		$this->load->model('design_model');
+		$designs = $this->design_model->retriveDesignsByUser($customer_id);
+
+		
+		// $this->load->model('tag_model');
+		//  $tags_query = $this->tag_model->getDesignTags(3);
+		// 
+		// echo "<pre>";
+		// print_r($designs->result());
+		// echo "</pre>";
+		
+		$data['data']         = (!empty($data)) ? $data['result'] : NULL;
+		$data['designs']      = $designs;
+		$data['main_content'] = 'design/own_design';
+		$this->load->view('includes/template', $data);
+	}
+	
+	// Remove Own Design
+	public function remove($design_id){
+		$customer_id = $this->session->userdata('customer_id');
+        if ($design_id != null) {
+			$this->load->model('design_model');
+			$result = $this->design_model->deleteDesign($design_id, $customer_id);
+
+			$data['result'] = $result;
+			$this->own($data);
+        }
+        
+    }
+    
+	
 }

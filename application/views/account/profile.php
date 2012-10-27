@@ -1,98 +1,82 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		
+		<div class="span2">
+			<img src="<?php echo site_url('uploads/'.$img_path); ?>" alt="<?= $first_name ?> <?= $last_name ?> " class = "pull-left" />
+		</div>
+		
+		<div class="span2">
+			<h2><?php echo $first_name, " " , $last_name;?></h2>
+		</div>		
+
+		<div class="span4 profile_info">
+			<div class = "profile_ribbon"><img src="<?php echo site_url(); ?>img/profile_ribbon.png" alt="" /></div>
+			<dl class="dl-horizontal well">
+			  <dt>Date Of Birth</dt>
+			  <dd><?php echo $date_of_birth; ?></dd>
+			  <dt>Gender</dt>
+			  <dd><?php echo ( $gender == 'M' ) ? "Male" : "Female";?></dd>
+			  <dt>About Me</dt>
+			  <dd><?php echo $about_you;?> &nbsp; </dd>
+			  <dt>Contact Num</dt>
+			  <dd><?php echo $hp_no; ?></dd>
+			  <dt>Email</dt>
+			  <dd><?php echo $email; ?></dd>
+			</dl>
+		</div>
+
+		<div class="span2 profile_action">
+		
+			<!-- need to implement changig button, if already friend then take away the add friend button -->
+			<form action="<?php echo site_url('friends/add');?>" method="post"/>
+				<input type="hidden" value="<?php echo $customer_id;?>" name="potential_friend_id"/>
+				<input type="hidden" value="<?php echo $this->session->userdata('customer_id');?>" name="customer_id" />
+				<input type="submit" class = "btn-large btn btn-block" value="Add Friend"/>			
+			</form>
+		</div>
+			
+	</div>
+</div> <!-- end of .hero-unit -->
+
 <div class="container">
 	
-	<div class = "page-header">
-		<table>
-		<tr><td><img src="<?php echo $img_path; ?>" alt="user" width="124" height="124" ></td>
-		<td><h1><?php echo $first_name, " " , $last_name;?></h1></td></tr>
-		</table>
-	</div> <!-- end of .page-header -->
-			 	
-		<?php if (validation_errors()): ?>
-
-			<div class="alert alert-error">
-			  <a class="close" data-dismiss="alert" href="#">x</a>
-			  <h4 class="alert-heading">Error!</h4>
-				<?php echo validation_errors(); ?>
+	<?php
+	
+	// echo "<pre>";
+	// print_r($designs);
+	// echo "</pre>";
+	// 
+	?>
+	
+	<div class="row">
+		<div class="span10">
+			<div class="row">
+				<div class="span12">
+					<h3>Seller Gallery</h3>
+				</div>
 			</div>
-
-		<?php endif ?>
-		
 			
-		<table class="table">
-		<tr><h4>Basic info</h4></tr>
-		<tr>
-		<td>
-			<label for="date_of_birth">Date of birth</label>					
-		</td>
-		<td>
-			<?php echo $date_of_birth; ?>			
-		</td>
-		</tr>
-		<tr>
-		<td>
-			<label class="control-label" for="country">Country</label>					
-		</td>
-		<td>
-			<?php echo value_of_country($country); ?>					
-		</td>
-		</tr>
-		<tr>
-		<td>
-			<label for="gender">Gender</label>					
-		</td>
-		<td>
-			<?php
-			if( $gender = 'M' )
-			{
-				echo "Male";
-			}
-			else
-			{
-				echo "Female";
-			}	?>
-		</td>
-		</tr>
-		<tr>
-		<td>
-			<label for="about_you">About you</label>					
-		</td>
-		<td>
-			<?php echo $about_you;?>
-		</td>
-		</tr>
-		</table>
-
-		<table class="table">
-		<tr><h4>Contact info</h4></tr>
-		<tr>
-		<td>
-			<label for="hp_no">Handphone no</label>					
-		</td>
-		<td>
-			<?php echo $hp_no; ?>			
-		</td>
-		</tr>
-
-		<tr>
-		<td>
-			<label for="email">Email</label>					
-		</td>
-		<td>
-			<?php echo $email; ?>
-		</td>
-		</tr>	
-		</table>		
-		
-		<!-- testing area to retrieve activity -->
-		<table>
-		<?php foreach($activity as $singleactivity):?>
-
-		<tr>
-		<td><?php echo "some message";?></td>
-		</tr>	
-
-		<?php endforeach;?>
-		</table>
-		<!-- testing area to retrieve design -->
-		
+			
+			<div class="row">
+				<div class="span12">
+					<div class="designs clearfix">
+						<?php foreach ($designs as $design): ?>
+						
+						<figure class="design">
+							<img src="<?php echo site_url('uploads/'.$design->image_path); ?>" class = "thumbnail" alt="" />									
+							<div class="design_overlay">
+								<p><?php echo $design->title; ?></p>
+							</div>
+						</figure>
+						
+						<?php endforeach; ?>
+						
+					</div>
+				</div>
+			</div>
+			
+						
+		</div>
+	</div>	
+	
 </div>

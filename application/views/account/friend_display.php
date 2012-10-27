@@ -1,13 +1,11 @@
 <div class="hero-unit">
 	<div class="row-fluid">
 		<div class="span12">
-
 			<div class="row-fluid">
 				<div class="span10">
 					<h1>Friends</h1>						
 				</div>
 			</div>
-
 			<div class="row-fluid">
 				<div class="span10">
 					<p>Here you can see all your friends</p>
@@ -47,7 +45,4 @@
 
 			</div>
 		</div> <!-- end of .row -->
-	
-	
-	
 </div>

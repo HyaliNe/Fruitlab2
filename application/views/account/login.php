@@ -1,10 +1,26 @@
+<div class="hero-unit">
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<div class="row-fluid">
+				<div class="span10">
+					<h1>Login</h1>						
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="span10">
+					<p>Please login before proceeding any further.</p>
+				</div>
+			</div>
+			
+   		</div> <!-- end of span12 -->
+	</div>
+</div> <!-- end of .hero-unit -->
+
 <div class="container">
-	<div class = "page-header">
-		<h1>Login</h1><br>
-	</div> <!-- end of .page-header -->	
 
-
-	<form class="form-horizontal" action = "<?php echo site_url('login/validate'); ?>" method = "post">
+	<form class="form-horizontal well span5 offset3" action = "<?php echo site_url('login/validate'); ?>" method = "post">
 		
 		<?php if ($error): ?>
 
@@ -29,10 +45,8 @@
 	  </div>
 	  <div class="control-group">
 	    <div class="controls">
-	      <label class="checkbox">
-	        <input type="checkbox"> Remember me
-	      </label>
-	      <button type="submit" class="btn">Sign in</button>
+	      <button type="submit" class="btn btn-medium pull-left">Sign in</button>
+			<p class = "pull-left span2"><a href = "#">Forget Password</a></p>
 	    </div>
 	  </div>
 	</form>

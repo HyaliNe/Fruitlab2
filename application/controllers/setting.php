@@ -12,32 +12,60 @@ class Setting extends CI_Controller {
 	
 	public function index() {
 		
-		$old_password = $this->input->post('oldpassword');
-
+		$formtype = $this->input->post('formtype');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('first_name', 'first name', 'required|trim');
-		$this->form_validation->set_rules('last_name', 'last name', 'required|trim');
-		$this->form_validation->set_rules('hp_no', 'handphone no', 'min_length[8]|max_length[20]');
-		$this->form_validation->set_rules('about_you', 'about you', 'max_length[150]');
-		$this->form_validation->set_rules('oldpassword', 'old password', 'callback_wrong_password[dbpassword]');
-	
-		$this->form_validation->set_rules('password', 'Password', 'required|matches[password2]|trim');			
-		$this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim');	
+		$upload = null;
 
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '1000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+			
+		if($formtype == "generalform")
+		{
+			$this->form_validation->set_rules('first_name', 'first name', 'required|trim');
+			$this->form_validation->set_rules('last_name', 'last name', 'required|trim');
+			$this->form_validation->set_rules('hp_no', 'handphone no', 'min_length[8]|max_length[20]');
+			$this->form_validation->set_rules('about_you', 'about you', 'max_length[150]');
+		}
+		elseif($formtype == "passwordform")
+		{
+			$old_password = $this->input->post('oldpassword');
+			$this->form_validation->set_rules('oldpassword', 'old password', 'callback_wrong_password[dbpassword]');
+			$this->form_validation->set_rules('password', 'Password', 'required|matches[password2]|trim');			
+			$this->form_validation->set_rules('password2', 'Confirm Password', 'required|trim');
+		}
+		elseif($formtype == "avatarform")
+		{
+			$this->form_validation->set_rules('userfile', 'Upload image', '');
+
+            $this->load->library('upload', $config);
+			
+			$upload = $this->upload->do_upload();
+		}
 		
-		if ($this->form_validation->run()) { 
-			// Load account model and call function to update settings
+		
+		if ($this->form_validation->run() && ($upload == null || $upload)) { 
+			// Load account model and call function to update settings 
 			$this->load->model('account_model');
 			//this will post all the data to the method update_settings
 			$result = $this->account_model->update_settings($this->input->post());
-		//	$result = $this->account_model->create_account($this->input->post());
 			
 			// settings update successfully
-			if ($result) { 
-				redirect('dashboard');
+			if ($result) 
+			{
+				redirect('setting/retrieve');
 			}		
 		} else {
 			// not successful, go back to setting
+			
+		$data['error'] = '';		
+		if($formtype == "avatarform" && $upload)
+		{	
+			//provide input for error message if available
+			$data['error'] = $this->upload->display_errors();			
+		}
 		$data['main_content'] = 'account/setting';
 		$data['first_name'] = $this->input->post('first_name');
 		$data['last_name'] = $this->input->post('last_name');
@@ -48,6 +76,8 @@ class Setting extends CI_Controller {
 		$data['gender'] = $this->input->post('gender');
 		$data['email'] = $this->input->post('email');
 		$data['password'] = $this->input->post('dbpassword');
+		$data['img_path'] = $this->input->post('img_path');
+		
 		$this->load->view('includes/template', $data);
 		}
 	}
