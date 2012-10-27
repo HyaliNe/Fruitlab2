@@ -18,7 +18,7 @@
 	</div>
 </div> <!-- end of .hero-unit -->
 <div class="container">
-	<h1> General area for design? catalog/ tag page maybe?</h1>
+	
 	either way we have a simple search base on title here</br>
 	<?php if (validation_errors()): ?>
 
@@ -33,6 +33,8 @@
 		<input class="span5" name="search_clause" type="text">
 		<button type="submit" class="btn">Search</button>
 	</form>
+	
+	
 	<?php if(isset($search_exist) && $search_exist) {?>
 		<div>
 			<?php foreach($search_result->result() as $item) {?>

@@ -133,7 +133,6 @@ class Design extends CI_Controller {
 			$data['result'] = $result;
 			$this->own($data);
         }
-        
     }
     
 	

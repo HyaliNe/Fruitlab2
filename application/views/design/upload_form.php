@@ -2,11 +2,13 @@
 <div class="hero-unit">
 	<div class="row-fluid">
 		<div class="span12">
+			
 			<div class="row-fluid">
 				<div class="span10">
 					<h1>Create New Design</h1>						
 				</div>
 			</div>
+
 			<div class="row-fluid">
 				<div class="span10">
 					<p>Let your creative juice flow and make some design!</p>

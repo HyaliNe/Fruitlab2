@@ -45,6 +45,7 @@ $route['user/(:num)'] = 'profile/userprofile/$1';
 $route['cart'] = 'cart/viewCart';
 $route['customise/(:num)'] = 'cart/customise/$1';
 $route['retrieveDesign/(:num)'] = 'design/browseDesignByUser/$1';
+$route['activity/(:num)'] = 'activity/activityList/$1';
 
 
 /* End of file routes.php */

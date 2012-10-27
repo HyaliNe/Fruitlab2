@@ -21,7 +21,7 @@
 
 <?php print_r($this->cart->contents()); echo form_open('path/to/controller/update/function'); ?>
 
-<table class="table table-striped table-bordered" style="width:100%" >
+<table class="table table-hover" style="width:100%" >
 
 <tr>
   <th>QTY</th>
@@ -45,7 +45,7 @@
 
 				<p>
 					<?php foreach ($this->cart->product_options($items['rowid']) as $option_name => $option_value): ?>
-
+						
 						<strong><?php echo $option_name; ?>:</strong> <?php echo $option_value; ?><br />
 
 					<?php endforeach; ?>
@@ -69,7 +69,6 @@
 </tr>
 
 </table>
-
-<p><?php echo form_submit('', 'Update your Cart'); ?></p>
-
+<p class = "pull-right"><input type = "submit" value = "Update Your Cart" class = "btn btn-success" /></p>
+</form>
 </div>

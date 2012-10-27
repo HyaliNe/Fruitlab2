@@ -241,11 +241,5 @@ class Design_model extends CI_model {
 
 		return $result;
 	}
-        
-    
-        public function searchByTag($tag_id){
-            $this->db->query($sql);
-            
-        }
  }
 ?>
