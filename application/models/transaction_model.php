@@ -141,6 +141,7 @@ class transaction_model extends CI_Model {
         return $result;
     }
     
+    /*
     public function close($user){
         $this->db->where('customer_id',$user);
         $this->db->select('balance');    
@@ -167,7 +168,7 @@ class transaction_model extends CI_Model {
         }
         return $result;
     }
-    
+    */
 
     public function getCartByID($id){
          $result = array();
