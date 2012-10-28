@@ -8,9 +8,9 @@
         <tr><th>Customer_ID</th><th>Email</th><th>Date_of_Birth</th><th>First_Name</th><th/>Last_Name</th><th>Gender</th><th>Balance</th><th>Country</th><th>Status</th><th>Action</th></tr>
         <?php 
         $this->load->helper('url');
-        for($i = 0;$i < sizeof($customers);$i++){
+        var_dump($customers['customer']);
+        for($i = 0;$i < sizeof($customers['customer']);$i++){
             $customer = $customers['customer'][$i];
-            //var_dump($customer);
             $checked =  ($customer['status'] == 'active') ? 'checked=checked' : '';
             echo "<tr>";
 		echo "<td>".$customer['customer_id']."</td><td>". $customer['email'] ."</td>";
