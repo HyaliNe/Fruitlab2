@@ -9,7 +9,8 @@ class transaction_model extends CI_Model {
         $this->db->join('singlecartitem','singlecartitem.design_id = design.design_id');
         $query = $this->db->get();
         $i = 0;
-		$this->load->model('account_model');
+	$this->load->model('account_model');
+        $design = 0;
         foreach ($query->result() as $row){
             $result[$design]["single_item_id"] = $row->single_item_id;
             $result[$design]["price"] = $row->price;
