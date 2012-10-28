@@ -35,7 +35,7 @@ class Tag_test extends CI_Controller {
         $design_id = 1;
         $result = $this->tag_model->getDesignTags(18);
         $result = $result->num_rows;
-        $expected_result = 2;
+        $expected_result = 5;
         $this->unit->run($result, $expected_result, $test_name);
         
         
