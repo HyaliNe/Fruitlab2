@@ -18,6 +18,7 @@ class Friends extends CI_Controller {
             $data['resultset'] = ''; 
             $data['error'] = '';
             $data['main_content']  = 'account/friend_display';
+			$data['role'] = 2;
             $this->load->view('includes/template', $data);
         }
         
@@ -41,6 +42,7 @@ class Friends extends CI_Controller {
                 ));				
                 if($result && $result2){
                     $data['error'] == 'Successfully added the friend';
+					$data['role'] = 2;
 					redirect('user/'.$potential_friend_id);
                 }else{
                     $data['error'] == 'Does not exist in the database';
@@ -53,7 +55,8 @@ class Friends extends CI_Controller {
 			// $data['js'] = 'jquery-ui-1.8.18.custom';			
             // $this->load->view('includes/template', $data);
         }
-        function remove() {
+        /*code that doesn't work
+		function remove() {
             $customer = $this->session->userdata('customer_id');
 
             $data['error'] = '';
@@ -73,13 +76,34 @@ class Friends extends CI_Controller {
 			$data['js'] = 'jquery-ui-1.8.18.custom';			
             $data['main_content'] = 'account/friend_display';
 			$this->load->view('includes/template', $data);
-        }
+        }*/
+		
+		function removeFriends($user) {
+			$this->load->model('account_model');
+			
+			$this->account_model->removeFriend($user);
+			
+			$data['message_title'] = 'Friend Removed';
+			
+			$this->load->model('activity_model');
+			$name = $this->activity_model->fetchName($user);
+			
+			$data['message'] = "You have successfulled removed $name as a friend";
+			
+			$data['main_content'] = 'message';
+			$data['role'] = 2;
+			$this->load->view('includes/template', $data);
+		}
 
         function search() {
             $customer_id = $this->input->post('customer_id');
             $this->load->model('account_model');
-            $data["error"] = '';
+            $data["noFriend"] = false;
             $data['friendlist'] = $this->account_model->searchFriend($this->input->post());
+			if($data['friendlist']->num_rows == 0) {
+				$data['noFriend'] = true;
+			}
+			$data['role'] = 2;
 			$data['main_content'] = 'account/friend_display';
             $this->load->view('includes/template', $data);
         }

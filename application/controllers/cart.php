@@ -29,7 +29,7 @@
 			 $data['image_path']		= $design['image_path'];
 		 }
 		 
-		 
+		 $data['role'] = 2;
 		 $data['main_content'] = 'cart/purchaseshirt';
  		 $this->load->view('includes/template', $data);
 		 
@@ -37,21 +37,27 @@
 	 
 	 
 	 public function addToCart() {
-		 $colorID		= $this->input->post('colourID');
+		 $this->load->model('cart_model');
+		 $colorID	= $this->input->post('colourID');
+		 $color 	= $this->cart_model->fetchColorName($colorID);
 		 $collarID	= $this->input->post('collarID');
+		 $collar	= $this->cart_model->fetchCollarName($collarID);
 		 $designID	= $this->input->post('designID');
-		 $materialID	= $this->input->post('materialID');
+		 $design	= $this->cart_model->fetchDesignName($designID);
+		 $materialID= $this->input->post('materialID');
+		 $material	= $this->cart_model->fetchMaterialName($materialID);
 		 $qty		= $this->input->post('quantity');
 		 //$size		= $this->input->post('size');
-		 $price		= 1; //fetch price of design, collar and color from database and compute
-		 
-		$this->load->model('cart_model');
+		 //$price		= 1; //fetch price of design, collar and color from database and compute
+		 $price		= $this->cart_model->getCombinationPrice($designID, $collarID, $colorID, $materialID);
+		 $name 		=  "$color $collar Custom $material T-Shirt with design titled $design";
+		
 		 if($this->cart_model->validateCombination($designID, $collarID, $colorID, $materialID)){		 
 			 $data = array(
 		                'id'      => $designID,
 		                'qty'     => $qty,
 		                'price'   => $price,
-		                'name'    => 'Custom T-Shirt with design by ',
+		                'name'    => $name,
 		                'options' => array(
 							//'Size' => $size, 
 							//'Color' => $color,
@@ -70,7 +76,8 @@
 		 	
 			//successfully added to cart
 			//return message to user
-
+		 
+   		 	$data['role'] = 2;
 	 		$data['main_content'] = 'cart/cart';
 
 				
@@ -96,12 +103,14 @@
 		 
 		 $data['updated'] = true;
 
+		 $data['role'] = 2;
   		 $data['main_content'] = 'cart/cart';
   		 $this->load->view('includes/template', $data);
 	
 	 }
 	 
 	 public function viewCart() {
+		$data['role'] = 2;
  		$data['main_content'] = 'cart/cart';
  		$this->load->view('includes/template', $data);
 	 }
@@ -110,7 +119,7 @@
 		 //take current cart display out details of the cart
 		 //ask the user to confirm
 		
-		 
+		 $data['role'] = 2;
 		 $data['main_content'] = "cart/cartpreview";
 		 $this->load->view('includes/template', $data);
 	 }
@@ -127,6 +136,7 @@
 		 
 		 $data['message_title'] = "Purchase Successful";
 		 $data['message'] = "We are currently processing your purchase.";
+		 $data['role'] = 2;
 		 $data['main_content'] = 'message';
 		 $this->load->view('includes/template', $data);
 		 

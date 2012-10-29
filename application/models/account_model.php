@@ -65,7 +65,7 @@ class Account_model extends CI_Model {
         return $data;
     }
 
-    public function update_settings($user) {
+    public function update_settings($user, $file = "") {
         if ($user['formtype'] == "generalform") {
             $user_data = array(
                 'first_name' => $user['first_name'],
@@ -83,7 +83,7 @@ class Account_model extends CI_Model {
         } else {
             //creating the array to update customer table
             $user_data = array(
-                'img_path' => $user['userfile']
+                'img_path' => $file['file_name']
             );
         }
         //creating a new array
@@ -239,6 +239,49 @@ class Account_model extends CI_Model {
         $query = $this->db->get();
         return $query;
     }
+	
+	public function removeFriend($user) {
+	
+		//check if "me" is friend with $user
+		//remove connections both ways
+		
+		$isfriends = $this->isFriends($user);
+			
+		if ($isfriends) {
+			$this->db->where('customer_id', $this->session->userdata('customer_id'));
+			$this->db->where('customer_id2', $user);
+			$this->db->delete('is_friends_with'); 
+
+			$this->db->where('customer_id2', $this->session->userdata('customer_id'));
+			$this->db->where('customer_id', $user);
+			$this->db->delete('is_friends_with'); 
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public function isFriends($user) {
+		
+		$this->db->from('is_friends_with');
+		$this->db->where('customer_id', $this->session->userdata('customer_id'));
+		$this->db->where('customer_id2', $user);
+		$query = $this->db->get();
+		
+		$isfriends = false;
+		if( $query->num_rows() == 1) $isfriends = true;
+		
+		$this->db->from('is_friends_with');
+		$this->db->where('customer_id2', $this->session->userdata('customer_id'));
+		$this->db->where('customer_id', $user);
+		$query2 = $this->db->get();
+		
+			
+		if ( $query2->num_rows() != 1) $isfriends = false;
+		
+		return $isfriends;
+	}
 
 }
 

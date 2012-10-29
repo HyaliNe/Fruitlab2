@@ -72,12 +72,7 @@
 				</div>
 				<hr>
 				<div class="row">
-					<div class="control-group">
-						<label class="control-label" for="price">Price</label>
-						<div class="controls lead ">
-							$16.00(should it be updated as you select options?)
-						</div>
-					</div>
+
 
 					<div class="control-group">
 						<div class="controls">

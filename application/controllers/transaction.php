@@ -18,6 +18,7 @@ class Transaction extends CI_Controller {
                 $this->load->model("transaction_model");
                 $data['sales'] = $this->transaction_model->getCustomerPaymentByCartList($customer_id);
                 $data['main_content'] = 'transaction/viewearnings';
+				$data['role'] = 2;
 		$this->load->view('includes/template', $data);
 	}
         public function withdrawbalance() {
@@ -46,6 +47,7 @@ class Transaction extends CI_Controller {
             $data['transactions'] = $this->transaction_model->getCustomerTransactions($customer_id);
             $data['main_content'] = 'transaction/withdrawbalance';
             $data['customer'] = $this->transaction_model->retrieve_profile($customer_id);
+			$data['role'] = 2;
             $this->load->view('includes/template', $data);
     }
     

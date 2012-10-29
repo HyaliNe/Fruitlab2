@@ -92,13 +92,16 @@ class Profile extends CI_Controller {
 			if ( $data['result'] ) {
 				
 				//start retriving stuff that the profile page needs after confirming that the user exsist.
-				$data['activity'] = $this->account_model->fetchActivityRecord($id);
+				$this->load->model('activity_model');
+				$data['activity'] = $this->activity_model->activityList($id);
 				
 				//to guo liang
 				//decide the template to load. Leave it for you since I haven't done it.
 
 				$this->load->model('design_model');
 				$designs = $this->design_model->retriveDesignsByUser($id);
+				
+				$data['isFriends'] = $this->account_model->isFriends($id); 
 				
 				$data['designs'] = (!$designs) ? "" : $designs->result();
 				$data['main_content'] = "account/profile";

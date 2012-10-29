@@ -44,8 +44,9 @@
 	<div class="row">
 		<div class="span8">
 			<table class = "table table-hover table-bordered">
-				<tr><th>Title</th><th>Image_Path</th><th>Price($)</th><th>Action</th></tr>
+				<tr><th>Title</th><th>Image_Path</th><th>Price ($)</th><th>Action</th></tr>
 				<?php 
+				if ($designs != ""):
 				foreach($designs->result() as $design): 
 				?>
 					<tr>
@@ -53,12 +54,19 @@
 						<td><img class="thumbnail" src = "<?php echo site_url('uploads/'.$design->image_path); ?>" /></td>
 						<td>$<?php echo $design->price ?></td>
 						<td>
-							<?php if ($design->type !== 'remove'): ?>
 							<a href = "<?php echo site_url('design/remove/'. $design->design_id) ?>" class = "btn"><i class = "icon-trash"></i></a>
-							<?php endif; ?>
+							<a href = "<?php echo site_url('design/'. $design->design_id) ?>" class = "btn"><i class = "icon-eye-open"></i></a>							
 						</td>
 					<tr>
 				<?php endforeach; ?>
+				<?php else: ?>
+					<tr>
+						<td colspan = "4">
+							<p>You do not have any design yet!</p>
+							 <p><a href = "<?php echo site_url('upload'); ?>" class = "btn btn-info">Create new Design</a></p>
+						</td>
+					</tr>	
+				<?php endif; ?>
 			</table>
 		</div>
 	</div>

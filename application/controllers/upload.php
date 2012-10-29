@@ -59,9 +59,10 @@ class Upload extends CI_Controller {
 					$this->db->insert('design', $user_data);
 					
                     $insertid = $this->db->insert_id(); //helper method to get the insert id when inserting into the database
-                    $tags     = $postdata['tag'];
+					
 										
-					if (!empty($tags)) {
+					if (!empty($postdata['tag'])) {
+						$tags = $postdata['tag'];
 	                     foreach ($tags as $tag) {
 	                         $db = "INSERT INTO taglist VALUES($tag,$insertid)";
 	                         $this->db->query($db);

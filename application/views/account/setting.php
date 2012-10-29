@@ -127,7 +127,7 @@
 					<div class="row">
 						<div class="span2">
 							<label>Old Password</label>
-							<input type="password" class = "span2" name = "oldpassword" id="oldpassword" value = "<?php echo set_value('oldpassword'); ?>" />
+							<input type="password" class = "span2" name = "oldpassword" id="oldpassword" />
 							<input type="hidden" name="dbpassword" value="<?php echo $password; ?>" />		
 							<input type="hidden" value="passwordform" name="formtype"/>
 							<input type="hidden" value="<?php echo $email;?>" name="email"/>
@@ -145,12 +145,12 @@
 					<div class="row">
 						<div class="span2">
 							<label>New Password</label>
-							<input type="password" class="span2" name = "password" id="password" value = "<?php echo set_value('password'); ?>" />	
+							<input type="password" class="span2" name = "password" id="password"/>	
 						</div>
 
 						<div class="span2">
 							<label>Confirm New Password</label>
-							<input type="password" class="span2" name = "password2" id="password2" value = "<?php echo set_value('password2'); ?>" />
+							<input type="password" class="span2" name = "password2" id="password2"/>
 						</div>
 					</div> <!-- end of .row -->
 

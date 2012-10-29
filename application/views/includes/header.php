@@ -86,7 +86,7 @@
 		<div class="nav-collapse collapse pull-right">
 			<ul class="nav">
 				<li>
-				<a href="<?php echo site_url('friends');?>"><i class="icon-user"></i>Friends</a>
+				<a href="<?php echo site_url('friends');?>"><i class="icon-user"></i> Friends</a>
 				</li>			
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -98,20 +98,10 @@
 						<a href="<?php echo site_url('design/own');?>">Manage Designs</a>
 					</ul>
 				</li>
-				<li style = "margin-right: 30px; position: relative;">
-							<div class="btn-group">
-								<a href = "#" class = "btn btn-link" data-toggle="dropdown"><i class = "icon-eye-close"></i> </a>
-								<ul class="dropdown-menu">
-								<li><a href="#">1 friend request</a></li>        
-								<li><a href="#">No New Notification</a></li>
-							  </ul>
-							  
-							</div>
-							<div class="badge badge-important" style = "position: absolute; top:3px; left:30px; z-index:99">3</div>
-						</li>
+
 				<li>
 		<!--	<a href="<?php echo site_url('dummycartcontroller');?>"><i class="icon-shopping-cart"></i>Cart</a>	-->
-				<a href="<?php echo site_url('cart/viewCart');?>"><i class="icon-shopping-cart"></i>Cart</a>
+				<a href="<?php echo site_url('cart/viewCart');?>"><i class="icon-shopping-cart"></i> Cart</a>
 				</li>						
 			
 				<li>

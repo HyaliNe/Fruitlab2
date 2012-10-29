@@ -2,6 +2,8 @@
 
 class Design_model extends CI_model {
 	
+	//possible design types //sales,private,remove
+	
 	/**
 	 * Fetch a single design from database
 	 *
@@ -20,6 +22,7 @@ class Design_model extends CI_model {
 		
 		$this->db->from('design');
 		$this->db->where('design_id', $id);
+		$this->db->where('type !=', 'remove');
 		
 		$query = $this->db->get();
 		
@@ -39,6 +42,11 @@ class Design_model extends CI_model {
 			$design['exist'] = true;
 			$row = $query->row();
 			
+			if ($row->type == "private" && $row->customer_id != $this->session->userdata('customer_id')) {
+				$design['exist'] = false;
+				return $design;
+			}
+						
 			$design['design_id'] = $row->design_id;
 			$design['customer_id'] = $row->customer_id;
 			$design['image_path'] = $row->image_path;
@@ -68,6 +76,7 @@ class Design_model extends CI_model {
 		$this->db->select('*');
 		$this->db->from('design');
 		$this->db->like('title', $input);
+		$this->db->where('type', 'Sales');
 		$this->db->limit($upperlimit, $lowerlimit);
 		
 		$query = $this->db->get();
@@ -175,6 +184,9 @@ class Design_model extends CI_model {
 	 public function retriveDesignsByUser($id, $lowerlimit = 0, $upperlimit = 20) {
  		$this->db->from('design');
  		$this->db->where('customer_id', $id);
+		$this->db->where('type', 'Sales');
+		$this->db->or_where('customer_id', $this->session->userdata('customer_id'));
+		$this->db->where('type !=', 'remove');
  		$this->db->limit($upperlimit, $lowerlimit);
 		
  		$query = $this->db->get();
@@ -240,6 +252,60 @@ class Design_model extends CI_model {
 		}
 
 		return $result;
+	}
+	
+	//fetch designs to display base on user limit
+	public function fetchDesign($lowerlimit = 0, $upperlimit = 20) {
+		
+		$this->db->from('design');
+		$this->db->where('type', 'Sales');
+		$this->db->limit($upperlimit, $lowerlimit);
+		$this->db->order_by("design_id", "desc");
+		
+ 		$query = $this->db->get();
+ 		if(!$query->num_rows()>0)
+ 			return false;
+
+ 		return $query;
+		
+	}
+	
+	public function fetchFriendsDesign($userid, $lowerlimit = 0, $upperlimit = 20) {
+		//get the user's friend
+		$this->db->from('is_friends_with');
+		$this->db->where('customer_id', $userid);
+		
+		$friendlist = $this->db->get();
+		if($friendlist->num_rows() > 0 ) {
+			//setup query to select design of all user's friends
+			$this->db->from('design');
+			$this->db->where('type', 'sales');
+			
+			$firstcount = true;
+			foreach ($friendlist->result() as $row)
+			{
+				if($firstcount) {
+					$this->db->where('customer_id', $row->customer_id2);
+					$firstcount = false;
+				} else {
+					$this->db->or_where('customer_id', $row->customer_id2);
+				}
+			    
+			}
+			    
+			$this->db->limit($upperlimit, $lowerlimit);
+			
+			$activityList = $this->db->get();
+			
+			if(!$activityList->num_rows()>0)
+				return false;
+			
+			return $activityList;
+			
+		} else {
+			//what to do when the user doesn't have any friends?
+		}
+		return false;
 	}
  }
 ?>
