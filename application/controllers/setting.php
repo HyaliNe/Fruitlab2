@@ -12,6 +12,7 @@ class Setting extends CI_Controller {
 	
 	public function index() {
 		
+		$data['role'] = 2;
 		$formtype = $this->input->post('formtype');
 		$this->load->library('form_validation');
 		$upload = null;
@@ -50,7 +51,7 @@ class Setting extends CI_Controller {
 			// Load account model and call function to update settings 
 			$this->load->model('account_model');
 			//this will post all the data to the method update_settings
-			$result = $this->account_model->update_settings($this->input->post());
+			$result = $this->account_model->update_settings($this->input->post(), $this->upload->data());
 			
 			// settings update successfully
 			if ($result) 
@@ -84,6 +85,7 @@ class Setting extends CI_Controller {
 	
 	public function retrieve()
 	{
+		$data['role'] = 2;
 		$this->load->model('account_model');
 		//retrieve email, then use it to query
 		$email = $this->session->userdata('email');

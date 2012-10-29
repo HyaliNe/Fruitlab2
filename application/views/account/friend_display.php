@@ -35,16 +35,20 @@
 		<div class="row">
 			<div class="span12 clearfix">
 				<h4 class = "span12">Friends</h4>			
-				
-				<?php foreach($friendlist->result() as $friend) : ?>
 					<div class="friend pull-left span">
+				<?php if (isset($noFriend) && $noFriend) : ?>
+					<p>No friends found.</p>
+				<?php else :?>
+				<?php foreach($friendlist->result() as $friend) : ?>
+					
 					<a href = "<?php echo site_url("user/".$friend->customer_id2); ?>">
 <img class = "thumbnail" src="<?php echo site_url('uploads/'.$friend->img_path);?>" alt="<?php echo $friend->first_name.' '.$friend->last_name?>" /></a>
 						<p><?php echo $friend->first_name.' '.$friend->last_name?></p>
-					</div>
+					
 																
 				<?php endforeach; ?>
-
+			<?php endif; ?>
+				</div>
 
 			</div>
 		</div> <!-- end of .row -->

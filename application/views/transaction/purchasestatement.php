@@ -12,8 +12,7 @@
     <br/>
     <table border="1">
         <tr><th>Title</th><th>Price</th><th>Quantity</th></tr>
-    <?php 
-        print_r($s['singlelineitem']);
+    <?php   
         for($i = 0; $i < sizeof($s) - 1 ;$i++){ 
         $k = $s['singlelineitem'][$i];
     ?>

@@ -37,7 +37,7 @@ class Design extends CI_Controller {
 			$data['main_content'] = 'design/single_design';
 		} else {
 			$data['message_title'] = "Design not found";
-			$data['message'] = "Some lengthy nice reply";
+			$data['message'] = "Unable to retrieve the design you are looking for. Please try again.";
 				
 			$data['main_content'] = "message";
 		}
@@ -108,8 +108,7 @@ class Design extends CI_Controller {
 		$customer_id = $this->session->userdata('customer_id');
 		$this->load->model('design_model');
 		$designs = $this->design_model->retriveDesignsByUser($customer_id);
-
-		
+				
 		// $this->load->model('tag_model');
 		//  $tags_query = $this->tag_model->getDesignTags(3);
 		// 
@@ -118,7 +117,8 @@ class Design extends CI_Controller {
 		// echo "</pre>";
 		
 		$data['data']         = (!empty($data)) ? $data['result'] : NULL;
-		$data['designs']      = $designs;
+		$data['designs']      = (!empty($designs)) ? $designs : '';
+		$data['role'] = 2;
 		$data['main_content'] = 'design/own_design';
 		$this->load->view('includes/template', $data);
 	}

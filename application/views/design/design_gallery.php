@@ -4,7 +4,7 @@
 			
 			<div class="row-fluid">
 				<div class="span10">
-					<h1>Design gallery</h1>						
+					<h1>Search Design Result</h1>						
 				</div>
 			</div>
 
@@ -18,57 +18,35 @@
 	</div>
 </div> <!-- end of .hero-unit -->
 <div class="container">
-
-	<div class="page-header">
-		<h1>Someone gallery</h1>
-	</div>
-	<div class="row">	
-	<?php
-		foreach($search_result->result() as $design)
-		{	?>
-			<div class="span3">
-				<div class="row">
-					<div class="span3">
-					<form action="<?php echo site_url('design/'.$design->design_id);?>" method="post"/>
-						<input type="image" src="<?php echo site_url('uploads/'. $design->image_path)?>">
-					</form>
-					</div>
-				</div>
-				<div class="row">
-					<div class="span3" style="text-align:center; padding-left:100px;">
-						<div class="row">
-							<div class="span1">
-							<?php echo $design->title;?>
-							</div>				
-						</div>
-						<div class="row">
-							<div class="span1">
-							<?php echo $design->price;?>
-							</div>				
-						</div>
-						<div class="row">
-							<div class="span1">
-							<?php echo $design->rating;?>/5.00
-							</div>				
-						</div>		
-					</div>
-				</div>
-			</div>
-	<?php
-		}	?>
-	</div>
-	<hr>
 	
-	<div class="row">
-		<div class="pagination offset4">
-		  <ul>
-			<li><a href="#">Prev</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">Next</a></li>
-		  </ul>
+	<?php if (validation_errors()): ?>
+
+		<div class="alert alert-error">
+		  <a class="close" data-dismiss="alert" href="#">×</a>
+		  <h4 class="alert-heading">Error!</h4>
+			<?php echo validation_errors(); ?>
 		</div>
-	</div>
+
+	<?php endif ?>
+	<div class="row">
+		<div class="span12 designs">
+			<?php if(isset($search_exist) && $search_exist): ?>
+			<?php foreach($search_result->result() as $design): ?>
+				<figure class="design">
+					<img src="<?php echo site_url('uploads/'.$design->image_path); ?>" class = "thumbnail" alt=""/>									
+					<div class="design_overlay">
+						<p><i class = "icon-bullhorn"></i> <a href = "<?php echo site_url('design/'.$design->design_id); ?>" ><?php echo $design->title; ?></a></p>
+						<p><i class = "icon-user"></i> <?php echo $design->customer_id; ?></p>
+						<p><i class = "icon-star"></i> <?php echo $design->rating; ?></p>
+						<p><a href ="<?php echo site_url('customise/'.$design->design_id);?>"  class ="btn btn-warning btn-block" >Buy </a></p>
+					</div>
+				</figure>
+
+			<?php endforeach; ?>
+			<?php else: ?>
+				<p>No Design Found</p>
+			<?php endif; ?>
+		</div>
+	</div>		
+	
 </div>

@@ -19,6 +19,7 @@ class Review extends CI_Controller {
 
 	public function index() {
 	
+		$data['role'] = 2;
 		$data['main_content'] = 'design/review';
 		$this->load->view('includes/template', $data);		
 	}					
@@ -46,6 +47,7 @@ class Review extends CI_Controller {
 			{
 				$data['design_id'] = $this->input->post('design_id');
 				//go back to the correct design page
+				$data['role'] = 2;
 				$data['main_content'] = 'design/' . $data['design_id'] ;
 				$this->load->view('includes/template', $data);
 			}
@@ -61,6 +63,7 @@ class Review extends CI_Controller {
 		
 		$redirect_string = 'design/' . $design_id;
 		$data['design_id'] 	= $design_id;
+		$data['role'] = 2;
 		
 		if($rate)
 		{

@@ -33,13 +33,13 @@ $allowed = false;
  * $allowed set to true if allowed else false
  * 
  **/
-$session_role = $this->session->userdata('role_id');
+$session_role = $this->session->userdata('role');
 
 if ($session_role === 1) { $allowed = true; } 
 else {
 	if ( empty($role) ) { $allowed = true; } 
 	else {
-		if ($session_role === $role) { $allowed = true; }
+		if ($session_role == $role) { $allowed = true; }
 		else { $allowed = false; }
 	}	
 }

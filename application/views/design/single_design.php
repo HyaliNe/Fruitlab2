@@ -4,7 +4,7 @@
 			
 			<div class="row-fluid">
 				<div class="span10">
-					<h1>Single Design</h1>						
+					<h1>View Design</h1>						
 				</div>
 			</div>
 
@@ -29,15 +29,9 @@
 				</p>
 		</div>
 		<div class="span6 well">
-			<div class = "row">	<br>
-				<div class="span2">
-					Title:
-				</div>
-				<div class="span3">
-					<?php echo $title;?>
-				</div>				
-			</div>
-			<hr>
+
+			<legend><?php echo $title;?></legend>
+			
 			<div class = "row">				
 				<div class="span2">
 					Price:
@@ -108,58 +102,54 @@
 		</div>
 	</div>	
 	<br>
-<?php
-	if(!$commented)
-	{	?>
-	<form class="form-vertical" action = "<?php echo site_url('review/comment'); ?>" method="post"/>
-		<input type="hidden" name="design_id" id="design_id" value="<?php echo $design_id;?>" />
-		<?php $customer_id = $this->session->userdata('customer_id');	?>
-		<input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id;?>" />
-		<label>Give your own comment</label>
-		<div class="row">
-			<div class="span6">
-				<textarea rows="4" class = "span6" name="comment" id="comment" value="<?php echo set_value('comment'); ?>" maxlength="150" ></textarea>
-			</div>
-		</div>
-		<div class="row">
-			<div class="span4">
-				<input type="submit" value="Submit" class="btn btn-success"/>
-			</div>
-		</div>
-	</form>
-<?php
-	}	
-	else
-	{	?>
-	<div class="lead">
-		You have already given your comment.
-	</div>
-<?php
-	}?>
+	
+<hr>
+
 	<div class="row">
-		<div class="span4">
-			Past Comment(<?php echo $comment->num_rows();?>)
+		<div class="span6">
+			<p class = 'lead'>Total Comment : <?php echo $comment->num_rows();?> </p>
 		</div>
 	</div>
-	<?php foreach($comment->result() as $singlecomment):?>
-		<div class="row">
-			<div class="span12">
-				<div class="thumbnail pull-left">
-					<form action="<?php echo site_url('user/'.$singlecomment->customer_id);?>" method="post" />
-						<input type="image" src="<?php echo site_url('uploads/'.$singlecomment->img_path);?>" />
-					</form>
-				</div>
-				<div class="span6">
-					<div class="span5 pull-left lead">
-						<?php echo $singlecomment->message;?>
-					</div>				
-					<div class="span3 offset4">
-						<?php echo $singlecomment->timestamp;;?>
+
+	<?php foreach($comment->result() as $singlecomment): ?>
+	<div class="row">
+		<div class="span6">
+
+			<div class="comment clearfix">
+				<img src="<?php echo site_url('uploads/'.$singlecomment->img_path);?>" alt="" class="thumbnail_small pull-left" />
+				<div class="comment_content pull-left">
+					<div class="comment_name clearfix">
+						<p class = "pull-left"><a href = "<?php echo site_url('user/'.$singlecomment->customer_id); ?>"><?php echo $singlecomment->customer_id; ?></a></p> 
+						<p class = "comment_timestamp pull-right"><?php echo $singlecomment->timestamp;?></p>
 					</div>
-					
+					<div class="comment_message">
+						<?php echo $singlecomment->message;?>
+					</div>									
 				</div>
 			</div>
+			
 		</div>
+	</div>
 	<?php endforeach;?>
+	
+	<div class="row" style = "margin-top: 20px;">
+		<form class="well form-vertical span6" action = "<?php echo site_url('review/comment'); ?>" method="post"/>
+			<input type="hidden" name="design_id" id="design_id" value="<?php echo $design_id;?>" />
+			<?php $customer_id = $this->session->userdata('customer_id');	?>
+			<input type="hidden" name="customer_id" id="customer_id" value="<?php echo $customer_id;?>" />
+			<h3>Comment on the design!</h3>
+			<div class="row">
+				<div class="span6">
+					<textarea rows="8" class = "span6" name="comment" id="comment" value="<?php echo set_value('comment'); ?>" maxlength="150" ></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<input type="submit" value="Comment" class="btn btn-info btn-block btn-large"/>
+				</div>
+			</div>
+		</form>		
+	</div>
+	
 	
 </div>

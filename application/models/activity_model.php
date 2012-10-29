@@ -107,7 +107,6 @@ class Activity_model extends CI_Model {
 		
 		if ($query->num_rows() > 0) {
 		   $row = $query->row();
-                   print_r($row);
 
 		   return $row->title;
 		} 
