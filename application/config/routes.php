@@ -47,6 +47,7 @@ $route['checkout'] = 'cart/checkout';
 $route['customise/(:num)'] = 'cart/customise/$1';
 $route['retrieveDesign/(:num)'] = 'design/browseDesignByUser/$1';
 $route['activity/(:num)'] = 'activity/activityList/$1';
+$route['friends/remove/(:num)']  = 'friends/removeFriends/$1';
 
 
 /* End of file routes.php */
